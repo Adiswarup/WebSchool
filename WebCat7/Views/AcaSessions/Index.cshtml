@@ -1,0 +1,33 @@
+@using Syncfusion.EJ2;
+@using Syncfusion.Data;
+@using SchMod.Models.Basics;
+@model IEnumerable<SchMod.Models.Basics.AcaSession>
+
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/AcaSessions.js"></script>
+
+@{
+    ViewData["Title"] = "Academic Sessions";
+}
+
+<h2>Academic Sessions</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div>
+    <ejs-grid id="AcaSessGrid" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Edit", "Update", "Cancel","Search" })">
+        @*<e-data-manager url="/AcaSessions/DataSource" adaptor="UrlAdaptor" crossDomain="true" updateUrl="/AcaSessions/Update"></e-data-manager>*@
+        <e-grid-editSettings allowEditing="true"></e-grid-editSettings>
+        @*<e-grid-searchSettings fields="@(new string[] { "sessionName"})" operator="contains" key="" ignoreCase="true"></e-grid-searchSettings>*@
+        @*<e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true"></e-grid-editSettings>*@
+
+        <e-grid-columns>
+            <e-grid-column field="ssdid" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+            <e-grid-column field="sessionName" headerText="Name" type="string" width="120"></e-grid-column>
+            <e-grid-column field="sessionStartDate" headerText="Start Date" format="yMd"  textAlign="Right" width="120"></e-grid-column>
+            <e-grid-column field="sessionEndDate" headerText="End Date" format="yMd" textAlign="Right" width="150"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+</div>
+

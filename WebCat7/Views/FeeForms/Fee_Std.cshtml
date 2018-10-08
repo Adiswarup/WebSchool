@@ -1,0 +1,136 @@
+﻿@using SchMod.ViewModels.StdFees;
+
+@model SchMod.ViewModels.StdFees.FeeForm
+
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/StdFees.js"></script>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Pay Students Fees</h2>
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Sn" />
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="UniReg" hidden="hidden" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="UniReg" hidden="hidden" class="form-control" />
+            <span asp-validation-for="UniReg" hidden="hidden" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="RegNo" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="RegNo" class="form-control" />
+            <span asp-validation-for="RegNo" class="text-danger"></span>
+        </div>
+        @*<a asp-action="Fee_Std" asp-route-id="@Model.RegNo">Get Student Details</a>*@
+        <div class="form-group col-md-4">
+            <input type=submit value="Get Student Details" name="Get_Student_Details" class="btn btn-default" formaction="Fee_Std" formmethod="get" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="RollNo" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="RollNo" readonly="readonly" class="form-control" />
+            <span asp-validation-for="RollNo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="StdName" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="StdName" readonly="readonly" class="form-control" />
+            <span asp-validation-for="StdName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Gender" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="Gender" readonly="readonly" class="form-control" />
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Clss" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="Clss" readonly="readonly" class="form-control" />
+            <span asp-validation-for="Clss" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="FNames" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="FNames" readonly="readonly" class="form-control" />
+            <span asp-validation-for="FNames" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="MNames" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="MNames" readonly="readonly" class="form-control" />
+            <span asp-validation-for="MNames" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ConPhone" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ConPhone" readonly="readonly" class="form-control" />
+            <span asp-validation-for="ConPhone" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="EmailAddress" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="EmailAddress" readonly="readonly"  class="form-control" />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="DOB" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="DOB" readonly="readonly" class="form-control" />
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="StdCat" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="StdCat" readonly="readonly" class="form-control" />
+            <span asp-validation-for="StdCat" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="form-group col-md-3 ">
+            <input type="submit" value="Get Fee Summary" name="Get_Fee_Summary" class="btn btn-default" formaction="Trans_Fee_Summ" formmethod="post" />
+        </div>
+    </div>
+</form>
+
+
+

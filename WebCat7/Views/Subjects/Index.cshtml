@@ -1,0 +1,52 @@
+@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@using SchMod.Models.Basics;
+@model IEnumerable<SchMod.Models.Basics.Subjects>
+
+    @{
+    ViewData["Title"] = "Subject Index";
+    }
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/Subjects.js"></script>
+
+    <hr />
+    <p>
+        <a asp-action="Create">Create New Subject</a>
+    </p>
+
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="e-name">
+                Select Class
+            </label>
+        </div>
+        <div class="form-group col-md-4">
+            <ejs-dropdownlist id="selectClsses" width="150px" height="30px" select="changeClsses" datasource="(IEnumerable<string>)ViewBag.clsses">
+            </ejs-dropdownlist>
+            @*<ejs-combo-box id="selectClsses" width="150px" height="30px" select="changeClsses" datasource="(IEnumerable<string>)ViewBag.clsses">
+            </ejs-combo-box>*@
+        </div>
+    </div>
+    <div>
+        <ejs-grid id="subsGrid" cellSelecting="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="subId" headerText="Subject ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="subName" headerText="Subject" type="string" width="120"></e-grid-column>
+                <e-grid-column field="classTeacher" headerText="Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= " classTeacher", value="classTeacher" }}})"></e-grid-column>
+                <e-grid-column field="subCode" headerText="Code" width="150"></e-grid-column>
+                <e-grid-column field="subjectExamName" headerText="Report Card Name" width="150"></e-grid-column>
+                <e-grid-column field="subType" headerText="Subject Type" width="150"></e-grid-column>
+                <e-grid-column field="featureInReport" headerText="Show in Report Card" width="150"></e-grid-column>
+                <e-grid-column field="autoGrades" headerText="Auto Grades" width="150"></e-grid-column>
+                <e-grid-column field="gradeOrMarks" headerText="Grade Or Marks" width="150"></e-grid-column>
+                <e-grid-column field="gradeType" headerText="Grade Type" width="150"></e-grid-column>
+                <e-grid-column field="isElective" headerText="Is Elective" editType="checkbox" width="150"></e-grid-column>
+                <e-grid-column field="IsTheory" headerText="Is Theory" width="150"></e-grid-column>
+                <e-grid-column field="isPract" headerText="Is Pract" width="150"></e-grid-column>
+                <e-grid-column field="isAssign" headerText="Is Assign" width="150"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+
+    </div>
+

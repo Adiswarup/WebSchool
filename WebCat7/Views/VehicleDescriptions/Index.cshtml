@@ -1,0 +1,36 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@using SchMod.Models.Convey;
+@model IEnumerable<SchMod.Models.Convey.VehicleDescription>
+
+    @{
+    ViewData["Title"] = "Vehicles";
+    }
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/VehicleDescription.js"></script>
+
+    <hr />
+    <p>
+        <a asp-action="Create">Create New Vehicles</a>
+    </p>
+    @{var editParams = new { @params = new { value = "drptext" } }; }
+
+    <div>
+        <ejs-grid id="vdGrid" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search"})">
+            <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-filterSettings type="FilterBar" mode="OnEnter" showFilterBarStatus="true"></e-grid-filterSettings>
+            <e-grid-columns>
+                <e-grid-column field="VehicleId" headerText="Id" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="VehicleName" headerText="Vehicle Name" type="string" width="120"></e-grid-column>
+                @*<e-grid-column field="vehicleType" headerText="Vehicle Type" width="150" editType="dropdownedit" showInColumnChooser="true" dataSource=ViewBag.vehTyp></e-grid-column>*@
+                @*<e-grid-column field="vehicleType" headerText="Vehicle Type" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.vehTyp, fields = new {text = " drptext", value="drptext" }}})"></e-grid-column>*@
+                <e-grid-column field="VDriver" headerText="Driver" width="150"></e-grid-column>
+                <e-grid-column field="VNumber" headerText="Number" width="150"></e-grid-column>
+                <e-grid-column field="DriverAddress" headerText="Driver's Address" showInColumnChooser="false" width="150"></e-grid-column>
+                <e-grid-column field="VehicleDetails" headerText="Vehicle's Details" width="150"></e-grid-column>
+                <e-grid-column field="ContactPhone" headerText="Contact Phone" width="150"></e-grid-column>
+                <e-grid-column field="Capacity" headerText="Capacity" width="150"></e-grid-column>
+                <e-grid-column field="Circuit" headerText="circuit" showInColumnChooser="false" width="150"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>

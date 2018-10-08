@@ -1,0 +1,26 @@
+@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@using SchMod.Models.StdFees;
+@model IEnumerable<SchMod.Models.StdFees.StdFeeCat>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/StdFeeCats.js"></script>
+
+    <h2>Index</h2>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <div>
+        <ejs-grid id="CatGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="stdFeeCatId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="stdFeeCategory" headerText="Category" type="string" width="120"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>

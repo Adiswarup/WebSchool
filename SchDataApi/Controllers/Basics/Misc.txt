@@ -1,0 +1,257 @@
+﻿@*@{Html.EJ().DataManager("AcaData").dataSource =  ViewBag.DataSource }*@
+
+    //.URL("http://localhost:55469/api/AcaSessions").Adaptor(AdaptorType.UrlAdaptor)
+    //.UpdateURL("http://localhost:55469/api/AcaSessions/PutAcaSession")
+    //.BatchURL("/AcaSessions/BatchUpdate")
+    //.CrossDomain(true).Render();}
+
+	    @*@{Html.EJ().Grid<AcaSession>("FlatGrid")
+                            .DataManagerID("AcaData")
+                            .Query("new ej.Query().select(['OrderID', 'CustomerID', 'EmployeeID', 'ShipCity', 'Freight']).where('CustomerID', 'equal', 'VINET').take(5)")
+                            //where(fieldName, operator, value, [ignoreCase])
+                            .Columns(col =>
+                            {
+                                col.Field("OrderID").HeaderText("Order ID").IsPrimaryKey(true).TextAlign(TextAlign.Right).Width(75).Add();
+                                col.Field("CustomerID").HeaderText("Customer ID").Width(80).Add();
+                                col.Field("EmployeeID").HeaderText("Employee ID").TextAlign(TextAlign.Right).Width(75).Add();
+                                col.Field("Freight").HeaderText("Freight").TextAlign(TextAlign.Right).Width(75).Format("{0:C}").Add();
+                                col.Field("ShipCity").HeaderText("Ship City").Width(110).Add();
+                            }).Render();
+    }*@
+@*<ej-grid id="FlatGrid" allow-paging="true" action-begin="begin" action-complete="complete"  end-edit="onEndEdit">
+    <e-datamanager json="(IEnumerable<AcaSession>)ViewBag.DataSource" offline="true"></e-datamanager>
+    <e-edit-settings allow-adding="true" allow-editing="true" allow-deleting="true" edit-mode="@(EditMode.Batch)" show-confirm-dialog="true"></e-edit-settings>
+    <e-toolbar-settings show-toolbar="true" toolbar-items="@(new List<string>(){"edit","update","cancel" })"></e-toolbar-settings>
+    <e-columns>
+        <e-column field="Ssdid" header-text="ID" is-primary-key="true" text-align="Right" width="75"></e-column>
+        <e-column field="SessionName" header-text="Name" width="80"></e-column>
+        <e-column field="SessionStartDate" header-text="StartDate" format="{0:dd/MM/yyyy}" text-align="Right" width="75"></e-column>
+        <e-column field="SessionEndDate" header-text="EndDate" format="{0:dd/MM/yyyy}" text-align="Right" width="75"></e-column>
+    </e-columns>
+</ej-grid>*@
+
+@*<script type="text/javascript">
+    function complete(args) {
+        if (args.requestType == "batchsave") {
+            debugger;
+        }
+    }
+</script>*@
+
+
+@*<e-datamanager json="(IEnumerable<object>)ViewBag.DataSource" update-url="AcaSessions/PostAcaSession" adaptor="remoteSaveAdaptor" />*@
+
+@*offline="true" adaptor="UrlAdaptor" update-url="http://localhost:62602/AcaSessions/Edit"*@
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ssdid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SessionName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SessionStartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SessionEndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dormant)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LoginName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CTerminal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DBid)
+                    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ssdid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dormant)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoginName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CTerminal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DBid)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AutoId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AutoId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AutoId">Delete</a>
+                </td>
+            </tr>
+         }
+        </tbody>
+    </table>*@
+
+
+	            <dl class="dl-horizontal">
+                <dt>
+                    Student's Name
+                    
+                </dt>
+                <dd>
+                    @Html.ValueFor(model => model.StdName)
+                    @Html.ValueFor(model => model.RollNo)
+                    <label>@Model.StdName</label>
+                    @*@Html.DisplayFor(model => model.StdName)*@
+                </dd>
+                <dt>
+                    Roll No.
+                </dt>
+                <dd>
+                    @Html.ValueFor(model => model.RollNo)
+                @*@Html.DisplayFor(model => model.ClassTeacher)*@
+                </dd>
+                <dt>
+                    Present Class
+                </dt>
+                <dd>
+                    @Html.DisplayNameFor(model => model.Clss)
+                </dd>
+                <dt>
+                    Gender
+                </dt>
+                <dd>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dd>
+                <dt>
+                   Father's Name
+                </dt>
+                <dd>
+                    @Html.DisplayNameFor(model => model.FNames)
+                </dd>
+            </dl>
+
+
+
+
+			@*@using (Html.BeginForm("Details", "FeeForms", FormMethod.Post, new { id = "Std_Fee_Details", name = "Std_Fee_Details" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SelectMarks</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*<input type="text" id="txt_UniReg" />*@
+        @*<input type="button" onclick="fetch_StdData()" id="btn_Std_Data" value="Get Student Details" />*@
+    </div>
+    <div class="form-group">
+        <label asp-for="RegNo" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RegNo" class="form-control" />
+            <span asp-validation-for="RegNo" class="text-danger"></span>
+        </div>
+  </div>
+        <input type=submit value="Get Student Details" name="Get_Student_Details" class="btn btn-default" formaction="Edit" formmethod="post" />
+
+    <div class="form-group">
+        <label asp-for="UniReg" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="UniReg" class="form-control" />
+            <span asp-validation-for="UniReg" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="RollNo" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RollNo" class="form-control" />
+            <span asp-validation-for="RollNo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="StdName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="StdName" class="form-control" />
+            <span asp-validation-for="StdName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Gender" class="form-control" />
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Clss" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Clss" class="form-control" />
+            <span asp-validation-for="Clss" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="FNames" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="FNames" class="form-control" />
+            <span asp-validation-for="FNames" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="MNames" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="MNames" class="form-control" />
+            <span asp-validation-for="MNames" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConPhone" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ConPhone" class="form-control" />
+            <span asp-validation-for="ConPhone" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailAddress" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="EmailAddress" class="form-control" />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DOB" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="DOB" class="form-control" />
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+    </div>
+
+     <div class="form-group">
+            <input type="submit" value="Get Fee Summary" name="Get_Fee_Summary" class="btn btn-default" formaction="Trans_Fee_Summ" formmethod="post"  />
+        </div>
+}*@

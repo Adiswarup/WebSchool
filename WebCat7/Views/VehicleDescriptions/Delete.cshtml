@@ -1,0 +1,87 @@
+﻿@model SchMod.Models.Convey.VehicleDescription
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VehicleDescription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AutoId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VDriver)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VDriver)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DriverAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverDetails)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DriverDetails)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleDetails)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleDetails)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Circuit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Circuit)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="VehicleId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

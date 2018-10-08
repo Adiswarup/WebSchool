@@ -1,0 +1,75 @@
+﻿@using Syncfusion.EJ2;
+@using Syncfusion.Data;
+@using SchMod.Models.Studs;
+
+@model SchMod.Models.Studs.SearchStd;
+
+<div class="control">
+    <ejs-list-view id="TimeP" />
+</div>
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/SearchStd.js"></script>
+
+<p>
+    @Html.ActionLink("New Student", "Create", "Students")
+</p>
+<body>
+    @using(Html.BeginForm("Index", "SearchStd", FormMethod.Post, new { id = "SearchStd", name = "searchStd" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.SClass, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-2">
+                    <ejs-dropdownlist id="selectClsses" width="150px" height="30px" select="changeClsses" datasource="(IEnumerable<string>)ViewBag.clsses">
+                    </ejs-dropdownlist>
+                    @*@Html.DropDownListFor(model => model.SClass, (SelectList)ViewBag.stdList, new { @class = "form-control col-md-3", id = "iSclass", onchange = "OnChangeClassEvent()" })*@
+                </div>
+                <div class="col-md-2">
+                    <input type=submit value="GO" name="GO" class="form-group btn btn-outline-dark" formmethod="post" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.SeaStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.SeaStr, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeSearchEvent()" })
+                </div>
+                <div class="col-md-2">
+                    <ej-button id="btnRefresh" click="btnClick" text="Search" />
+                </div>
+            </div>
+            <div>
+                <ejs-grid id="Stdnts" >
+ @*enableAltRow="true" allowFiltering="true" allowPaging="true" allowSorting="true" showColumnChooser="true" toolbar="@(new List<string>(){" Edit","Update","Cancel","Search"})">*@
+                    @*<e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>*@
+                    <e-grid-filterSettings type="FilterBar" mode="OnEnter" showFilterBarStatus="true"></e-grid-filterSettings>
+                    @*<e-grid-filterSettings type="FilterBar"></e-grid-filterSettings>*@
+                    <e-grid-columns>
+                        <e-grid-column field="SchMod.Models.Studs.SearchStd.StdList.Students.Unireg" headerText="Id" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                        <e-grid-column field="SchMod.Models.Studs.SearchStd.StdList.Students.RegNumber" headerText="Admin No." type="string" width="120"></e-grid-column>
+                        <e-grid-column field="SchMod.Models.Studs.SearchStd.StdList.Students.StdName" headerText="Name" width="150"></e-grid-column>
+                        @*<e-grid-column field="PresentRollNo" headerText="Roll" width="150"></e-grid-column>
+                        <e-grid-column field="Sex" headerText="Gender" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="ParentsNamesF" headerText="Father's Name" width="150"></e-grid-column>
+                        <e-grid-column field="ParentsNamesM" headerText="Mother's Name" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="StdGenCategory" headerText="Category" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="Color_House" headerText="Color/House" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="Religion" headerText="Religion" width="150"></e-grid-column>
+                        <e-grid-column field="PermIdentification" headerText="Identification" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="MPhone" headerText="Mobile" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="Nationality" headerText="Nationality" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="BoardRollCode" headerText="Board RollCode" showInColumnChooser="false" width="150"></e-grid-column>
+                        <e-grid-column field="AAdhar" headerText="AAdhar" showInColumnChooser="false" width="150"></e-grid-column>*@
+                    </e-grid-columns>
+                </ejs-grid>
+            </div>
+        </div>
+    }
+</body>
+

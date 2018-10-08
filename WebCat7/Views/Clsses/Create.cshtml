@@ -1,0 +1,74 @@
+@model SchMod.Models.Basics.Clss
+
+@{
+    ViewData["Title"] = "Add New Class";
+}
+
+<h2>New Class</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="ClsName" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="ClsName" class="form-control" />
+                <span asp-validation-for="ClsName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="ClassTeacher" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                @Html.DropDownListFor(model => model.ClassTeacher, (SelectList)ViewBag.dropdownTeacher)
+
+                @*<input asp-for="ClassTeacher" class="form-control" />*@
+                <span asp-validation-for="ClassTeacher" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="StdStrength" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="StdStrength" class="form-control" />
+                <span asp-validation-for="StdStrength" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="BoardCode" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="BoardCode" class="form-control" />
+                <span asp-validation-for="BoardCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="ClssNum" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="ClssNum" class="form-control" />
+                <span asp-validation-for="ClssNum" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="form-group col-md-3 ">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

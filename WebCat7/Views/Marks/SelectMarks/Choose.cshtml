@@ -1,0 +1,70 @@
+﻿@using SchMod.Models.Marx;
+@model SchMod.Models.Marx.SelectMarks
+
+@{
+    ViewBag.Title = "Choose";
+}
+
+<h2>Choose</h2>
+
+
+@using (Html.BeginForm("Choose", "SelectMarks", FormMethod.Post, new { id = "Choose", name = "Choose" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SelectMarks</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sessn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Sessn, (SelectList)ViewBag.SchSessLst, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeEvent();" })
+                @Html.ValidationMessageFor(model => model.Sessn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MClss, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.MClss, (SelectList)ViewBag.SchClssLst, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeEvent();" })
+                @Html.ValidationMessageFor(model => model.MClss, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExamName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ExamName, (SelectList)ViewBag.SchExmLst, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeEvent();" })
+                @Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SubName, (SelectList)ViewBag.SchSubLst, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" formaction="Choose" formmethod="post" />
+                <input type=submit value="Subject" name="Subject" class="btn btn-default" formaction="ChSubjects" formmethod="post"/>   </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    function OnChangeEvent() {
+        //Form post
+        //alert("error");
+        $("#Choose").submit();
+    }
+</script>

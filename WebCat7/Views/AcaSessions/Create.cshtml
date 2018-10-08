@@ -1,0 +1,96 @@
+@model SchMod.Models.Basics.AcaSession
+
+@{
+    ViewData["Title"] = "Create Academic Session";
+}
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Create Academic Session</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Ssdid" />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="SessionName" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="SessionName" class="form-control" />
+            <span asp-validation-for="SessionName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="SessionStartDate" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="SessionStartDate" class="form-control" />
+            <span asp-validation-for="SessionStartDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="SessionEndDate" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="SessionEndDate" class="form-control" />
+            <span asp-validation-for="SessionEndDate" class="text-danger"></span>
+        </div>
+    </div>
+    <input type="hidden" asp-for="Dormant" />
+    <input type="hidden" asp-for="LoginName" />
+    <input type="hidden" asp-for="ModTime" />
+    <input type="hidden" asp-for="CTerminal" />
+    <input type="hidden" asp-for="DBid" />
+
+    @*<div class="form-group">
+        <label asp-for="Dormant" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Dormant" class="form-control" />
+            <span asp-validation-for="Dormant" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="LoginName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="LoginName" class="form-control" />
+            <span asp-validation-for="LoginName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ModTime" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ModTime" class="form-control" />
+            <span asp-validation-for="ModTime" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="CTerminal" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="CTerminal" class="form-control" />
+            <span asp-validation-for="CTerminal" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DBid" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="DBid" class="form-control" />
+            <span asp-validation-for="DBid" class="text-danger"></span>
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="form-group col-md-3 ">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

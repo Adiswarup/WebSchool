@@ -1,0 +1,78 @@
+﻿@model SchMod.Models.StdFees.DynaFee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DynaFee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AutoId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FeeNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FeeNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Caption)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Caption)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ForMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ForMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FeeCaption)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FeeCaption)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PayByDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PayByDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ForClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ForClass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StdCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StdCategory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DueOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DueOn)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ClsFeeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

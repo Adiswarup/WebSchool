@@ -1,0 +1,130 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.EJ2;
+
+@using Syncfusion.Data;
+
+@using SchMod.Models.StdFees;
+
+@model IEnumerable<SchMod.Models.StdFees.DynaFee>
+    @{
+        ViewData["Title"] = "EditDynaFee";
+    }
+
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/EditDynaFee.js"></script>
+    <h4>EditDynaFee</h4>
+    <hr />
+    <label class="col-md-2 control-label">'@ViewBag.Clss'</label>
+    <label class="col-md-2 control-label">'@ViewBag.SessionName'</label>
+    <label class="col-md-2 control-label">'@ViewBag.StdCategory'</label>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label class="control-label">Fee Caption</label>
+        </div>
+        <div class="form-group col-md-4">
+            <input type="text" class="form-control" maxlength="11" id="feeCaption" name="FeeCaption" placeholder="Fee Caption" value="@(ViewBag.FeeCaption)">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label class="control-label">Bill Date</label>
+        </div>
+        <div class="form-group col-md-4">
+            <ej-date-picker id="billDate" value="@(ViewBag.BillDate)" width="200" date-format="MMM/yyyy"></ej-date-picker>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <ejs-grid id="dynaGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="autoId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                @*<e-grid-column field="clsFeeId" headerText="ID" textAlign="Right"  width="100"></e-grid-column>*@
+                <e-grid-column field="feeNo" headerText="FeeNo" type="string" width="120"></e-grid-column>
+                <e-grid-column field="caption" headerText="Caption" width="150"></e-grid-column>
+                <e-grid-column field="amount" headerText="Amount" width="150"></e-grid-column>
+                @*<e-grid-column field="forMonth" headerText="For Month"  width="150"></e-grid-column>*@
+                @*<e-grid-column field="classTeacher" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= "classTeacher", value= "classTeacher"}}})"></e-grid-column>*@
+                @*<e-grid-column field="classTeacher" headerText="Class Teacher"  editType="dropdownedit" edit=@Json.Serialize(@ViewBag.dropdownTeacher) textAlign="Right" width="120"></e-grid-column>*@
+            </e-grid-columns>
+        </ejs-grid>
+
+        @*{Html.EJS().Grid("dynaGrid")
+                  .Toolbar(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel" })
+                  .ShowColumnChooser(true)
+                  //.EditSettings(edit => {().EditMode(EditMode.Normal); })
+                  //.ShowSummary()
+                  //.AllowCellMerging(true)
+                  .Columns(col =>
+                  {
+                      col.Field("autoId").HeaderText("ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).ShowInColumnChooser(true).Visible(false).Add();
+                      col.Field("clsFeeId").HeaderText("Name").Visible(false).Width(80).Add();
+                      col.Field("feeNo").HeaderText("FeeNo").ShowInColumnChooser(true).Visible(true).Width(80).Add();
+                      col.Field("caption").HeaderText("Caption").Visible(true).ShowInColumnChooser(true).Width(80).Add();
+                      col.Field("amount").HeaderText("Amount").Visible(true).Format("{0:C2}").ShowInColumnChooser(true).Width(80).Add();
+                    //col.Field("forMonth").HeaderText("For Month").Format("{0:MMM/yyyy}").ShowInColumnChooser(true).EditType("datepicker").Width(80).Add();
+                    col.Field("feeCaption").HeaderText("Fee Caption").Visible(false).Width(80).Add();
+                  }).Render();
+        }*@
+        @*//.SummaryRow(row =>
+        //{
+        //    row.Title("Sum").SummaryColumns(col => { col.SummaryType(SummaryType.Sum)
+        //  .Format("{0:C2}").DisplayColumn("amount").DataMember("Amount").Add(); })
+        //.SummaryColumns(col => { col.SummaryType(SummaryType.Sum).DisplayColumn("Field2").DataMember("Field2").Add(); })
+        //.SummaryColumns(col => { col.SummaryType(SummaryType.Sum).DisplayColumn("Field3").DataMember("Field3").Add(); })
+        //.Add();*@
+    </div>
+
+    <script type="text/javascript">
+        var jClss = '@ViewBag.Clss';
+        var jSession = '@ViewBag.SessionName';
+        var jStdFeeCat = '@ViewBag.StdCategory';
+        var jFeeCap = '@ViewBag.FeeCaption';
+        var jFeeDate = '@ViewBag.FeeDate';
+
+        //function currency(args, data) {
+        //    //ej.sum is aggregate to add data's of freight from datasource
+        //    return ej.sum(data, "Amount");
+        //}
+    </script>
+
+
+    @*<div>
+        @{Html.EJS().Grid("dynaGrid")
+        //.Toolbar(new List<string>
+            () { "Add", "Edit" ,"Print", "Search" })
+
+            //.ToolbarSettings(toolbar =>
+            //{
+            //    toolbar.ShowToolbar().ToolbarItems(items =>
+            //    {
+            //        items.AddTool(ToolBarItems.Add);
+            //        items.AddTool(ToolBarItems.Edit);
+            //        items.AddTool(ToolBarItems.Delete);
+            //        items.AddTool(ToolBarItems.Update);
+            //        items.AddTool(ToolBarItems.Cancel);
+            //    });
+            //})
+            //.ShowColumnChooser()
+            //.EditSettings(edit => { edit.AllowEditing(true).Mode(Syncfusion.EJ2.Grids.EditMode.Normal); })
+            //.ShowSummary()
+            .Columns(col =>
+            {
+            col.Field("autoId").HeaderText("ID").IsPrimaryKey(true).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+            col.Field("clsFeeId").HeaderText("Name").Visible(false).Add();
+            col.Field("feeNo").HeaderText("FeeNo").Add();
+            col.Field("caption").HeaderText("Caption").Visible(true).Add();
+            col.Field("amount").HeaderText("Amount").Visible(true).Add();
+            col.Field("forMonth").HeaderText("For Month").Add();
+            col.Field("feeCaption").HeaderText("Fee Caption").Add();
+            })
+            //.Aggregates(agg =>
+            //{
+            //    agg.Columns(new List<Syncfusion.EJ2.Grids.GridAggregateColumn>
+                () { new Syncfusion.EJ2.Grids.GridAggregateColumn() { Field = "Freight", Type = "Sum", FooterTemplate = "Sum: ${Sum}" } }).Add();
+                //    agg.Columns(new List<Syncfusion.EJ2.Grids.GridAggregateColumn>
+                    () { new Syncfusion.EJ2.Grids.GridAggregateColumn() { Field = "Freight", Type = "Average", FooterTemplate = "Average: ${Average}" } }).Add();
+                    //})
+                    .Render();
+                    }
+    </div>*@

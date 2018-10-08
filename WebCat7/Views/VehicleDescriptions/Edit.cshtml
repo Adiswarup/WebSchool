@@ -1,0 +1,81 @@
+﻿@model SchMod.Models.Convey.VehicleDescription
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>VehicleDescription</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AutoId" class="control-label"></label>
+                <input asp-for="AutoId" class="form-control" />
+                <span asp-validation-for="AutoId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="VehicleId" />
+            <div class="form-group">
+                <label asp-for="VehicleName" class="control-label"></label>
+                <input asp-for="VehicleName" class="form-control" />
+                <span asp-validation-for="VehicleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleType" class="control-label"></label>
+                <input asp-for="VehicleType" class="form-control" />
+                <span asp-validation-for="VehicleType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VDriver" class="control-label"></label>
+                <input asp-for="VDriver" class="form-control" />
+                <span asp-validation-for="VDriver" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VNumber" class="control-label"></label>
+                <input asp-for="VNumber" class="form-control" />
+                <span asp-validation-for="VNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverAddress" class="control-label"></label>
+                <input asp-for="DriverAddress" class="form-control" />
+                <span asp-validation-for="DriverAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverDetails" class="control-label"></label>
+                <input asp-for="DriverDetails" class="form-control" />
+                <span asp-validation-for="DriverDetails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleDetails" class="control-label"></label>
+                <input asp-for="VehicleDetails" class="form-control" />
+                <span asp-validation-for="VehicleDetails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactPhone" class="control-label"></label>
+                <input asp-for="ContactPhone" class="form-control" />
+                <span asp-validation-for="ContactPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Circuit" class="control-label"></label>
+                <input asp-for="Circuit" class="form-control" />
+                <span asp-validation-for="Circuit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

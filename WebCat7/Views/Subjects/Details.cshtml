@@ -1,0 +1,192 @@
+@model SchMod.Models.Basics.Subjects
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subjects</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Clss)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Clss)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClsWeek)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClsWeek)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TutWeek)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TutWeek)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LabWeek)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LabWeek)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrefTeacher)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrefTeacher)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeachId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeachId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StandByTeacher)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StandByTeacher)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomLab)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RoomLab)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FullMarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullMarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrefPeriod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrefPeriod)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AcaSession)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AcaSession)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NLesson)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NLesson)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NTutorials)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NTutorials)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NLaboratory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NLaboratory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectExamName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubjectExamName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FeatureInReport)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FeatureInReport)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoGrades)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AutoGrades)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GradeType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeOrMarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GradeOrMarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsElective)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsElective)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsTheory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsTheory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPract)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPract)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAssign)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsAssign)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubSn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubSn)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SubAutoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

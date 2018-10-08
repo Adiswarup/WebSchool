@@ -1,0 +1,138 @@
+﻿@model SchMod.ViewModels.StdFees.Receipt
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Receipt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiptNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceiptNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiptDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceiptDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UniReg)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UniReg)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ForPeriod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ForPeriod)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountPayable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountPayable)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountPaid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDuesClearance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDuesClearance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BankName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BankName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChqDated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChqDated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChqNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChqNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaidAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FeeHeading)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FeeHeading)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DelRemarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DelRemarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AcaSession)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AcaSession)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AutoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

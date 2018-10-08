@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\ViewModelsXXX\**" />
+    <Compile Remove="ViewModels\**" />
+    <Content Remove="Models\ViewModelsXXX\**" />
+    <Content Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Models\ViewModelsXXX\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <None Remove="Models\ViewModelsXXX\**" />
+    <None Remove="ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\ApplicationUser.cs" />
+    <Compile Remove="Models\Entity\Marks.cs" />
+    <Compile Remove="Models\Entity\SubsTeach.cs" />
+    <Compile Remove="Models\OrdersView.cs" />
+    <Compile Remove="Models\SchContext.cs" />
+    <Compile Remove="Models\StdFees\CashDenom.cs" />
+    <Compile Remove="Models\StdFees\ChqDrafts.cs" />
+    <Compile Remove="Models\StdFees\Receipt.cs" />
+    <Compile Remove="Models\StdFees\ReceiptDetails.cs" />
+    <Compile Remove="Models\StdFees\WaiverCaption.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ViewModels\StdFees\FeeForm.cs" />
+    <Compile Include="ViewModels\StdFees\FeeSumm.cs" />
+    <Compile Include="ViewModels\StdFees\Receipt.cs" />
+    <Compile Include="ViewModels\StdFees\ReceiptDetails.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
+  </ItemGroup>
+
+</Project>

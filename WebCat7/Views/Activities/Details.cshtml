@@ -1,0 +1,102 @@
+﻿@model SchMod.Models.Active.Activity
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Activity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActivityId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActivityName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityValue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActivityValue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityGroup)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActivityGroup)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActGroupId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActGroupId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityRemarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActivityRemarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActivityDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SendSms)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SendSms)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SendEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SendEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LoginName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dormant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dormant)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ModTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ModTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CTerminal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CTerminal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DBid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DBid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AutoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,53 @@
+﻿@using Syncfusion.EJ2;
+@using Syncfusion.Data;
+
+@using  SchMod.Models.Convey;
+
+@model IEnumerable<SchMod.Models.Convey.Conveyance>
+    @{
+    ViewData["Title"] = "Conveyance";
+    }
+    <script src="@Url.Content("~/js/jquery-3.1.1.min.js")"></script>
+    <script src="@Url.Content("~/js/Conveyance.js")"></script>
+    <hr />
+    <h3>Assign Stops to Students</h3>
+    <hr />
+    <div class="row">
+        <div class="form-group col-md-1"></div>
+        <div class="form-group col-md-2">
+            <label class="e-name">
+                Class
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+             <ejs-dropdownlist id="selectClsses" width="150px" height="30px" select="changeClsses" datasource="(IEnumerable<string>)ViewBag.clsses">
+            </ejs-dropdownlist>
+        </div>
+        <div class="form-group col-md-2"></div>
+        <div class="form-group col-md-1">
+            <label class="e-name">
+                Date
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            <ejs-datetimepicker id="selectDate" width="180px" height="30px"  change="changeDate" format="dd/MMM/yyyy" value="ViewBag.AtDate">
+            </ejs-datetimepicker>
+        </div>
+    </div>
+    <div>
+        <ejs-grid id="convGrid" enableAltRow="true" allowFiltering="true" allowPaging="true" allowSorting="true" showColumnChooser="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search"})">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-filterSettings type="FilterBar" mode="OnEnter" showFilterBarStatus="true"></e-grid-filterSettings>
+            @*<e-grid-filterSettings type="FilterBar"></e-grid-filterSettings>*@
+            <e-grid-columns>
+                <e-grid-column field="ConId" headerText="Id" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="RegNum" headerText="Registration" type="string" width="120"></e-grid-column>
+                <e-grid-column field="StdName" headerText="Name" width="150"></e-grid-column>
+                <e-grid-column field="RollNo" headerText="Roll" width="150"></e-grid-column>
+                <e-grid-column field="Gender" headerText="Gender" showInColumnChooser="false" width="150"></e-grid-column>
+                <e-grid-column field="Stops" headerText="Stops" width="150" editType="dropdownedit" showInColumnChooser="true" dataSource=ViewBag.vehTyp></e-grid-column>
+                <e-grid-column field="Commit" headerText="Save" editType="booleanEdit" width="150"></e-grid-column>
+                <e-grid-column field="Fare" headerText="Fare" showInColumnChooser="true" width="150"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+</div>

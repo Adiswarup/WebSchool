@@ -1,0 +1,25 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@using SchMod.Models.Convey;
+@model IEnumerable<SchMod.Models.Convey.VehicleType>
+
+    @{
+    ViewData["Title"] = "Vehicle Types";
+    }
+    <script src="@Url.Content("~/js/jquery-3.1.1.min.js")"></script>
+    <script src="@Url.Content("~/js/VehicleType.js")"></script>
+
+    <h2>Vehicle Types</h2>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div>
+        <ejs-grid id="VehicleType" enableAltRow="true" allowFiltering="true" allowPaging="true" allowSorting="true" toolbar="@(new List<string>() {" Edit","Update" ,"Cancel" ,"Search"})">
+            <e-grid-editSettings   allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            @*<e-grid-filterSettings type="FilterBar"></e-grid-filterSettings>*@
+            <e-grid-columns>
+                <e-grid-column field="VehicleTypeId" headerText="Id" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="VehType" headerText="Vehicle Category" type="string" width="120"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+</div>

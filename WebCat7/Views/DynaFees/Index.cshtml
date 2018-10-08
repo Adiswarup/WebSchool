@@ -1,0 +1,78 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using SchMod.Models.StdFees;
+@model SchMod.Models.StdFees.DynaFee
+@{
+    ViewData["Title"] = "Index";
+}
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/DynaFee.js"></script>
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@using (Html.BeginForm("Index", "DynaFees", FormMethod.Post, new { id = "DynaF", name = "DynaF" }))
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            @Html.LabelFor(model => model.SessionName, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-4">
+            @Html.DropDownListFor(model => model.SessionName, (SelectList)ViewBag.AcaSession, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeEvent();" } )
+            @Html.ValidationMessageFor(model => model.SessionName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-2">
+            @Html.LabelFor(model => model.ForClass, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-3">
+            @Html.DropDownListFor(model => model.ForClass, (SelectList)ViewBag.SchClssLst, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeEvent();" })
+            @Html.ValidationMessageFor(model => model.ForClass, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-2">
+            @Html.LabelFor(model => model.StdCategory, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-3">
+            @Html.DropDownListFor(model => model.StdCategory, (SelectList)ViewBag.StdFeeCat, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeEvent();" })
+            @Html.ValidationMessageFor(model => model.StdCategory, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            @Html.LabelFor(model => model.FeeCaption, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-3">
+            @Html.DropDownListFor(model => model.FeeCaption, (SelectList)ViewBag.StdFeeName, new { htmlAttributes = new { @class = "form-control"}, @onchange = "OnChangeEvent();" })
+            @Html.ValidationMessageFor(model => model.FeeCaption, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="form-group col-md-2 ">
+        <input type=submit value="Edit" name="EditDyna" class="btn btn-default" formaction="DynaFees/EditDynaFee" formmethod="post" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="form-group col-md-2 ">
+        <input type=submit value="New" name="NewDyna" class="btn btn-default" formaction="DynaFees/NewDynaFee" formmethod="post" />
+    </div>
+</div>
+}
+
+<script type="text/javascript">
+    function OnChangeEvent() {
+        $("#DynaF").submit();
+    }
+</script>

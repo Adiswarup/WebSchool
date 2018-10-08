@@ -1,0 +1,92 @@
+@model SchMod.Models.Basics.AcaSession
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>AcaSession</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="AutoId" />
+        <div class="form-group">
+            <label asp-for="Ssdid" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Ssdid" class="form-control" />
+                <span asp-validation-for="Ssdid" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SessionName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SessionName" class="form-control" />
+                <span asp-validation-for="SessionName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SessionStartDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SessionStartDate" class="form-control" />
+                <span asp-validation-for="SessionStartDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SessionEndDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SessionEndDate" class="form-control" />
+                <span asp-validation-for="SessionEndDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Dormant" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Dormant" class="form-control" />
+                <span asp-validation-for="Dormant" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoginName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LoginName" class="form-control" />
+                <span asp-validation-for="LoginName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModTime" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModTime" class="form-control" />
+                <span asp-validation-for="ModTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CTerminal" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CTerminal" class="form-control" />
+                <span asp-validation-for="CTerminal" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DBid" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DBid" class="form-control" />
+                <span asp-validation-for="DBid" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

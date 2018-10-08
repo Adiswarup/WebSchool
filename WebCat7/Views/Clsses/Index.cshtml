@@ -1,0 +1,39 @@
+@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using SchMod.Models.Basics;
+@model IEnumerable<SchMod.Models.Basics.Clss>
+
+@{
+    ViewData["Title"] = "Class";
+}
+<h2>Class</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<script src="~/js/Clsses.js"></script>
+<div class="row">
+    <div class="form-group col-md-3">
+        <label class="e-name">
+            Session
+        </label>
+    </div>
+    <div class="form-group col-md-4">
+        <ejs-dropdownlist id="selectSession" width="150px" height="30px" select="changeSession" datasource="(IEnumerable<string>)ViewBag.dropdownSession">
+        </ejs-dropdownlist>
+    </div>
+</div>
+<div>
+    <ejs-grid id="clssGrid" cellSelecting="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
+        <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+        @*<e-data-manager url="/Clsses/DataSource?sess=2016-17"  adaptor="UrlAdaptor"></e-data-manager>*@
+
+        <e-grid-columns>
+            <e-grid-column field="ClsId" headerText="Class ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+            <e-grid-column field="ClsName" headerText="Class" type="string" width="120"></e-grid-column>
+            <e-grid-column field="ClssNum" headerText="Class Order" width="150"></e-grid-column>
+            <e-grid-column field="ClassTeacher" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= "classTeacher", value= "classTeacher"}}})"></e-grid-column>
+            @*<e-grid-column field="classTeacher" headerText="Class Teacher"  editType="dropdownedit" edit=@Json.Serialize(@ViewBag.dropdownTeacher) textAlign="Right" width="120"></e-grid-column>*@
+        </e-grid-columns>
+    </ejs-grid>
+</div>

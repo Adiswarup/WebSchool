@@ -1,0 +1,53 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using SchMod.ViewModels.StdFees;
+
+@model SchMod.ViewModels.StdFees.FeeForm
+@{
+    ViewData["Title"] = "Fee Details";
+}
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/FeeSumm.js"></script>
+<script>
+    var fRegNo = @Model.RegNo;
+</script>
+<h2>Fee Details</h2>
+<div class="row">
+    <div class="form-group col-md-3">
+        <label asp-for="RegNo" class="control-label"></label>
+    </div>
+    <div class="form-group col-md-4">
+        <input asp-for="RegNo" readonly="readonly" class="form-control" />
+        <span asp-validation-for="RegNo" class="text-danger"></span>
+    </div>
+</div>
+
+<div>
+    <div>
+        <ejs-grid id="feeSummGrid" cellSelecting="true"  allowPaging="false" allowSorting="false" allowFiltering="true" enableAltRow="true">
+              <e-grid-columns>
+                  <e-grid-column field="feeId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                  <e-grid-column field="sn" headerText="Sl.No." type="string" width="120"></e-grid-column>
+                  <e-grid-column field="dueOn" format=""  headerText="Due On" width="150"></e-grid-column>
+                  <e-grid-column field="amount" headerText="Amount" width="150"></e-grid-column>
+                  <e-grid-column field="receiptNo" headerText="Receipt No." width="150"></e-grid-column>
+                  <e-grid-column field="feeCaption" headerText="Caption/Name" width="150"></e-grid-column>
+                  <e-grid-column field="isPaid" headerText="Paid" width="150"></e-grid-column>
+                  <e-grid-column field="remarks" headerText="Remarks" width="150"></e-grid-column>
+                  @*<e-grid-column field="classTeacher" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= " classTeacher", value="classTeacher" }}})"></e-grid-column>*@
+                  @*<e-grid-column field="classTeacher" headerText="Class Teacher" editType="dropdownedit" edit=@Json.Serialize(@ViewBag.dropdownTeacher) textAlign="Right" width="120"></e-grid-column>*@
+              </e-grid-columns>
+        </ejs-grid>
+    </div>
+
+        @*col.Field("feeId").HeaderText("ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).AllowEditing(false).ShowInColumnChooser(false).Visible(false).Add();
+        col.Field("sn").HeaderText("Sn.").AllowEditing(false).ShowInColumnChooser(false) .Visible(true).Add();
+        col.Field("dueOn").Format("{0:MM/yyyy}").HeaderText("Due On").AllowEditing(false).ShowInColumnChooser(true).Visible(true).Add();
+        //col.Field("forMonth").HeaderText("Due On").AllowEditing(false).ShowInColumnChooser(true).Visible(true).Add();
+        col.Field("amount").HeaderText("Amount").AllowEditing(false).ShowInColumnChooser(true).Visible(true).Add();
+        col.Field("receiptNo").HeaderText("ReceiptNo").AllowEditing(false).ShowInColumnChooser(true).Visible(true).Add();
+        col.Field("feeCaption").HeaderText("Caption").AllowEditing(false).ShowInColumnChooser(true).Visible(true).Add();
+        col.Field("isPaid").HeaderText("IsPaid").AllowEditing(false).ShowInColumnChooser(true).Visible(true).Add();
+        col.Field("remarks").HeaderText("Remarks").AllowEditing(false).AllowTextWrap(true).ShowInColumnChooser(true).Visible(true).Add();*@
+</div>

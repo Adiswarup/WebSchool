@@ -1,0 +1,31 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@using SchMod.Models.StdFees;
+
+@model IEnumerable<SchMod.Models.StdFees.Fcaption>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+
+    <h2>Index</h2>
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/fcaps.js"></script>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div>
+        <ejs-grid id="fCapGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+
+            <e-grid-columns>
+                <e-grid-column field="feeNameId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="feeCaption" headerText="Caption/Label" type="string" width="120"></e-grid-column>
+                <e-grid-column field="feeOrder" headerText="Fee Order" width="150"></e-grid-column>
+                <e-grid-column field="showIt" headerText="ShowIt" width="150" editType="checkbox"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+
+    </div>
+

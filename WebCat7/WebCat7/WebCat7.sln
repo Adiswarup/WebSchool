@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCat7", "..\WebCat7.csproj", "{D5F2FC2A-7D0D-4C44-A634-364CD99AE199}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchMod", "..\..\SchModels\SchMod.csproj", "{2E17E41F-D4EF-4927-858B-4AB9713CB971}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5F2FC2A-7D0D-4C44-A634-364CD99AE199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F2FC2A-7D0D-4C44-A634-364CD99AE199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F2FC2A-7D0D-4C44-A634-364CD99AE199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F2FC2A-7D0D-4C44-A634-364CD99AE199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E17E41F-D4EF-4927-858B-4AB9713CB971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E17E41F-D4EF-4927-858B-4AB9713CB971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E17E41F-D4EF-4927-858B-4AB9713CB971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E17E41F-D4EF-4927-858B-4AB9713CB971}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45E746E7-47A8-43C4-B1D4-85327B039555}
+	EndGlobalSection
+EndGlobal

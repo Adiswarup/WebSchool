@@ -1,0 +1,87 @@
+﻿@model SchMod.Models.Active.ActivityGroup
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ActivityGroup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ActGroupId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActGroupId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActGroupName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActGroupName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsReflectedInReportCard)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsReflectedInReportCard)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActGroupReportCard)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActGroupReportCard)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActGroupMotive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActGroupMotive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GradeType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Clss)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Clss)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActSn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActSn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActClss)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActClss)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActSession)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActSession)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AutoId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

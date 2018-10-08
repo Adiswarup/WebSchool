@@ -1,0 +1,211 @@
+﻿side Bar
+<ejs-sidebar id="dockSidebar" width="220px" dockSize="72px" enableDock="false">
+            <e-content-template>
+                <div class="dock">
+                    @*<ul>
+                        <li class="sidebar-item" id="toggle">
+                            <span class="e-icons expand"></span>
+                            <span class="e-text" title="menu">Menu</span>
+                        </li>
+                    </ul>*@
+                    <div class="control_wrapper accordion-control-section">
+                        <ejs-accordion id="defaultAccordion">
+                            <e-accordion-accordionitems>
+                                <e-accordion-accordionitem expanded="true" header="Students" content="#Stds"></e-accordion-accordionitem>
+                                <e-accordion-accordionitem header="Exam" content="#Exam"></e-accordion-accordionitem>
+                                <e-accordion-accordionitem header="Basics" content="#Basics"></e-accordion-accordionitem>
+                                <e-accordion-accordionitem header="Fee Setup" content="#FeeSetup"></e-accordion-accordionitem>
+                                <e-accordion-accordionitem header="Activity" content="#Activity"></e-accordion-accordionitem>
+                                <e-accordion-accordionitem header="Conveyance" content="#Conveyance"></e-accordion-accordionitem>
+                                <e-accordion-accordionitem header="Admin" content="#Admin"></e-accordion-accordionitem>
+                            </e-accordion-accordionitems>
+                        </ejs-accordion>
+                    </div>
+                    <ul id="Stds" style="display:none">
+                        <li><a class="dropdown-item" asp-controller="SearchStd" asp-action="Index">Search</a></li>
+                        <li><a class="dropdown-item" asp-controller="FeeForms" asp-action="Fee_Std" asp-route-RegNo="0">Fee</a></li>
+                    </ul>
+                    <ul id="Exam" style="display:none">
+                        <li><a class="dropdown-item" asp-controller="SelectMarks//choose" asp-action="Index">Marks Entry</a></li>
+                    </ul>
+                    <ul id="Basics" style="display:none">
+                        <li><a class="dropdown-item" asp-controller="Teachers" asp-action="Index">Teachers</a></li>
+                        <li><a class="dropdown-item" asp-controller="Clsses" asp-action="Index">Class</a></li>
+                        <li><a class="dropdown-item" asp-controller="Subjects" asp-action="Index">Subjects</a></li>
+                        <li><a class="dropdown-item" asp-controller="AcaSessions" asp-action="Index">Sessions</a></li>
+                        <li><a class="dropdown-item" asp-controller="StdHouses" asp-action="Index">House</a></li>
+                        <li><a class="dropdown-item" asp-controller="StdCats" asp-action="Index">Category</a></li>
+                    </ul>
+                    <ul id="FeeSetup" style="display:none">
+                        <li><a class="dropdown-item" asp-controller="StdFeeCats" asp-action="Index">Fee Category</a></li>
+                        <li><a class="dropdown-item" asp-controller="Fcaptions" asp-action="Index">Fee Heads</a></li>
+                        <li><a class="dropdown-item" asp-controller="DynaFees" asp-action="Index">Fee Schedule</a></li>
+                        <li><a class="dropdown-item" asp-controller="ConfigLateFine" asp-action="Index">Late Fine</a></li>
+                        <li><a class="dropdown-item" asp-controller="StdWaivers" asp-action="Index">Waivers & Charges </a></li>
+                    </ul>
+                    <ul id="Activity" style="display:none">
+                        <li><a class="dropdown-item" asp-controller="ActivityGroups" asp-action="Index">Activity Group</a></li>
+                        <li><a class="dropdown-item" asp-controller="Activities" asp-action="Index">Activity</a></li>
+                        <li><a class="dropdown-item" asp-controller="TransActivities" asp-action="Index">TransAct</a></li>
+                        <li><a class="dropdown-item" asp-controller="ActiLogs" asp-action="Index">Activity Log</a></li>
+                        <li><a class="dropdown-item" asp-controller="Attendances" asp-action="Index">Attendance</a></li>
+                    </ul>
+                    <ul id="Conveyance" style="display:none">
+                        <li><a class="dropdown-item" asp-controller="VehicleTypes" asp-action="Index">Vehicle Category</a></li>
+                        <li><a class="dropdown-item" asp-controller="VehicleDescriptions" asp-action="Index">Vehicle Descriptions</a></li>
+                        <li><a class="dropdown-item" asp-controller="Stops" asp-action="Index">Stops</a></li>
+                        <li><a class="dropdown-item" asp-controller="Conveyances" asp-action="Index">Conveyance</a></li>
+                    </ul>
+                </div>
+            </e-content-template>
+        </ejs-sidebar>
+
+
+
+
+
+
+
+
+
+
+
+    @{
+    Html.EJ().Grid<Marks>
+        ("MarksGrid")
+        //.Datasource(ds => ds.URL("http://HP:7541/api/Teachers").Adaptor(AdaptorType.WebApiAdaptor).CrossDomain(true))
+        //.DataManagerID("MarksData")
+        //.Query("new ej.Query().select(['autoId', 'teachId', 'tName', 'teachLoginName', 'tTelephone', 'teachEMail']).take(5)")
+        .AllowPaging(true)
+        .EnableRowHover(true)
+        .ShowColumnChooser()
+        //.AllowEditOnDblClick(false)
+        .IsResponsive(true)
+        .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.Normal).ShowConfirmDialog(); })
+        //.ShowDeleteConfirmDialog()
+        //.Query("new ej.Query().take(5)")
+        //.Datasource((IEnumerable<Marks>
+            )ViewBag.DataSource)
+            //.PageSettings()
+            //.AllowSelection()
+            //.AllowFiltering()
+            //.SelectionType(SelectionType.Multiple)
+            //.SelectionSettings(select => { select.SelectionMode(mode => { mode.AddMode(SelectionMode.Row); }); })
+            //.AllowEditOnDblClick(true)
+            //.EditSettings(edit => { edit.AllowEditing().EditMode(EditMode.ExternalForm).FormPosition(FormPosition.BottomLeft); })
+            .ToolbarSettings(toolbar =>
+            {
+            toolbar.ShowToolbar().ToolbarItems(items =>
+            {
+            items.AddTool(ToolBarItems.Add);
+            items.AddTool(ToolBarItems.Edit);
+            items.AddTool(ToolBarItems.Delete);
+            items.AddTool(ToolBarItems.Update);
+            items.AddTool(ToolBarItems.Cancel);
+            });
+            })
+
+            .Columns(col =>
+            {
+            col.Field("mkID").HeaderText("MkID").IsPrimaryKey(true).IsIdentity(true).ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("regNum").HeaderText("Reg #").AllowEditing(false).ShowInColumnChooser(false).Add();
+            col.Field("presentRollNum").HeaderText("Roll").AllowEditing(false).ShowInColumnChooser(false).Add();
+            col.Field("uniReg").HeaderText("UniReg").AllowEditing(false).ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("stdName").HeaderText("Name").AllowEditing(false).ShowInColumnChooser(false).Add();
+            col.Field("thMarks").HeaderText("Theory").ShowInColumnChooser(true).Add();
+            col.Field("pracMarks").HeaderText("Prac").ShowInColumnChooser(true).Add();
+            col.Field("orMarks").HeaderText("Oral").ShowInColumnChooser(true).Add();
+            col.Field("asgnMarks").HeaderText("Asgn").ShowInColumnChooser(true).Add();
+            col.Field("totalMarks").HeaderText("TotalMarks").ShowInColumnChooser(true).Add();
+            col.Field("grades").HeaderText("Grades").ShowInColumnChooser(true).Add();
+            col.Field("stdGrades").HeaderText("StdGrades").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("mClss").HeaderText("Class").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("subName").HeaderText("SubName").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("examName").HeaderText("ExamName").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("mSession").HeaderText("Session").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("dBID").HeaderText("dBID").ShowInColumnChooser(false).Visible(false).Add();
+            //col.HeaderText("Edit").Format("<a onclick=\"clk(this)\" href=#>Edit</a>").Add();
+            })
+            .Render();
+            }
+
+
+
+            <script type="text/javascript">
+                var jClss = '@(ViewBag.Clss)';
+                //var jSubID = '@(ViewBag.SubID)';
+                var jExamName = '@(ViewBag.ExamName)';
+                @*var jsubType = '@(ViewBag.subType)';*@
+                                        var jsubName = '@(ViewBag.subName)';
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @*@{
+            var grid = new WebGrid(Model, canPage: true, rowsPerPage: 5,
+            selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+            grid.Pager(WebGridPagerModes.NextPrevious);}*@
+
+            @{
+            SchMod.Models.Marx.Marks marks = new SchMod.Models.Marx.Marks();
+            }
+
+            @*<div id="gridContent">
+                @grid.GetHtml(tableStyle: "table",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "selected",
+                columns: grid.Columns(
+                grid.Column("",
+                style: "col1",
+                format: @<text>
+                    <button class="edit-book display-mode" id="@item.MkAutoID">Edit</button>
+                    <button class="save-book edit-mode" id="@item.MkAutoID">Save</button>
+                </text>),
+                //grid.Column("MkAutoID", "ID"),    //, format: (item) => item.GetSelectLink(item.MkAutoID)),
+                grid.Column("StdName","Name"),
+                grid.Column("presentRollNum", "RollNum"),
+                grid.Column("Marks",
+                style: "col2",
+                format: @<text>
+                    <span id="marks" class="display-mode">@marks.ThMarks </span>
+                    @Html.TextBox("Marks", marks.ThMarks, new { @class = "edit-mode", size = 25 })
+                </text>)
+                ))
+            </div>*@
+
+
+
+
+
+
+
+
+
+
+            @*@if (grid.HasSelection)
+            {
+            marks = (WebCat7.Models.Marks)grid.Rows[grid.SelectedIndex].Value;
+            <b>MkAutoID</b> @marks.MkAutoID<br />
+            <b>Name</b>  @marks.StdName<br />
+            <b>RollNum</b> @marks.presentRollNum<br />
+            <b>Marks</b> @marks.ThMarks<br />
+
+            }*@

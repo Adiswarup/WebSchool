@@ -1,0 +1,88 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using SchMod.ViewModels.StdFees;
+@model IEnumerable<SchMod.ViewModels.StdFees.FeeForm>
+
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/StdFees.js"></script>
+
+    @{
+    ViewData["Title"] = "Fee Details";
+    }
+    <h2>Fee Details</h2>
+    <div class="gridtable">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td>
+                    <input type="text" id="txt_UniReg" />
+                </td>
+                <td>
+                    <div>
+                        <input type="button" onclick="fetch_StdData()" value="Get Fee Details" />
+                        @*<ejs-drop-down-list id="selectSession" width="150px" height="30px" select="changeSession" datasource="(IEnumerable<string>)ViewBag.dropdownSession">
+                        </ejs-drop-down-list>*@
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Student's Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayNameFor(model => model.StdName)
+                        @*@Html.DisplayFor(model => model.StdName)*@
+                    </dd>
+                    <dt>
+                        Roll No.
+                    </dt>
+                    <dd>
+                        @Html.DisplayNameFor(model => model.RollNo)
+                        @*@Html.DisplayFor(model => model.ClassTeacher)*@
+                    </dd>
+                    <dt>
+                        Present Class
+                    </dt>
+                    <dd>
+                        @Html.DisplayNameFor(model => model.Clss)
+                    </dd>
+                    <dt>
+                        Gender
+                    </dt>
+                    <dd>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </dd>
+                    <dt>
+                        Father's Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayNameFor(model => model.FNames)
+                    </dd>
+                </dl>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="button">
+                        <ejs-button id="btnStore"  click="btnClick" text="Class Store" />
+                        @*create="hidebutton"*@
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <ejs-grid id="feeSummGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+                <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+                <e-grid-columns>
+                    <e-grid-column field="feeId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                    <e-grid-column field="sn" headerText="Sl. No." type="string" width="120"></e-grid-column>
+                    <e-grid-column field="forMonth" headerText="For Month" width="150"></e-grid-column>
+                    @*<e-grid-column field="classTeacher" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= " classTeacher", value="classTeacher" }}})"></e-grid-column>*@
+                    @*<e-grid-column field="classTeacher" headerText="Class Teacher" editType="dropdownedit" edit=@Json.Serialize(@ViewBag.dropdownTeacher) textAlign="Right" width="120"></e-grid-column>*@
+                </e-grid-columns>
+            </ejs-grid>
+        </div>
+
+    </div>

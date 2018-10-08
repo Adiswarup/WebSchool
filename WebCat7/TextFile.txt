@@ -1,0 +1,94 @@
+﻿
+@*@{Html.EJ().DataManager("FlatData").URL("http://mvc.syncfusion.com/Services/Northwnd.svc/Orders/").CrossDomain(true).Render();}
+
+@{Html.EJ().Grid<OrdersView>("FlatGrid")
+        .DataManagerID("FlatData") //DataManagerID(DataManager ID)
+        .Query("new ej.Query().take(5)")
+        .Columns(col =>
+        {
+            col.Field("OrderID").HeaderText("Order ID").IsPrimaryKey(true).TextAlign(TextAlign.Right).Width(75).Add();
+            col.Field("CustomerID").HeaderText("Customer ID").Width(80).Add();
+            col.Field("EmployeeID").HeaderText("Employee ID").TextAlign(TextAlign.Right).Width(75).Add();
+            col.Field("Freight").HeaderText("Freight").TextAlign(TextAlign.Right).Width(75).Format("{0:C}").Add();
+            col.Field("ShipCity").HeaderText("Ship City").Width(110).Add();
+        }).Render();
+}*@
+
+
+    @{Html.EJ().DataManager("teachData").URL("http://localhost:62246/api/teachers")                 //("http://hp:7541/api/Teachers/")http://localhost:62246/api/teachers
+                              .Adaptor(AdaptorType.WebApiAdaptor)
+                              //.UpdateURL("http://localhost:62246/api/teachers/PutTeachers")
+                              //.RemoveURL("http://localhost:62246/api/teachers/PutTeachers")
+                              //.InsertURL("http://localhost:62246/api/teachers/PutTeachers")
+                              .CrossDomain(true)
+                              .Render();}
+    
+
+    @{Html.EJ().Grid<Teachers>("teachs")
+                                    //.Datasource(ds => ds.URL("http://HP:7541/api/Teachers").Adaptor(AdaptorType.WebApiAdaptor).CrossDomain(true))
+                                    .DataManagerID("teachData")
+                                    .Query("new ej.Query().select(['autoId', 'teachId', 'tName', 'teachLoginName', 'tTelephone', 'teachEMail']).take(5)")
+                                    .AllowPaging(true)
+                                    .EnableRowHover(true)
+                                    .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.Normal).ShowConfirmDialog(); })
+                                    //.ShowDeleteConfirmDialog()
+                                    //.Query("new ej.Query().take(5)")
+                                    //.Datasource(Model)
+                                    //.PageSettings()
+                                    //.AllowSelection()
+                                    //.AllowFiltering()
+                                    //.SelectionType(SelectionType.Multiple)
+                                    //.SelectionSettings(select => { select.SelectionMode(mode => { mode.AddMode(SelectionMode.Row); }); })
+                                    //.AllowEditOnDblClick(true)
+                                    //.EditSettings(edit => { edit.AllowEditing().EditMode(EditMode.ExternalForm).FormPosition(FormPosition.BottomLeft); })
+                                    .ToolbarSettings(toolbar =>
+                                    {
+                                        toolbar.ShowToolbar().ToolbarItems(items =>
+                                        {
+                                            items.AddTool(ToolBarItems.Add);
+                                            items.AddTool(ToolBarItems.Edit);
+                                            items.AddTool(ToolBarItems.Delete);
+                                            items.AddTool(ToolBarItems.Update);
+                                            items.AddTool(ToolBarItems.Cancel);
+                                        });
+                                    })
+
+                                    .Columns(col =>
+                                    {
+                                        col.Field("autoId").HeaderText("AutoID").IsPrimaryKey(true).IsIdentity(true).Add();
+                                        col.Field("teachId").HeaderText("Teacher's ID").Add();
+                                        col.Field("tName").HeaderText("Name").Add();
+                                        col.Field("teachLoginName").HeaderText("Login Name").Add();
+                                        col.Field("tTelephone").HeaderText("Phone/Mobile").Add();
+                                        col.Field("teachEMail").HeaderText("E-MAil").Add();
+                                      //col.HeaderText("Edit").Format("<a onclick=\"clk(this)\" href=#>Edit</a>").Add();
+                                  })
+                                .Render();
+    }
+
+    @*<script type="text/javascript">
+            function clk(e) {
+                var obj = $("#Teachs").data("ejGrid");
+                obj.editRecord("teachId", obj.getSelectedRecords()[0]);
+            }
+        </script>*@
+
+<script id="template" type="text/x-jsrender">
+    <input id="currentPage" type="text" style="text-align: center; width: 32px; height: 21px; background: white;" value="1" />
+    <label>of 200</label>
+    <button id="btn">Go to</button>
+</script>
+<script>
+            function create(args) {
+                     $("#btn").ejButton({
+                       click : "btnClick"
+                         });
+                   }
+             function btnClick(args) {
+                     var val = $("#currentPage").val();
+                     var gridObj = $("#Grid").data("ejGrid");
+                      gridObj.gotoPage(args.val);
+                  }
+</script>
+
+

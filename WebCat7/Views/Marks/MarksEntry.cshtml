@@ -1,0 +1,51 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using Newtonsoft.Json;
+@using SchMod.Models.Marx;
+
+@model IEnumerable<SchMod.Models.Marx.Marks>
+
+
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="~/Content/WebGrid.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+        <title>Index</title>
+    </head>
+    <hr />
+    <label class="col-md-2 control-label">'@ViewBag.Clss'</label>
+    <label class="col-md-2 control-label">'@ViewBag.SubName'</label>
+    <label class="col-md-2 control-label">'@ViewBag.ExamName'</label>
+    @*<label class="col-md-2 control-label">'@ViewBag.SubID'</label>
+    <label class="col-md-2 control-label">'@ViewBag.subType'</label>*@
+    @{
+    ViewBag.Title = "MarksEntry";
+    }
+
+    <h3>Marks Entry</h3>
+    <div>
+        <ejs-grid id="MarksGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="mkID" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="regNum" headerText="Reg #" type="string" width="120"></e-grid-column>
+                <e-grid-column field="presentRollNum" headerText="Roll" width="150"></e-grid-column>
+                <e-grid-column field="uniReg" headerText="uniReg" width="150"></e-grid-column>
+                <e-grid-column field="stdName" headerText="Name" width="150"></e-grid-column>
+                @*<e-grid-column field="classTeacher" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= " classTeacher", value="classTeacher" }}})"></e-grid-column>*@
+                @*<e-grid-column field="classTeacher" headerText="Class Teacher" editType="dropdownedit" edit=@Json.Serialize(@ViewBag.dropdownTeacher) textAlign="Right" width="120"></e-grid-column>*@
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        var jClss = '@(ViewBag.Clss)';
+        //var jSubID = '@(ViewBag.SubID)';
+        var jExamName = '@(ViewBag.ExamName)';
+        //var jsubType = '@(ViewBag.subType)';
+        var jsubName = '@(ViewBag.subName)';
+    </script>
+    <script src="~/js/SMarks.js"></script>
+

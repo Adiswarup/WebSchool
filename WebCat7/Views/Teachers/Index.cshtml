@@ -1,0 +1,34 @@
+@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using SchMod.Models.Basics;
+@model IEnumerable<SchMod.Models.Basics.Teachers>
+
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/Teachers.js"></script> 
+
+    @{
+    ViewData["Title"] = "Teachers";
+    }
+    <h2>Teachers</h2>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <div>
+        <ejs-grid id="TeachGrid" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="teachId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="tName" headerText="Name" type="string" width="120"></e-grid-column>
+                <e-grid-column field="teachLoginName" headerText="Login Name" width="150"></e-grid-column>
+                <e-grid-column field="teachEMail" headerText="E-Mail" width="150"></e-grid-column>
+                <e-grid-column field="tTelephone" headerText="Phone" width="150"></e-grid-column>
+                <e-grid-column field="teachEMail" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= " classTeacher", value="classTeacher" }}})"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+
+
+
+

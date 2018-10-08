@@ -1,0 +1,219 @@
+@model SchMod.Models.Studs.Students
+
+@{
+    ViewData["Title"] = "Edit Student General";
+}
+
+<h2>Edit</h2>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.ActionLink("Edit Address", "EditAddress", new { RegNumber = @Model.RegNumber })  
+        </div>
+        <div class="col-md-2">
+            @Html.ActionLink("Edit Family", "EditFamily", new { RegNumber = @Model.RegNumber })  
+        </div>
+        <div class="col-md-2">
+            @Html.ActionLink("Edit Health", "EditHealth", new { RegNumber = @Model.RegNumber })  
+        </div>
+    </div>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Students</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="StdId" />
+        <input type="hidden" asp-for="DBid" />
+        <input type="hidden" asp-for="StdSession" />
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="RegNumber" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="RegNumber" class="form-control" />
+                <span asp-validation-for="RegNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="StdName" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="StdName" class="form-control" />
+                <span asp-validation-for="StdName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="Sex" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="Sex" class="form-control" />
+                <span asp-validation-for="Sex" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+
+                <label asp-for="Dob" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="Dob" class="form-control" />
+                <span asp-validation-for="Dob" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="Religion" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="Religion" class="form-control" />
+                <span asp-validation-for="Religion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="ParentsNamesF" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="ParentsNamesF" class="form-control" />
+                <span asp-validation-for="ParentsNamesF" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="ParentsNamesM" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="ParentsNamesM" class="form-control" />
+                <span asp-validation-for="ParentsNamesM" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="PresentClass" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="PresentClass" class="form-control" />
+                <span asp-validation-for="PresentClass" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="StdCategory" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="StdCategory" class="form-control" />
+                <span asp-validation-for="StdCategory" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="EmailAddress" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="Color_House" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="Color_House" class="form-control" />
+                <span asp-validation-for="Color_House" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="PresentRollNo" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="PresentRollNo" class="form-control" />
+                <span asp-validation-for="PresentRollNo" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="Mphone" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="Mphone" class="form-control" />
+                <span asp-validation-for="Mphone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="Nationality" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="Nationality" class="form-control" />
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="ConPhone" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="ConPhone" class="form-control" />
+                <span asp-validation-for="ConPhone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="BoardNo" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="BoardNo" class="form-control" />
+                <span asp-validation-for="BoardNo" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="StdCategory" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="StdCategory" class="form-control" />
+                <span asp-validation-for="StdCategory" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="Aadhar" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+
+                <input asp-for="Aadhar" class="form-control" />
+                <span asp-validation-for="Aadhar" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="form-group col-md-3 ">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-controller="SearchStd" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

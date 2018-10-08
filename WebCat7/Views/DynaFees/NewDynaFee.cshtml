@@ -1,0 +1,56 @@
+﻿@using SchMod.Models.StdFees;
+@model IEnumerable<SchMod.Models.StdFees.DynaFee>
+@{
+    ViewData["Title"] = "NewDynaFee";
+}
+
+<script src="@Url.Content("~/js/jquery-3.1.1.min.js")"></script>
+<script src="@Url.Content("~/js/NesDynaFee.js")"></script>
+<h2>NewDynaFee</h2>
+
+<hr />
+<label class="col-md-2 control-label">'@ViewBag.Clss'</label>
+<label class="col-md-2 control-label">'@ViewBag.SessionName'</label>
+<label class="col-md-2 control-label">'@ViewBag.StdCategory'</label>
+
+<label class="col-md-2 control-label">'@ViewBag.FeeCaption'</label>
+
+<div>
+    @{Html.EJ().Grid<DynaFee>("dynaGrid")
+          .AllowPaging()
+          .PageSettings(paging =>
+          {
+              paging.PageSize(10);
+          })
+          .ToolbarSettings(toolbar =>
+          {
+              toolbar.ShowToolbar().ToolbarItems(items =>
+              {
+                  items.AddTool(ToolBarItems.Add);
+                  items.AddTool(ToolBarItems.Edit);
+                  items.AddTool(ToolBarItems.Delete);
+                  items.AddTool(ToolBarItems.Update);
+                  items.AddTool(ToolBarItems.Cancel);
+              });
+          })
+          .ShowColumnChooser()
+          .EditSettings(edit => { edit.AllowEditing().EditMode(EditMode.Normal); })
+          .Columns(col =>
+          {
+              col.Field("autoId").HeaderText("ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).ShowInColumnChooser(true).Visible(false).Add();
+              col.Field("clsFeeId").HeaderText("Name").Visible(false).Width(80).Add();
+              col.Field("feeNo").HeaderText("FeeNo").ShowInColumnChooser(true).Visible(true).Width(80).Add();
+              col.Field("caption").HeaderText("Caption").Visible(true).ShowInColumnChooser(true).Width(80).Add();
+              col.Field("amount").HeaderText("Amount").Visible(true).ShowInColumnChooser(true).Width(80).Add();
+              col.Field("forMonth").HeaderText("For Month").ShowInColumnChooser(true).EditType(EditingType.Datepicker).Width(80).Add();
+              col.Field("feeCaption").HeaderText("Fee Caption").Visible(false).Width(80).Add();
+          }).Render();
+    }
+</div>
+
+<script type="text/javascript">
+    var jClss = '@ViewBag.Clss';
+    var jSession =  '@ViewBag.SessionName';
+    var jStdFeeCat ='@ViewBag.StdCategory';
+    var jFeeCap = '@ViewBag.FeeCaption';
+</script>

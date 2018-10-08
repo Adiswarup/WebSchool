@@ -1,0 +1,71 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+
+@using SchMod.Models.Active;
+@model IEnumerable<SchMod.Models.Active.Attendance>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+
+    <h2>Index</h2>
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/Attendance.js"></script>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <tr>
+            <td>
+                <label class="e-name">
+                    Class
+                </label>
+                <div>
+                    <ejs-dropdownlist id="selectClsses" width="150px" height="30px" select="changeClsses" datasource="(IEnumerable<string>)ViewBag.clsses">
+                    </ejs-dropdownlist>
+                </div>
+
+                <br />
+            </td>
+            <td>
+                <label class="e-name">
+                    Type
+                </label>
+                <div>
+                    <ejs-dropdownlist id="selectType" width="150px" height="30px" select="changeType" datasource="(IEnumerable<string>)ViewBag.dropdownAtType">
+                    </ejs-dropdownlist>
+                </div>
+
+                <br />
+            </td>
+            <td>
+                <label class="e-name">
+                    Date
+                </label>
+                <div>
+                    <ejs-datepicker id="selectDate" width="150px" height="30px" select="changeDate" datasource="(DateTime)ViewBag.AtDate">
+                    </ejs-datepicker>
+                </div>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                      <ejs-grid id="attsGrid" cellSelecting="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+                        <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+
+                        <e-grid-columns>
+                            <e-grid-column field="attId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                            <e-grid-column field="regNum" headerText="RegNum" edit="false" type="string" width="120"></e-grid-column>
+                            <e-grid-column field="stdName" headerText="Name" width="150"></e-grid-column>
+                            <e-grid-column field="clsRoll" headerText="Roll" width="150"></e-grid-column>
+                            <e-grid-column field="isAbsent" headerText="Absent" editType="booleanedit" displayAsCheckBox="true" type="boolean"width="150"></e-grid-column>
+                            <e-grid-column field="remark" headerText="remark" width="150"></e-grid-column>
+                            <e-grid-column field="Cause" headerText="Cause" width="150"></e-grid-column>
+                        </e-grid-columns>
+                    </ejs-grid>
+            </td>
+        </tr>
+    </table>
+

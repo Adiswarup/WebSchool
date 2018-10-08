@@ -1,0 +1,112 @@
+﻿@model SchMod.Models.Active.ActivityGroup
+@{
+    ViewData["Title"] = "Create Activity Group";
+}
+<h2>Create Activity Group</h2>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ActGroupId" />
+    <input type="hidden" asp-for="Clss" />
+    <input type="hidden" asp-for="ActSession" />
+
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActGroupName" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActGroupName" class="form-control" />
+            <span asp-validation-for="ActGroupName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="IsReflectedInReportCard" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="IsReflectedInReportCard" class="form-control" />
+            <span asp-validation-for="IsReflectedInReportCard" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActGroupReportCard" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActGroupReportCard" class="form-control" />
+            <span asp-validation-for="ActGroupReportCard" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActGroupMotive" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActGroupMotive" class="form-control" />
+            <span asp-validation-for="ActGroupMotive" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActCode" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActCode" class="form-control" />
+            <span asp-validation-for="ActCode" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="GradeType" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="GradeType" class="form-control" />
+            <span asp-validation-for="GradeType" class="text-danger"></span>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Clss" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="Clss" class="form-control" />
+            <span asp-validation-for="Clss" class="text-danger"></span>
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActSn" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActSn" class="form-control" />
+            <span asp-validation-for="ActSn" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActClss" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActClss" class="form-control" />
+            <span asp-validation-for="ActClss" class="text-danger"></span>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActSession" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActSession" class="form-control" />
+            <span asp-validation-for="ActSession" class="text-danger"></span>
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="form-group col-md-3 ">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

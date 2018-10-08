@@ -1,0 +1,29 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@using SchMod.Models.Convey;
+
+@model IEnumerable<SchMod.Models.Convey.Stops>
+
+@{
+    ViewData["Title"] = "Stops";
+}
+<script src="@Url.Content("~/js/jquery-3.1.1.min.js")"></script>
+<script src="@Url.Content("~/js/Stops.js")"></script>
+
+<hr />
+<p>
+    <a asp-action="Create">Create New Stops</a>
+</p>
+<ejs-grid id="stopsGrid" enableAltRow="true" allowFiltering="true" allowPaging="true" allowSorting="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search"})">
+    <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+    <e-grid-filterSettings type="FilterBar"></e-grid-filterSettings>
+    <e-grid-columns>
+        <e-grid-column field="stopId" headerText="Id" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+        <e-grid-column field="drptext" headerText="Conveyance Mode" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.vehTyp, fields = new {text="drptext", value="drptext"}}})"></e-grid-column>
+        <e-grid-column field="stops1" headerText="Stops" type="string" width="120"></e-grid-column>
+        <e-grid-column field="circuit" headerText="Circuit" width="150"></e-grid-column>
+        <e-grid-column field="monthlyFare" headerText="Monthly Fare" width="150"></e-grid-column>
+        <e-grid-column field="fareFromMonth" headerText="Fare From Month" editType="datepickeredit" format="yMd" textAlign="Right" width="130"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+
