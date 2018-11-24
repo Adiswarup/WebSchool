@@ -1,7 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SchMod.ViewModels.StdFees
 {
@@ -24,19 +23,31 @@ namespace SchMod.ViewModels.StdFees
 
         [Key]
         public int FeeId { get; set; }
+        [DisplayName("Sl.No.")]
         public int Sn { get; set; }
+        [DisplayName("Fee No.")]
         public int FeeNo { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
+        [DisplayName("Fee Month")]
         public int ForMonth { get; set; }
+        [DisplayName("Fee Caption")]
         public string Caption { get; set; }
+        [DisplayName("Receipt No.")]
         public string ReceiptNo { get; set; }
+        [DisplayName("Amount")]
         public double Amount { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayName("Due Date")]
         public DateTime DueDate { get; set; }
+        [DisplayName("Due On")]
         public DateTime DueOn { get; set; }
+        [DisplayName("Payment Date")]
         public DateTime PayDate { get; set; }
+        [DisplayName("Is Fee Paid")]
         public string IsPaid { get; set; }
+        [DisplayName("Remarks")]
         public string Remarks { get; set; }
+        [DisplayName("Fee Caption")]
         public string FeeCaption { get; set; }
 
 

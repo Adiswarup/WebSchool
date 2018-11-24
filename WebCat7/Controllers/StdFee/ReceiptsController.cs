@@ -11,6 +11,7 @@ using WebCat7.GenFunction;
 using System;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using static WebCat7.GenFunction.PayFunc;
 using static WebCat7.GenFunction.GloVar;
 using static WebCat7.GenFunction.GloFunc;
 
@@ -19,17 +20,57 @@ namespace WebSchool.Controllers
     public class ReceiptsController : Controller
     {
         private readonly SchContext _context;
+        HttpClient client;
 
         public ReceiptsController(SchContext context)
         {
             _context = context;
+            client = new HttpClient();
+            client.BaseAddress = new Uri(iBaseURI);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        // GET: Receipts
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Receipt.ToListAsync());
-        //}
+        // POST: Receipts/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ReceiptDate,  UniReg,  RegNo,  StdName,  Gender,  Clss, ForPeriod, AmountPayable, AmountPaid," +
+            "ConvenienceFee, Remarks, SName,  FeeHeading, AcaSession, StdCat")] Receipt receipt)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                PayMod payMod = new PayMod();
+
+                payMod.TransactionAmount = receipt.AmountPaid.ToString();
+                payMod.TransactionDateTime = receipt.ReceiptDate.ToShortDateString();
+                payMod.udf1 = receipt.RegNo.ToString();
+                payMod.udf2 = receipt.ForPeriod.ToString();
+                payMod.udf3 = receipt.FeeHeading;
+                payMod.udf4 = receipt.RollNo.ToString();
+                payMod.udf5 = receipt.StdCat;
+                payMod.udf6 = receipt.DBid.ToString();
+                payMod.udf7 = receipt.ConvenienceFee.ToString();
+                string TransURL = TransferFund(payMod);
+                //HttpRequestMessage httpRequestMessage;
+                //httpRequestMessage.RequestUri = TransURL;
+                Redirect(TransURL);
+                client.BaseAddress = new Uri(GloVar.iBaseURI);
+                MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                client.DefaultRequestHeaders.Accept.Add(contentType);
+                string stringData = JsonConvert.SerializeObject(receipt);
+                var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.GetAsync(TransURL).Result;
+                ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    receipt = JsonConvert.DeserializeObject<Receipt>(data);
+                }
+            }
+            return View(receipt);
+        }
 
         // GET: Receipts/Edit/5
         public IActionResult Edit(int fRegNo, int feeNo, string feeCaption)
@@ -45,9 +86,20 @@ namespace WebSchool.Controllers
                 receipt = JsonConvert.DeserializeObject<Receipt>(stringData);
             }
             //receipt.FeeHeading = repSplXMLChr( feeCaption);
-            ViewBag.datasource = receipt.RecDetails;
-            return View(receipt);
+            ViewBag.DataSrc = receipt;
+            receipt.ConvenienceFee = 30;
+           receipt.AmountPaid = receipt.AmountPaid+30;
+            receipt.AmountPayable = receipt.AmountPayable+30;
+           return View(receipt);
         }
+
+
+        [HttpGet]
+        public async void PayReceipt()
+        {
+
+        }
+
 
         // GET: Receipts/Create
         //public IActionResult Create()
@@ -87,40 +139,6 @@ namespace WebSchool.Controllers
         //    return View(receipt);
         //}
 
-        //// POST: Receipts/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("AutoId,RecId,ReceiptNo,BillNo,ReceiptDate,UniReg,RegNo,ForPeriod,AmountPayable,AmountPaid,IsDuesClearance,PaymentMode,BankName,ChqDated,ChqNumber,Remarks,PaidAt,SName,FeeHeading,DelRemarks,AcaSession")] Receipt receipt)
-        //{
-        //    if (id != receipt.AutoId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(receipt);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ReceiptExists(receipt.AutoId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(receipt);
-        //}
 
         //// GET: Receipts/Delete/5
         //public async Task<IActionResult> Delete(int? id)

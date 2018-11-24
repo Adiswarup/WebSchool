@@ -33,10 +33,10 @@ namespace WebCat7.Controllers.StdFee
         public async  Task<IActionResult> Index()
         {
             List<DropDown> periodList = new List<DropDown>();
-            periodList.Add(new DropDown("Monthly" ));
-            periodList.Add(new DropDown("Quaterly" ));
-            periodList.Add(new DropDown("Half Yearly" ));
-            periodList.Add(new DropDown("Annually"));
+            periodList.Add(new DropDown("Monthly", "Monthly"));
+            periodList.Add(new DropDown("Quaterly" , "Quaterly"));
+            periodList.Add(new DropDown("Half Yearly" , "Half Yearly"));
+            periodList.Add(new DropDown("Annually", "Annually"));
             ViewBag.dropdownDuration = periodList;
             return View();
         }

@@ -14,7 +14,7 @@
         <a asp-action="Create">Create New</a>
     </p>
     <div>
-        <ejs-grid id="VehicleType" enableAltRow="true" allowFiltering="true" allowPaging="true" allowSorting="true" toolbar="@(new List<string>() {" Edit","Update" ,"Cancel" ,"Search"})">
+        <ejs-grid id="VehicleType" enableAltRow="true"  allowPaging="true"   toolbar="@(new List<string>() {" Edit","Update" ,"Cancel" ,"Search"})">
             <e-grid-editSettings   allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
             @*<e-grid-filterSettings type="FilterBar"></e-grid-filterSettings>*@
             <e-grid-columns>

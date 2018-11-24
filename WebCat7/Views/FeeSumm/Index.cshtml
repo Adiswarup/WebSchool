@@ -31,38 +31,19 @@
         <tr></tr>
         <tr>
             <td>
-                @{Html.EJ().Grid<FeeSumm>("feeSummGrid")
-                                  .AllowPaging()
-                                  .ClientSideEvents(eve => { eve.ActionBegin("begin"); })
-                                        .PageSettings(paging =>
-                                        {
-                                            paging.PageSize(10);
-                                        })
-                                        .ToolbarSettings(toolbar =>
-                                        {
-                                            toolbar.ShowToolbar().ToolbarItems(items =>
-                                            {
-                                                items.AddTool(ToolBarItems.Add);
-                                                items.AddTool(ToolBarItems.Edit);
-                                                items.AddTool(ToolBarItems.Delete);
-                                                items.AddTool(ToolBarItems.Update);
-                                                items.AddTool(ToolBarItems.Cancel);
-                                            });
-                                        })
-                                        .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().EditMode(EditMode.Normal); })
-                                        .Columns(col =>
-                                        {
-                                            col.Field("feeId").HeaderText("ID").IsPrimaryKey(true).TextAlign(TextAlign.Left).Width(75).Add();
-                                            col.Field("sn").HeaderText("Sn.").Width(80).Add();
-                                            col.Field("forMonth").HeaderText("Class Teacher").Width(80).Add();
-                                        }).Render();
-                }
+                <ejs-grid id="feeSummGrid" cellSelecting="true" allowPaging="false" allowSorting="false" allowFiltering="true" enableAltRow="true">
+                    <e-grid-columns>
+                        <e-grid-column field="FeeId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                        <e-grid-column field="Sn" headerText="Sl.No." type="string" width="120"></e-grid-column>
+                        <e-grid-column field="ForMonth" format="" headerText="For Month" width="150"></e-grid-column>
+                    </e-grid-columns>
+                </ejs-grid>
             </td>
         </tr>
         <tr>
             <td>
                 <div class="button">
-                    <ej-button id="btnStore" size="@ButtonSize.Medium" click="btnClick" text="Class Store" />
+                    <ej-button id="btnStore" click="btnClick" text="Class Store" />
                     @*create="hidebutton"*@
                 </div>
             </td>

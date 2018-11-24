@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SchMod.Models.Active;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -15,8 +14,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using WebCat7.Data;
 using WebCat7.GenFunction;
-using static WebCat7.GenFunction.GloVar;
 using static WebCat7.GenFunction.AcaFunctions;
+using static WebCat7.GenFunction.GloVar;
 
 namespace WebCat7.Controllers.Active
 {
@@ -32,9 +31,9 @@ namespace WebCat7.Controllers.Active
         // GET: Activities
         public async Task<IActionResult> Index()
         {
-             GetActGrpLst(_context);
-            ViewBag.dropdownActGrp = StrActGrpLst;
-            ViewBag.ActGrp = drpActGrpLst;
+            GetActivityGroup(_context);
+            ViewBag.dropdownActGrp = StrActivityGroup;
+            ViewBag.ActGrp = drpActivityGroup;
             return View();
         }
 
@@ -59,6 +58,8 @@ namespace WebCat7.Controllers.Active
         // GET: Activities/Create
         public IActionResult Create()
         {
+            GetActivityGroup(_context);
+            ViewBag.ActGrp = new SelectList(SchActivityGroup, "Value", "Text", null);
             return View();
         }
 
@@ -67,29 +68,29 @@ namespace WebCat7.Controllers.Active
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ActivityName,ActivityValue,ActivityGroup,ActGroupId,ActivityRemarks,ActivityDate,SendSms,SendEmail,LoginName,Dormant,ModTime,CTerminal,DBid")] Activity activity)
+        public IActionResult Create([Bind("ActivityName,ActivityValue,ActivityGroup,ActGroupId,ActivityRemarks,ActivityDate,SendSms,SendEmail, DBid")] Activity activity)
         {
-            if (ModelState.IsValid)
+            if (!ActivityExists(activity.ActivityId))
             {
-                if (!ActivityExists(activity.ActivityId))
+                activity.DBid = mdBId;
+                using (HttpClient client = new HttpClient())
                 {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        client.BaseAddress = new Uri(GloVar.iBaseURI);
-                        MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                        client.DefaultRequestHeaders.Accept.Add(contentType);
-                        string stringData = JsonConvert.SerializeObject(activity);
-                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                        HttpResponseMessage response = client.PostAsync("/api/Activities", contentData).Result;
-                        ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return View(activity);
-                    }
+                    client.BaseAddress = new Uri(GloVar.iBaseURI);
+                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                    client.DefaultRequestHeaders.Accept.Add(contentType);
+                    string stringData = JsonConvert.SerializeObject(activity);
+                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PostAsync("/api/Activities", contentData).Result;
+                    ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                    return RedirectToAction(nameof(Create));
                 }
-                //_context.Add(activity);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
             }
-            return View(activity);
+            else
+            {
+                GetActivityGroup(_context);
+                ViewBag.ActGrp = new SelectList(SchActivityGroup, "Value", "Text", null);
+                return View(activity);
+            }
         }
 
         // GET: Activities/Edit/5
@@ -222,9 +223,15 @@ namespace WebCat7.Controllers.Active
                 IEnumerable data = acaSession;
                 var count = data.AsQueryable().Count();
                 if (dm.Skip > 0)
+                {
                     data = operation.PerformSkip(data, dm.Skip);
+                }
+
                 if (dm.Take > 0)
+                {
                     data = operation.PerformTake(data, dm.Take);
+                }
+
                 return Json(new { result = data, count = count });
             }
         }

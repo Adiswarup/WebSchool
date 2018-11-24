@@ -25,19 +25,18 @@
 
 <div>
     <div>
-        <ejs-grid id="feeSummGrid" cellSelecting="true"  allowPaging="false" allowSorting="false" allowFiltering="true" enableAltRow="true">
-              <e-grid-columns>
-                  <e-grid-column field="feeId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
-                  <e-grid-column field="sn" headerText="Sl.No." type="string" width="120"></e-grid-column>
-                  <e-grid-column field="dueOn" format=""  headerText="Due On" width="150"></e-grid-column>
-                  <e-grid-column field="amount" headerText="Amount" width="150"></e-grid-column>
-                  <e-grid-column field="receiptNo" headerText="Receipt No." width="150"></e-grid-column>
-                  <e-grid-column field="feeCaption" headerText="Caption/Name" width="150"></e-grid-column>
-                  <e-grid-column field="isPaid" headerText="Paid" width="150"></e-grid-column>
-                  <e-grid-column field="remarks" headerText="Remarks" width="150"></e-grid-column>
-                  @*<e-grid-column field="classTeacher" headerText="Class Teacher" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownTeacher, fields= new {text= " classTeacher", value="classTeacher" }}})"></e-grid-column>*@
-                  @*<e-grid-column field="classTeacher" headerText="Class Teacher" editType="dropdownedit" edit=@Json.Serialize(@ViewBag.dropdownTeacher) textAlign="Right" width="120"></e-grid-column>*@
-              </e-grid-columns>
+        <ejs-grid id="feeSummGrid" >
+            <e-grid-columns>
+                <e-grid-column field="FeeId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="Sn" headerText="Sl.No." type="string" width="120"></e-grid-column>
+                <e-grid-column field="DueOn" headerText="Due On" type="date" format="yMd" width="150"></e-grid-column>
+                <e-grid-column field="Amount" headerText="Amount" width="150"></e-grid-column>
+                <e-grid-column field="ReceiptNo" headerText="Receipt No." width="150"></e-grid-column>
+                <e-grid-column field="FeeCaption" headerText="Caption/Name" width="150"></e-grid-column>
+                <e-grid-column field="IsPaid" headerText="Paid" width="150"></e-grid-column>
+                <e-grid-column field="Remarks" headerText="Remarks" width="150"></e-grid-column>
+                <e-grid-column field="ForMonth" headerText="ForMonth" visible="false" width="150"></e-grid-column>
+            </e-grid-columns>
         </ejs-grid>
     </div>
 

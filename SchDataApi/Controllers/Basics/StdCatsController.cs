@@ -126,6 +126,7 @@ namespace SchDataApi.Controllers
         [HttpPost]
         public async Task<IActionResult> PostStdCat([FromBody] StdCat stdCat)
         {
+            int HasCat = 0;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -139,15 +140,30 @@ namespace SchDataApi.Controllers
                 }
                 using (var command = conn.CreateCommand())
                 {
-                    MySql = " INSERT INTO StdCat ( StdCatID, StdCategory, ";
-                    MySql = MySql + " Dormant, LoginName, ModTime, cTerminal, dBID) Values (0, '";
-                    MySql = MySql + stdCat.StdCategory + "'";
-                    MySql = MySql + ", 0,'" + strLoginName + "'," + GenFunc.GloFunc.ToOADate(DateTime.Now);
-                    MySql = MySql + ",'" + Terminal + "'," + stdCat.DBid + ")";
-
+                    MySql = "SELECT StdCatID FROM StdCat";
+                    MySql = MySql + " WHERE Dormant = 0";
+                    MySql = MySql + " AND StdCategory = '" + stdCat.StdCategory + "'";
                     command.CommandType = CommandType.Text;
                     command.CommandText = MySql;
-                    command.ExecuteNonQuery();
+                    DbDataReader kMyReader = command.ExecuteReader();
+                    if (kMyReader.HasRows)
+                    {
+                        HasCat = 1;
+                        return BadRequest();
+                         }
+                    kMyReader.Close();
+                    if (HasCat == 0)
+                    {
+                        MySql = " INSERT INTO StdCat ( StdCatID, StdCategory, ";
+                        MySql = MySql + " Dormant, LoginName, ModTime, cTerminal, dBID) Values (0, '";
+                        MySql = MySql + stdCat.StdCategory + "'";
+                        MySql = MySql + ", 0,'" + strLoginName + "'," + GenFunc.GloFunc.ToOADate(DateTime.Now);
+                        MySql = MySql + ",'" + Terminal + "'," + stdCat.DBid + ")";
+
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = MySql;
+                        command.ExecuteNonQuery();
+                    }
                 }
                 //UpdateAcaSession(acaSession);
                 //    await _context.SaveChangesAsync();

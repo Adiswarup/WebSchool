@@ -1,0 +1,81 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@model SchMod.Models.Active.EnmAttendance
+
+@{
+    ViewData["Title"] = "Attendance";
+}
+
+<h2>Attendance</h2>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/Attendance.js"></script>
+<br />
+<h4>Activities Log</h4>
+@using (Html.BeginForm("Index", "EnmAttendances", FormMethod.Post, new { id = "Attendance", name = "Attendance" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="form-group col-md-1">
+            <label class="e-name">
+                Class
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            @Html.DropDownListFor(model => model.StdClss, (SelectList)ViewBag.Schclsses, "Select Class", new { @id = "Schclsses", @class = "form-control", @onchange = "changeClsses()" })
+        </div>
+        <div class="form-group col-md-2">
+            <label class="e-name">
+                Attendance Type
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            @Html.DropDownList("AttType", new List<SelectListItem> {
+                  new SelectListItem {Text="Class",Value ="Class"},
+                  new SelectListItem {Text="Lunch",Value ="Lunch"},
+                  new SelectListItem {Text="Last Bell",Value ="Last Bell"},
+                  new SelectListItem {Text="Bus",Value ="Bus"}
+                  }, "Select Attendance Type", new { @id = "AttType", @class = "selectpicker form-control", @data_selected_text_format = "count > 2", @data_size = "6", @data_width = "auto", @onchange = "changeAttType()" })
+        </div>
+        <div class="form-group col-md-1"></div>
+        <div class="form-group col-md-2">
+            <label class="e-name">
+                Attendance Date
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            <input asp-for="AttDate" type="date" class="form-control" onchange="changeAttDate()" id="AttDate" />
+        </div>
+    </div>
+    <div>
+        <ejs-grid id="attsGrid" cellSelecting="true" rowHeight="55" toolbar="@(new List<string>() { " Edit", "Update", "Cancel", "Search" })" enableAltRow="true">
+            <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+
+            <e-grid-columns>
+                <e-grid-column field="AttId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column headerText="Image" template="#template" textAlign="Center"  allowEditing="false"  width="150"></e-grid-column>
+                <e-grid-column field="RegNum" headerText="RegNum" allowEditing="false" type="string" width="120"></e-grid-column>
+                <e-grid-column field="StdName" headerText="Name"  allowEditing="false" width="150"></e-grid-column>
+                <e-grid-column field="clsRoll" headerText="Roll"  allowEditing="false" width="150"></e-grid-column>
+                <e-grid-column field="isAbsent" headerText="Absent" editType="booleanedit" displayAsCheckBox="true" type="boolean" width="150"></e-grid-column>
+                <e-grid-column field="Remark" headerText="remark" width="150"></e-grid-column>
+                <e-grid-column field="Cause" headerText="Cause" width="150"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+
+    </div>
+}
+<script id="template" type="text/x-template">
+    <div class="image">
+        <img src="${ImgDataURL}" alt="${RegNumber}" />
+    </div>
+</script>
+<style>
+    .image img {
+        height: 55px;
+        width: 55px;
+        border-radius: 50px;
+        box-shadow: inset 0 0 1px #e0e0e0, inset 0 0 14px rgba(0, 0, 0, 0.2);
+    }
+</style>

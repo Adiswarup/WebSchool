@@ -1,145 +1,103 @@
-﻿@{
+﻿@model SchMod.Models.General.DashMod
+
+@{
     ViewData["Title"] = "Home Page";
 }
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699318">Add client packages using Bower.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run & Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="card">
                 <img class="card-img-top" src="..." alt="Students Activities">
                 <div class="card-body">
                     <h5 class="card-title">Activities</h5>
-                    <p class="card-text"> Discipline Late 14-05-2018 Saroj</p>
-                    <p class="card-text"> Discipline Loitering 14-05-2018 Saroj</p>
-                    <p class="card-text"> Discipline OutSide Class 14-05-2018 Saroj</p>
+                    <table  max-height="40"  class="table">
+                        <tbody>
+                            @foreach (var item in Model.DashActivities)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Activity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Clss)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Roll)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Remark)
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
                     <a class="card-link" asp-action="Index" asp-controller="Activities">Log</a>
                     <a class="card-link" asp-action="Index" asp-controller="TransActivities">Add Activity</a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card">
-                <img class="card-img-top img-fluid" src="~/images/attendance_hands.jpg" alt="Attendance" >
+                <img class="card-img-top img-fluid" src="~/images/attendance_hands.jpg" alt="Attendance">
                 <div class="card-body">
                     <h5 class="card-title">Attendance</h5>
-                    <p class="card-text">Anand Kumar VIII E Ab Dt 17-05-2018  </p>
-                    <p class="card-text">Abhi Kumar VIIA Ab Dt 17-05-2018  </p>
-                    <p class="card-text">Sresth Kumar XE Ab Dt 17-05-2018  </p>
-                    <p class="card-text">Suresh Kumar IXE Ab Dt 17-05-2018  </p>
-                    <a asp-action="Index" asp-controller="Attendances" class="btn btn-primary">Class Attendance</a>
-                </div>
+                    <table class="table">
+                        <tbody>
+                            @foreach (var item in Model.DashAttendances)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Clss)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Roll)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                        <a asp-action="Index" asp-controller="Attendances" class="btn btn-primary">Class Attendance</a>
+                    </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card">
-                <img  src="..." alt="Total Fee Collection" >
+                <img src="..." alt="Total Fee Collection">
                 <div class="card-body">
                     <h5 class="card-title">Fees</h5>
-                    <p class="card-text">Total Fee Collection ₹724729.00.</p>
+                    <p class="card-text">Total Fee Collection ₹@Html.DisplayFor(model => model.TodaysFeeCollection)</p>
+                    <table class="table">
+                        <tbody>
+                            @foreach (var item in Model.DashFeess)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RegNum)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Clss)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FeeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
                     <a asp-action="Fee_Std" asp-controller="FeeForms" class="btn btn-primary">Fees</a>
                 </div>
             </div>

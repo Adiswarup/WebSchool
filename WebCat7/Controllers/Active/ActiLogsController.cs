@@ -35,7 +35,7 @@ namespace WebCat7.Controllers.Active
         {
             GetSchClss(_context);
             ViewBag.clsses = StrClsLst;
-            GetActGrpLst(_context);
+            GetActivityGroup(_context);
             ViewBag.ActGrps = StrActGrpLst;
             ViewBag.ColCount = 4;
             return View();

@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using static WebCat7.GenFunction.GloVar;
 using Newtonsoft.Json;
 using static WebCat7.GenFunction.AcaFunctions;
+using System.IO;
 
 namespace WebCat7.Controllers.Std
 {
@@ -38,13 +39,13 @@ namespace WebCat7.Controllers.Std
         }
 
         // GET: Students/Details/5
-        public async Task<IActionResult> Details(int RegNumber)
+        public async Task<IActionResult> Profile(int RegNumber)
         {
             Students students = new Students();
-            if (RegNumber == null)
-            {
-                return NotFound();
-            }
+            //if (RegNumber == null)
+            //{
+            //    return NotFound();
+            //}
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(iBaseURI);
@@ -59,6 +60,13 @@ namespace WebCat7.Controllers.Std
             {
                 return NotFound();
             }
+            //var pathPict = Path.Combine(
+            //    Directory.GetCurrentDirectory(),
+            //    "wwwroot" + "/userImages/", RegNumber + "Pict.jpg");
+
+            string imreBase64Data = Convert.ToBase64String(students.ImajePict);
+            string imgDataURL = String.Format("data:image/jpg;base64,{0}", imreBase64Data);
+            ViewBag.ImPict = imgDataURL;
 
             return View(students);
         }

@@ -2065,7 +2065,7 @@ namespace SchDataApi.DataLayer
 
                 entity.Property(e => e.PrefPeriod).HasColumnName("Pref_Period");
 
-                entity.Property(e => e.classTeacher).HasColumnName("Teacher");
+                entity.Property(e => e.ClassTeacher).HasColumnName("Teacher");
 
                 entity.Property(e => e.RoomLab).HasColumnName("Room_Lab");
 
@@ -2367,7 +2367,7 @@ namespace SchDataApi.DataLayer
                     .HasColumnName("TransActID")
                     .HasDefaultValueSql("0");
 
-                entity.Property(e => e.TransActName).HasMaxLength(255);
+                entity.Property(e => e.Activity).HasMaxLength(255);
 
                 entity.Property(e => e.TransActObserver).HasMaxLength(255);
 
@@ -2479,5 +2479,7 @@ namespace SchDataApi.DataLayer
         public DbSet<SchMod.Models.Studs.SearchStd> SearchStd { get; set; }
 
         public DbSet<SchMod.Models.Marx.SelectMarks> SelectMarks { get; set; }
+
+        public DbSet<SchMod.Models.General.DashMod> DashMod { get; set; }
     }
 }

@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SchMod.Models.Basics;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -15,9 +14,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using WebCat7.Data;
 using WebCat7.GenFunction;
-using static WebCat7.GenFunction.GloVar;
 using static WebCat7.GenFunction.AcaFunctions;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using static WebCat7.GenFunction.GloVar;
 
 namespace WebCat7.Controllers.Basics
 {

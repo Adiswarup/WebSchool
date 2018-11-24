@@ -10,19 +10,18 @@
 <script src="~/js/jquery-3.1.1.min.js"></script>
 <script src="~/js/StdCats.js"></script>
 
-<h2>Index</h2>
+<h2>Student Fee Category</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Category</a>
 </p>
 
 <div>
-    <ejs-grid id="CatGrid">
-        @*allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">*@
-        @*<e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>*@
+    <ejs-grid id="CatGrid" allowSorting="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
+        <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
         <e-grid-columns>
-            <e-grid-column field="stdCatId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
-            <e-grid-column field="stdCategory" headerText="Categorys" width="120"></e-grid-column>
+            <e-grid-column field="StdCatId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+            <e-grid-column field="StdCategory" headerText="Category" width="120"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
 </div>

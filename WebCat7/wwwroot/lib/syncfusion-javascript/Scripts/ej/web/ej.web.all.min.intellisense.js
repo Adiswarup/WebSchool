@@ -9293,6 +9293,9 @@ ejDiagram :function (options) {
 ///Defines how long edges should be, ideally. This will be the resting length for the springs.
 ///<br/>maxIteration-number	default-1000
 ///<br/><br/>
+///Enable or disable connector's segment overlapping with each other when executing the layout with multiple parents.
+///<br/>avoidSegmentOverlapping-boolean	default-false
+///<br/><br/>
 ///Defines the current culture of diagram
 ///<br/>locale-string	default-en-US
 ///<br/><br/>
@@ -9538,6 +9541,9 @@ ejDiagram :function (options) {
 ///<br/><br/>
 ///Describes the transparency level of the region
 ///<br/>opacity-number	default-1
+///<br/><br/>
+///defines the node border with a smooth transition from one color to another color.
+///<br/>borderGradient-any	default-null
 ///<br/><br/>
 ///Defines the header of a swimlane/lane
 ///<br/>header-any	default-{ text: Title, fontSize: 11 }
@@ -11695,7 +11701,7 @@ ejFileExplorer :function (options) {
 ///<br/>enableThumbnailCompress-boolean	default-false
 ///<br/><br/>
 ///Allows specified type of files only to display in FileExplorer control.
-///<br/>fileTypes-string	default-.
+///<br/>fileTypes-string	default-* . *
 ///<br/><br/>
 ///By using filterSettings property, you can customize the search functionality of the search bar in FileExplorer control.
 ///<br/>filterSettings-FilterSettings	default-
@@ -12229,6 +12235,9 @@ ejGantt :function (options) {
 ///Enables or disables sorting. When enabled, we can sort the column by clicking on the column.
 ///<br/>allowSorting-boolean	default-false
 ///<br/><br/>
+///Enables or disables the rendering of unscheduled tasks.
+///<br/>allowUnscheduledTask-boolean	default-false
+///<br/><br/>
 ///Specifies the baseline background color in Gantt
 ///<br/>baselineColor-string	default-#fba41c
 ///<br/><br/>
@@ -12263,7 +12272,7 @@ ejGantt :function (options) {
 ///<br/>dateFormat-string	default-MM/dd/yyyy
 ///<br/><br/>
 ///Specifies the customized working time for tasks in Gantt
-///<br/>dayWorkingTime-Array&lt;any&gt;	default-[{ from: 08:00 AM, to: 12:00 PM }, { from: 01:00 PM, to: 05:00 PM }]
+///<br/>dayWorkingTime-Array&lt;any&gt;	default-[{ from: 08:00 AM, to: 12:00 PM , background:   }, { from: 01:00 PM, to: 05:00 PM , background:  }]
 ///<br/><br/>
 ///Option for customizing the drag tooltip while reordering the rows.
 ///<br/>dragTooltip-DragTooltip	default-
@@ -12394,6 +12403,9 @@ ejGantt :function (options) {
 ///Default Value
 ///<br/>groupNameMapping-string	default-
 ///<br/><br/>
+///Specifies whether to highlight the non working time in Gantt.
+///<br/>highlightNonWorkingTime-boolean	default-false
+///<br/><br/>
 ///Specifies whether to highlight the weekends in Gantt .
 ///<br/>highlightWeekends-boolean	default-true
 ///<br/><br/>
@@ -12429,6 +12441,9 @@ ejGantt :function (options) {
 ///<br/><br/>
 ///To Specify the JsRender script Id to customize the mile stone with our preference
 ///<br/>milestoneTemplate-string	default-
+///<br/><br/>
+///Specifies the background color for non working time in Gantt.
+///<br/>nonWorkingBackground-string	default-
 ///<br/><br/>
 ///Specifies the mapping property path for the task description in datasource
 ///<br/>notesMapping-string	default-
@@ -14985,6 +15000,18 @@ ejKanban :function (options) {
 ///<br/><br/>
 ///To enable or disable DragAndDrop across swim lane.
 ///<br/>allowDragAndDrop-boolean	default-false
+///<br/><br/>
+///To enable or disable empty swimlane on Kanban board.  It is used to shown empty swimlane when no data's present on headers key mapping value.
+///<br/>showEmptySwimlane-boolean	default-false
+///<br/><br/>
+///Gets or sets an object that indicates to render the swimlane rows with specified swimlane headers.
+///<br/>headers-Array&lt;any&gt;	default-[]
+///<br/><br/>
+///Gets or sets a value that indicates to render the Kanban with specified swimlane header text.
+///<br/>text-string	default-null
+///<br/><br/>
+///Gets or sets a value that indicates to render the Kanban with specified swimlane header key.
+///<br/>key-string	default-null
 ///<br/><br/>
 ///Customize the settings for unassigned category of swim lane.
 ///<br/>unassignedGroup-any	default-Object
@@ -18296,6 +18323,27 @@ ejMap :function (options) {
 ///<br/><br/>
 ///set the smartLabelSize property
 ///<br/>smartLabelSize-ej.datavisualization.Map.LabelSize|string	default-fixed
+///<br/><br/>
+///Options for customizing the data label font.
+///<br/>font-any	default-
+///<br/><br/>
+///Font family of the data label.
+///<br/>fontFamily-string	default-Segoe UI
+///<br/><br/>
+///Font style of the data label.
+///<br/>fontStyle-ej.datavisualization.Map.FontStyle|string	default-normal.
+///<br/><br/>
+///NameType DescriptionRegularstring Specifies the font weight as regular.BoldstringSpecifies the font weight as bold.LighterstringSpecifies the font weight as lighter.  
+///<br/>fontWeight-ej.datavisualization.Map.FontWeight|string	default-regular. See
+///<br/><br/>
+///Opacity of the text.
+///<br/>opacity-number	default-1
+///<br/><br/>
+///Font color of the data label text.
+///<br/>color-string	default-null
+///<br/><br/>
+///Font size of the data label.
+///<br/>size-string	default-12px
 ///<br/><br/>
 ///Specifies the map view type.
 ///<br/>geometryType-ej.datavisualization.Map.GeometryType|string	default-&#39;geographic&#39;
@@ -22810,6 +22858,9 @@ ejRangeNavigator :function (options) {
 ///Toggles the placement of slider exactly on the place it left or on the nearest interval.
 ///<br/>allowSnapping-boolean	default-false
 ///<br/><br/>
+///It allows to show the value between the particular periods (i.e) from 1st January to 31st February and so on. The default value is true. If we set the property as false, it allows to show the value between the particular periods.(i.e) from 1st January to 31st January and so on.
+///<br/>allowNextValue-boolean	default-true
+///<br/><br/>
 ///Options for customizing the color, opacity and width of the chart border.
 ///<br/>border-Border	default-
 ///<br/><br/>
@@ -22918,6 +22969,9 @@ ejRangeNavigator :function (options) {
 ///Specifies the position of the labels to render either inside or outside of plot area
 ///<br/>labelPlacement-ej.datavisualization.RangeNavigator.LabelPlacement|string	default-outside
 ///<br/><br/>
+///Specifies to hide the labels when it intersects with each other.
+///<br/>labelIntersectAction-ej.datavisualization.RangeNavigator.LabelIntersectAction|string	default-none
+///<br/><br/>
 ///Specifies the position of the labels in higher level
 ///<br/>position-ej.datavisualization.RangeNavigator.Position|string	default-top
 ///<br/><br/>
@@ -22983,6 +23037,9 @@ ejRangeNavigator :function (options) {
 ///<br/><br/>
 ///Specifies the position of the labels to render either inside or outside of plot area. See LabelPlacement
 ///<br/>labelPlacement-ej.datavisualization.RangeNavigator.LabelPlacement|string	default-outside
+///<br/><br/>
+///Specifies to hide the labels when it intersects with each other.
+///<br/>labelIntersectAction-ej.datavisualization.RangeNavigator.LabelIntersectAction|string	default-none
 ///<br/><br/>
 ///Specifies the position of the labels in lower level.See Position
 ///<br/>position-ej.datavisualization.RangeNavigator.Position|string	default-bottom
@@ -28370,6 +28427,9 @@ ejSpreadsheet :function (options) {
 ///Gets or sets a value that indicates to define password while importing in the Spreadsheet.
 ///<br/>password-string	default-
 ///<br/><br/>
+///Gets a value that indicates whether importing or not while loading the sheets in Spreadsheet.
+///<br/>isImport-boolean	default-false
+///<br/><br/>
 ///Gets or sets a value that indicates whether to enable or disable readonly support in the Spreadsheet.
 ///<br/>isReadOnly-boolean	default-false
 ///<br/><br/>
@@ -31230,6 +31290,12 @@ ejTreeGrid :function (options) {
 ///Enables or disables the ability to edit a row or cell.
 ///<br/>allowEditing-boolean	default-false
 ///<br/><br/>
+///specifies the batch edit mode in TreeGrid.
+///<br/>batchEditSettings-any	default-
+///<br/><br/>
+///Specifies the batch edit mode whether it is cell, row or dialog.
+///<br/>editMode-ej.TreeGrid.BatchEditMode|string	default-ej.TreeGrid.BatchEditMode.Cell
+///<br/><br/>
 ///Specifies the mouse action whether single click or double click to begin the editing
 ///<br/>beginEditAction-ej.TreeGrid.BeginEditAction|string	default-ej.TreeGrid.BeginEditAction.DblClick
 ///<br/><br/>
@@ -31364,6 +31430,9 @@ ejTreeGrid :function (options) {
 ///<br/><br/>
 ///Specifies the operator for the search key words in toolbar searching.
 ///<br/>operator-string	default-contains
+///<br/><br/>
+///Specifies the search mode of records in searching.
+///<br/>searchHierarchyMode-ej.TreeGrid.SearchHierarchyMode|string	default-ej.TreeGrid.SearchHierarchyMode.Parent
 ///<br/><br/>
 ///Specifies the selected cell information on rendering TreeGrid.
 ///<br/>selectedCellIndexes-Array&lt;SelectedCellIndexes&gt;	default-
@@ -31856,7 +31925,7 @@ var wrapper=function(){
 var instance = new original();
 intellisense.annotate(instance, {
 
-addNode:function(newNodeText, target){
+addNode:function(newNodeText, target, preventTargetExpand){
 /// <signature>
 /// <summary>
 /// To add a Node or collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
@@ -31869,8 +31938,14 @@ addNode:function(newNodeText, target){
 /// </summary>
 /// <param name="target"	type="string|any">ID of TreeView node/object of TreeView node</param>
 /// </signature>
+/// <signature>
+/// <summary>
+/// To add a Node or collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
+/// </summary>
+/// <param name="preventTargetExpand"	type="boolean">Parent node will be prevented from auto expanding</param>
+/// </signature>
 },
-addNodes:function(collection, target){
+addNodes:function(collection, target, preventTargetExpand){
 /// <signature>
 /// <summary>
 /// To add a collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
@@ -31882,6 +31957,12 @@ addNodes:function(collection, target){
 /// To add a collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
 /// </summary>
 /// <param name="target"	type="string|any">ID of TreeView node/object of TreeView node</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To add a collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
+/// </summary>
+/// <param name="preventTargetExpand"	type="boolean">Parent node will be prevented from auto expanding</param>
 /// </signature>
 },
 checkAll:function(){

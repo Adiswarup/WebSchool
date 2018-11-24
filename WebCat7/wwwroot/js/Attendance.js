@@ -1,17 +1,12 @@
-﻿var jClss = "";
-var jAtType = "";
-
-function changeClsses(sender) {
-    jClss = sender.itemData.value;
+﻿function changeClsses() {
     UpdateGrid();
 }
 
-function changeType(sender) {
-    jAtType = sender.itemData.value;
+function changeAttType() {
     UpdateGrid();
 }
 
-function changeDate(sender) {
+function changeAttDate() {
     UpdateGrid();
 }
 
@@ -24,18 +19,24 @@ function changeDate(sender) {
 //});
 
 function UpdateGrid() {
-    if (jClss !== "" & jAtType !== "") {
-        var atDate = document.getElementById("selectDate").value();
-        //alert("Adi")
-        //alert(jclss + "  " + jAtType + "  " + jAtDate)
-        var urlAdaptor = new ej.data.UrlAdaptor();
+        var jActDate = document.getElementById("AttDate").value;
+        jClss = document.getElementById("Schclsses").value;
+        jAtType = document.getElementById("AttType").value;
+        if (jClss !== "" & jAtType !== "") {
+        //var atDateObj = document.getElementById ('selectDate').ej2_instances[0];
+        //var atDate = atDateObj.value;
+       //alert(jclss + "  " + jAtType + "  " + jAtDate);
+        //var datepickerObject = document.getElementById("selectDate").ej2_instances[0];
+        //atDate = datepickerObject.currentDate;
+
+        var urlAdaptor = new ejs.data.UrlAdaptor();
         var grid = document.querySelector('#attsGrid').ej2_instances[0];
-        grid.dataSource = new ej.data.DataManager({
-            url: "/Attendances/DataSource?clss=" + jClss + "&atType=" + jAtType + "&atDate=" + atDate,
-            updateUrl: "/Attendances/Update?clss=" + jClss + "&atType=" + jAtType + "&AtDate=" + atDate,
+        grid.dataSource = new ejs.data.DataManager({
+            url: "/Attendances/DataSource?clss=" + jClss + "&atType=" + jAtType + "&atDate=" + jActDate,
+            updateUrl: "/Attendances/Update?clss=" + jClss + "&atType=" + jAtType + "&AtDate=" + jActDate,
             adaptor: urlAdaptor
         });
-    }
+    } 
 }
 
 function click(args) {

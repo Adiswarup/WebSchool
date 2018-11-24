@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchMod.ViewModels.StdFees
@@ -7,6 +6,7 @@ namespace SchMod.ViewModels.StdFees
     public partial class ReceiptDetails
     {
         public int AutoId { get; set; }
+        [Key]
         public int RecId { get; set; }
         public int ReceiptNo { get; set; }
         public string BillNo { get; set; }

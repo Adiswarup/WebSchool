@@ -1,21 +1,18 @@
 ﻿$(function () {
     $(document).ready(function () {
-        UpdateGrid();
-        alert("Ready");
+         alert("Ready");
+       UpdateGrid();
     });
 });
 
 function UpdateGrid() {
-    var dataManager = ej.DataManager({
+         var urlAdaptor = new ejs.data.UrlAdaptor();
+        var grid = document.querySelector('#dynaGrid').ej2_instances[0];
+        grid.dataSource = new ejs.data.DataManager({
         url: "/DynaFees/DataSource?clss=" + jClss + "&tSess=" + jSession + "&StdFeeCat=" + jStdFeeCat + "&FeeCap=" + jFeeCap,
         updateUrl: "/DynaFees/Update?clss=" + jClss + "&tSess=" + jSession + "&StdFeeCat=" + jStdFeeCat + "&FeeCap=" + jFeeCap,
-        adaptor: new ej.UrlAdaptor()
-    });
-    $("#dynaGrid").ejGrid({
-        dataSource: dataManager,
-        allowPaging: true,
-        updateUrl: UpdateGrid
-    });
+        adaptor: urlAdaptor()
+    }
 }
 
 function click(args) {

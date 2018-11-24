@@ -8,86 +8,83 @@
 
 <h4>Activity</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ActivityId" class="control-label"></label>
-                <input asp-for="ActivityId" class="form-control" />
-                <span asp-validation-for="ActivityId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityName" class="control-label"></label>
-                <input asp-for="ActivityName" class="form-control" />
-                <span asp-validation-for="ActivityName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityValue" class="control-label"></label>
-                <input asp-for="ActivityValue" class="form-control" />
-                <span asp-validation-for="ActivityValue" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityGroup" class="control-label"></label>
-                <input asp-for="ActivityGroup" class="form-control" />
-                <span asp-validation-for="ActivityGroup" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActGroupId" class="control-label"></label>
-                <input asp-for="ActGroupId" class="form-control" />
-                <span asp-validation-for="ActGroupId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityRemarks" class="control-label"></label>
-                <input asp-for="ActivityRemarks" class="form-control" />
-                <span asp-validation-for="ActivityRemarks" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityDate" class="control-label"></label>
-                <input asp-for="ActivityDate" class="form-control" />
-                <span asp-validation-for="ActivityDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SendSms" class="control-label"></label>
-                <input asp-for="SendSms" class="form-control" />
-                <span asp-validation-for="SendSms" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SendEmail" class="control-label"></label>
-                <input asp-for="SendEmail" class="form-control" />
-                <span asp-validation-for="SendEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LoginName" class="control-label"></label>
-                <input asp-for="LoginName" class="form-control" />
-                <span asp-validation-for="LoginName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dormant" class="control-label"></label>
-                <input asp-for="Dormant" class="form-control" />
-                <span asp-validation-for="Dormant" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModTime" class="control-label"></label>
-                <input asp-for="ModTime" class="form-control" />
-                <span asp-validation-for="ModTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CTerminal" class="control-label"></label>
-                <input asp-for="CTerminal" class="form-control" />
-                <span asp-validation-for="CTerminal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DBid" class="control-label"></label>
-                <input asp-for="DBid" class="form-control" />
-                <span asp-validation-for="DBid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @*<div class="form-group col-md-3">
+                    <label asp-for="ActivityId" class="control-label"></label>
+                    <input asp-for="ActivityId" class="form-control" />
+                    <span asp-validation-for="ActivityId" class="text-danger"></span>
+                </div>*@
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="ActivityName" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input asp-for="ActivityName" class="form-control" />
+                        <span asp-validation-for="ActivityName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="ActivityValue" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input asp-for="ActivityValue" class="form-control" />
+                        <span asp-validation-for="ActivityValue" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="ActivityGroup" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        @Html.DropDownListFor(model => model.ActivityGroup, (SelectList)ViewBag.ActGrp, "Select Activity Group", new { @class = "form -control", style = "width: 350px;" })
+                        <span asp-validation-for="ActivityGroup" class="text-danger"></span>
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="ActGroupId" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">*@
+                        <input asp-for="ActGroupId" hidden="hidden" class="form-control" />
+                        @*<span asp-validation-for="ActGroupId" class="text-danger"></span>
+                    </div>
+                </div>*@
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="ActivityRemarks" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input asp-for="ActivityRemarks" class="form-control" />
+                        <span asp-validation-for="ActivityRemarks" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="SendSms" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input asp-for="SendSms" class="form-control" />
+                        <span asp-validation-for="SendSms" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="SendEmail" class="control-label"></label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input asp-for="SendEmail" class="form-control" />
+                        <span asp-validation-for="SendEmail" class="text-danger"></span>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="form-group col-md-3 ">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </form>
-    </div>
-</div>
 
 <div>
     <a asp-action="Index">Back to List</a>

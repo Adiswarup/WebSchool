@@ -67,8 +67,8 @@ namespace WebCat7.Controllers.Basics
         {
             if (ModelState.IsValid)
             {
-                if (!StdCatExists(stdCat.StdCategory))
-                {
+                //if (!StdCatExists(stdCat.StdCategory))
+                //{
                     using (HttpClient client = new HttpClient())
                     {
                         client.BaseAddress = new Uri(GloVar.iBaseURI);
@@ -79,7 +79,7 @@ namespace WebCat7.Controllers.Basics
                         HttpResponseMessage response = client.PostAsync("/api/StdCats", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
                         return View(stdCat);
-                    }
+                    //}
                 }
             }
             return View(stdCat);

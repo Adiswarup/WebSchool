@@ -11,6 +11,7 @@ using System.Data;
 using System.Data.Common;
 using static SchDataApi.GenFunc.GloFunc;
 using SchDataApi.GenFunc;
+using static SchDataApi.GenFunc.ActiveFunc;
 
 namespace SchDataApi.Controllers
 {
@@ -38,12 +39,19 @@ namespace SchDataApi.Controllers
             }
             using (var command = conn.CreateCommand())
             {
+                MySql = "SELECT ActGroupID FROM ActivityGroup ";
+                MySql = MySql + " WHERE ActGroupName ='" + actGrp + "'";
+                MySql = MySql + " AND Dormant =0 ";
+                MySql = MySql + " AND DBID =  " + mdBID;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = MySql;
+                int tActGroupID = (int)command.ExecuteScalar();
 
                 MySql = " SELECT  ActivityID, ActivityName, ActivityValue, ActivityGroup, ActGroupID, ActivityRemarks,"
                             + "   SendSMS, SendEMail FROM Activity WITH (NOLOCK)"
                             + " WHERE  Dormant = 0"
                             + " AND dBID = " + mdBID
-                            + " AND ActivityGroup = '" + actGrp + "'";
+                            + " AND ActGroupID = '" + tActGroupID + "'";
                 command.CommandType = CommandType.Text;
                 command.CommandText = MySql;
                 DbDataReader kMyReader = command.ExecuteReader();
@@ -108,11 +116,9 @@ namespace SchDataApi.Controllers
                     MySql = " UPDATE Activity SET ";
                     MySql = MySql + " ActivityName = '" + activity.ActivityName + "',";
                     MySql = MySql + " ActivityValue = '" + activity.ActivityValue + "',";
-                    MySql = MySql + " ActivityGroup = '" + activity.ActivityGroup + "',";
-                    MySql = MySql + " ActGroupID = '" + activity.ActGroupId + "'";
-                    MySql = MySql + " ActivityRemarks = '" + activity.ActivityRemarks + "'";
-                    MySql = MySql + " SendSMS = '" + activity.SendSms + "'";
-                    MySql = MySql + " SendEMail = '" + activity.SendEmail + "'";
+                    MySql = MySql + " ActivityRemarks = '" + activity.ActivityRemarks + "',";
+                    MySql = MySql + " SendSMS = " + CBI(activity.SendSms) + ",";
+                    MySql = MySql + " SendEMail = " + CBI(activity.SendEmail) ;
                     MySql = MySql + " WHERE ActivityID = " + activity.ActivityId;
                     MySql = MySql + " AND Dormant = 0";
                     MySql = MySql + " AND dBID = " + activity.DBid;
@@ -147,7 +153,7 @@ namespace SchDataApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            activity.ActGroupId = GetActivityGroupID(_context, activity.ActivityGroup, activity.DBid);
             try
             {
                 var conn = _context.Database.GetDbConnection();
@@ -158,7 +164,7 @@ namespace SchDataApi.Controllers
                 using (var command = conn.CreateCommand())
                 {
                     MySql = " INSERT INTO Activity ( ActivityID, ActivityName, ActivityValue, ActivityGroup, " +
-                    "ActGroupID, ActivityRemarks,  SendSMS, SendEMail ";
+                    "ActGroupID, ActivityRemarks,  SendSMS, SendEMail, ";
                     MySql = MySql + " Dormant, LoginName, ModTime, cTerminal, dBID) Values (0, '";
                     MySql = MySql + activity.ActivityName + "'," + activity.ActivityValue + ",'"
                         + activity.ActivityGroup + "'," + activity.ActGroupId + ",'"

@@ -22,11 +22,11 @@ namespace WebCat7.GenFunction
         public static List<string> strSessLst = new List<string>();
 
         public static List<SelectListItem> SchActGrdLst = new List<SelectListItem>();
-        public static List<DropDown> drpActGrdLst = new List<DropDown>();
+        public static List<DropDownGradeType> drpActGrdLst = new List<DropDownGradeType>();
         public static List<string> strActGrdLst = new List<string>();
 
         public static List<SelectListItem> SchClsLst = new List<SelectListItem>();
-        public static List<DropDown> drpClsLst = new List<DropDown>();
+        public static List<DropDownCls> drpClsLst = new List<DropDownCls>();
         public static List<String> StrClsLst = new List<String>();
 
         public static List<SelectListItem> SchActGrpLst = new List<SelectListItem>();
@@ -35,7 +35,7 @@ namespace WebCat7.GenFunction
 
         public static List<SelectListItem> SchActLst = new List<SelectListItem>();
         public static List<String> StrActLst = new List<String>();
-        public static List<DropDown> drpActLst = new List<DropDown>();
+        public static List<DropDownActivity> drpActLst = new List<DropDownActivity>();
 
         public static List<SelectListItem> SchExmLst = new List<SelectListItem>();
         public static List<SelectListItem> SchSubLst = new List<SelectListItem>();
@@ -48,11 +48,15 @@ namespace WebCat7.GenFunction
         public static List<String> StrStopLst = new List<String>();
         public static List<DropDown> drpStopLst = new List<DropDown>();
 
-         public static List<SelectListItem> SchStdFeeCat = new List<SelectListItem>();
+        public static List<SelectListItem> SchStdFeeCat = new List<SelectListItem>();
         public static List<String> StrStdFeeCat = new List<String>();
         public static List<DropDown> drpStdFeeCat = new List<DropDown>();
 
-       #region "Fill Lists"
+        public static List<SelectListItem> SchActivityGroup = new List<SelectListItem>();
+        public static List<String> StrActivityGroup = new List<String>();
+        public static List<DropDownActivityGroup> drpActivityGroup = new List<DropDownActivityGroup>();
+
+        #region "Fill Lists"
 
         public static void GetSchTeachers(SchContext _context, Boolean tMode = false)
         {
@@ -90,7 +94,7 @@ namespace WebCat7.GenFunction
                             }
                             else
                             {
-                                drpTeachLst.Add(new DropDownTeach { classTeacher = kMyReader.GetString(0)});
+                                drpTeachLst.Add(new DropDownTeach { ClassTeacher = kMyReader.GetString(0) });
                             }
                             strTeachLst.Add(kMyReader.GetString(0));
                         }
@@ -139,52 +143,6 @@ namespace WebCat7.GenFunction
 
         }
 
-        public static void GetActivityGradeType(SchContext _context, Boolean tMode = true)
-        {
-            strActGrdLst.Clear();
-            SchActGrdLst.Clear();
-            drpActGrdLst.Clear();
-            string kMySql;
-            var conn = _context.Database.GetDbConnection();
-            if (conn.State == ConnectionState.Open)
-            {
-                conn.Close();
-            }
-            conn.Open();
-            using (var command = conn.CreateCommand())
-            {
-                //dSess = "";
-                SchSessLst.Clear();
-                kMySql = " SELECT DISTINCT GradeType ";
-                kMySql = kMySql + " FROM  ActivityGroup";
-                kMySql = kMySql + " WHERE dBID = " + mdBId;
-                kMySql = kMySql + " AND  Dormant = 0";
-                command.CommandText = kMySql;
-
-                DbDataReader kMyReader = command.ExecuteReader();
-                if (kMyReader.HasRows)
-                {
-                    while (kMyReader.Read())
-                    {
-                        if (!kMyReader.IsDBNull(0))
-                        {
-                            //if (dSess == "") { dSess = kMyReader.GetString(0); }
-                            if (tMode)
-                            {
-                                SchActGrdLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
-                            }
-                            else
-                            {
-                                drpActGrdLst.Add(new DropDown { drptext = kMyReader.GetString(0) });//, value = kMyReader.GetString(0)
-                            }
-                            strActGrdLst.Add(kMyReader.GetString(0));
-                        }
-                    }
-                }
-                conn.Close();
-            }
-        }
-
         public static void GetSchSession(SchContext _context)
         {
             strSessLst.Clear();
@@ -214,7 +172,7 @@ namespace WebCat7.GenFunction
                     {
                         if (!kMyReader.IsDBNull(0))
                         {
-                            drpSessLst.Add(new DropDown { drptext = kMyReader.GetString(0)});//, value = kMyReader.GetString(0) 
+                            drpSessLst.Add(new DropDown { drptext = kMyReader.GetString(0) });//, value = kMyReader.GetString(0) 
                             strSessLst.Add(kMyReader.GetString(0));
                             SchSessLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
                         }
@@ -259,7 +217,7 @@ namespace WebCat7.GenFunction
                                 if (dClss == "") { dClss = kMyReader.GetString(0); }
                                 SchClsLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
                                 StrClsLst.Add(kMyReader.GetString(0));
-                                drpClsLst.Add(new DropDown { drptext = kMyReader.GetString(0) });//, value = kMyReader.GetString(0)
+                                drpClsLst.Add(new DropDownCls { Clss = kMyReader.GetString(0) });//, value = kMyReader.GetString(0)
                             }
                         }
                     }
@@ -361,7 +319,7 @@ namespace WebCat7.GenFunction
             return new SelectList(SchSubLst, "Value", "Text", null);
         }
 
-        public static async void GetStdFeeCat(SchContext _context )
+        public static async void GetStdFeeCat(SchContext _context)
         {
             string kMySql = "";
             SchStdFeeCat.Clear();
@@ -441,48 +399,80 @@ namespace WebCat7.GenFunction
 
         #region "Activity"
 
-        public static void GetActGrpLst(SchContext _context)
+
+        public static void GetActivityGradeType(SchContext _context, Boolean tMode = true)
         {
-            drpActGrpLst.Clear();
-            StrActGrpLst.Clear();
-            SchActGrpLst.Clear();
-            dActGrp = "";
-            string kMySql = "";
+            strActGrdLst.Clear();
+            SchActGrdLst.Clear();
+            drpActGrdLst.Clear();
+            string kMySql;
             var conn = _context.Database.GetDbConnection();
-            if (conn.State != ConnectionState.Open)
+            if (conn.State == ConnectionState.Open)
             {
                 conn.Close();
-                conn.Open();
             }
+            conn.Open();
             using (var command = conn.CreateCommand())
             {
-                if (!(string.IsNullOrWhiteSpace(dSess) || (dSess == "None")))
-                {
-                    kMySql = " SELECT DISTINCT ActGroupName ";
-                    kMySql = kMySql + " FROM  ActivityGroup";
-                    kMySql = kMySql + " WHERE dBID = " + mdBId;
-                    kMySql = kMySql + " AND  Dormant = 0";
-                    command.CommandText = kMySql;
-                    command.CommandType = CommandType.Text;
-                    DbDataReader kMyReader = command.ExecuteReader();
-                    if (kMyReader.HasRows)
-                    {
-                        while (kMyReader.Read())
-                        {
-                            if (!kMyReader.IsDBNull(0))
-                            {
-                                if (dActGrp == "") { dActGrp = kMyReader.GetString(0); }
-                                SchActGrpLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
-                                StrActGrpLst.Add(kMyReader.GetString(0));
-                                drpActGrpLst.Add(new DropDown { drptext = kMyReader.GetString(0) });//, value = kMyReader.GetString(0)
+                //dSess = "";
+                SchSessLst.Clear();
+                kMySql = " SELECT DISTINCT GradeType ";
+                kMySql = kMySql + " FROM  ActivityGroup";
+                kMySql = kMySql + " WHERE dBID = " + mdBId;
+                kMySql = kMySql + " AND  Dormant = 0";
+                command.CommandText = kMySql;
 
-                            }
+                DbDataReader kMyReader = command.ExecuteReader();
+                if (kMyReader.HasRows)
+                {
+                    while (kMyReader.Read())
+                    {
+                        if (!kMyReader.IsDBNull(0))
+                        {
+                            SchActGrdLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
+                            drpActGrdLst.Add(new DropDownGradeType { GradeType = kMyReader.GetString(0) });
+                            strActGrdLst.Add(kMyReader.GetString(0));
                         }
                     }
                 }
-                else
+                conn.Close();
+            }
+        }
+
+        public static void GetActivityGroup(SchContext _context, Boolean tMode = true)
+        {
+            SchActivityGroup.Clear();
+            StrActivityGroup.Clear();
+            drpActivityGroup.Clear();
+            string kMySql;
+            var conn = _context.Database.GetDbConnection();
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
+            using (var command = conn.CreateCommand())
+            {
+                //dSess = "";
+                SchSessLst.Clear();
+                kMySql = " SELECT DISTINCT ActGroupName ";
+                kMySql = kMySql + " FROM  ActivityGroup";
+                kMySql = kMySql + " WHERE dBID = " + mdBId;
+                kMySql = kMySql + " AND  Dormant = 0";
+                command.CommandText = kMySql;
+
+                DbDataReader kMyReader = command.ExecuteReader();
+                if (kMyReader.HasRows)
                 {
-                    SchActGrpLst.Add(new SelectListItem { Text = "None", Value = "None", Selected = true });
+                    while (kMyReader.Read())
+                    {
+                        if (!kMyReader.IsDBNull(0))
+                        {
+                            SchActivityGroup.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
+                            drpActivityGroup.Add(new DropDownActivityGroup { ActivityGroup = kMyReader.GetString(0) });
+                            StrActivityGroup.Add(kMyReader.GetString(0));
+                        }
+                    }
                 }
                 conn.Close();
             }
@@ -490,12 +480,13 @@ namespace WebCat7.GenFunction
 
         public static void GetActivity(SchContext _context, string tActGrp, Boolean tMode = true)
         {
+          int iActGrID = GetActivityGroupID(_context, tActGrp);
             StrActLst.Clear();
             SchActLst.Clear();
             drpActLst.Clear();
             StrActLst.Add("None");
             SchActLst.Add(new SelectListItem { Text = "None", Value = "None", Selected = true });
-            drpActLst.Add(new DropDown { drptext = "None"});
+            drpActLst.Add(new DropDownActivity { Activity = "None" });
             string kMySql;
             var conn = _context.Database.GetDbConnection();
             if (conn.State == ConnectionState.Open)
@@ -510,7 +501,7 @@ namespace WebCat7.GenFunction
                 kMySql = " SELECT DISTINCT ActivityName ";
                 kMySql = kMySql + " FROM  Activity";
                 kMySql = kMySql + " WHERE dBID = " + mdBId;
-                kMySql = kMySql + " AND  ActivityGroup = '" + tActGrp + "'";
+                kMySql = kMySql + " AND  ActGroupID = " + iActGrID  ;
                 kMySql = kMySql + " AND  Dormant = 0";
                 command.CommandText = kMySql;
 
@@ -523,13 +514,37 @@ namespace WebCat7.GenFunction
                         {
                             //if (dSess == "") { dSess = kMyReader.GetString(0); }
                             SchActLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
-                            drpActLst.Add(new DropDown { drptext = kMyReader.GetString(0)});
+                            drpActLst.Add(new DropDownActivity { Activity = kMyReader.GetString(0) });
                             StrActLst.Add(kMyReader.GetString(0));
                         }
                     }
                 }
                 conn.Close();
             }
+        }
+        public static int GetActivityGroupID(SchContext _context, string tActGr )
+        {
+            int ActGrpId = -1;
+            string kMySql = "";
+            var conn = _context.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Close();
+                conn.Open();
+            }
+            using (var command = conn.CreateCommand())
+            {
+                kMySql = " SELECT   ActGroupID ";
+                kMySql = kMySql + " FROM  ActivityGroup";
+                kMySql = kMySql + " WHERE dBID = " + mdBId;
+                kMySql = kMySql + " AND  Dormant = 0";
+                kMySql = kMySql + " AND ActGroupName = '" + tActGr + "'";
+                command.CommandText = kMySql;
+                command.CommandType = CommandType.Text;
+                ActGrpId = (int)command.ExecuteScalar();
+            }
+            conn.Close();
+            return ActGrpId;
         }
 
         #endregion
@@ -543,7 +558,7 @@ namespace WebCat7.GenFunction
             drpVehTypLst.Clear();
             StrVehTypLst.Add("None");
             SchVehTypLst.Add(new SelectListItem { Text = "None", Value = "None", Selected = true });
-            drpVehTypLst.Add(new DropDown { drptext = "None"});
+            drpVehTypLst.Add(new DropDown { drptext = "None" });
             var dVeh = "";
             string kMySql = "";
             var conn = _context.Database.GetDbConnection();
@@ -572,7 +587,7 @@ namespace WebCat7.GenFunction
                                 if (dVeh == "") { dVeh = kMyReader.GetString(0); }
                                 SchVehTypLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
                                 StrVehTypLst.Add(kMyReader.GetString(0));
-                                drpVehTypLst.Add(new DropDown { drptext = kMyReader.GetString(0)});
+                                drpVehTypLst.Add(new DropDown { drptext = kMyReader.GetString(0) });
                             }
                         }
                     }
@@ -588,7 +603,7 @@ namespace WebCat7.GenFunction
             drpStopLst.Clear();
             StrStopLst.Add("None");
             SchStopLst.Add(new SelectListItem { Text = "None", Value = "None", Selected = true });
-            drpStopLst.Add(new DropDown { drptext = "None"});
+            drpStopLst.Add(new DropDown { drptext = "None" });
 
             var dVeh = "";
             string kMySql = "";
@@ -618,7 +633,7 @@ namespace WebCat7.GenFunction
                                 if (dVeh == "") { dVeh = kMyReader.GetString(0); }
                                 SchStopLst.Add(new SelectListItem { Text = kMyReader.GetString(0), Value = kMyReader.GetString(0), Selected = true });
                                 StrStopLst.Add(kMyReader.GetString(0));
-                                drpStopLst.Add(new DropDown { drptext = kMyReader.GetString(0)});
+                                drpStopLst.Add(new DropDown { drptext = kMyReader.GetString(0) });
                             }
                         }
                     }

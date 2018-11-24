@@ -126,13 +126,14 @@ namespace SchDataApi.GenFunc
             {
                 if (!(string.IsNullOrWhiteSpace(dSess) || (dSess == "None")))
                 {
-                    kMySql = " SELECT DISTINCT FeeCaption ";
+                    kMySql = " SELECT DISTINCT FeeCaption,ForMonth";
                     kMySql = kMySql + " FROM  DynaFee";
                     kMySql = kMySql + " WHERE dBID = " + mdBId;
                     kMySql = kMySql + " AND  Dormant = 0";
                     kMySql = kMySql + " AND SessionName = '" + tSess + "'";
                     kMySql = kMySql + " AND ForClass = '" + clss + "'";
                     kMySql = kMySql + " AND StdCategory = '" + stdFeeCat + "'";
+                    kMySql = kMySql + " ORDER BY ForMonth";
                     command.CommandText = kMySql;
                     command.CommandType = CommandType.Text;
                     DbDataReader kMyReader = command.ExecuteReader();

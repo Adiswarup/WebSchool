@@ -1,0 +1,283 @@
+﻿@model SchMod.Models.Studs.Students
+
+@{
+    ViewData["Title"] = "Profile";
+}
+<script src="~/js/jquery-3.1.1.min.js"></script>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Students</h4>
+    <hr />
+    <table border="0" cellpadding="2" align="center" cellspacing="0" style="border-collapse: collapse; font-family: Tahoma; font-size: 9pt; border-color:#991111; width:100%">
+        <tr id="1">
+            <td align="center" colspan="12">
+                <h1><b>PATLIPUTRA UNIVERSITY</b></h1>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="12">
+                <h4><b>PATNA</b></h4>
+            </td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="8" valign="top">
+                <h4>&#160;&#160;Profile</h4>
+            </td>
+            <td align="right" colspan="4" valign="bottom">
+                <h6>Session:&#160;<b>@Html.DisplayFor(model => model.StdSession)   &#160;&#160;&#160;</b></h6>
+            </td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="4">
+                <h6>Registration Number:&#160; <b>@Html.DisplayFor(model => model.RegNumber)&#160;&#160;&#160;</h6>
+            </td>
+            @*</tr>
+                <tr height="10px">*@
+            <td align="center" colspan="4">
+                <h6>Roll Number:&#160; <b>@Html.DisplayFor(model => model.PresentRollNo)&#160;&#160;&#160;</h6>
+            </td>
+            @*</tr>
+                <tr height="10px">*@
+            <td align="right" colspan="4">
+                <h6>Class:&#160; <b>@Html.DisplayFor(model => model.PresentClass)&#160;&#160;&#160;</b></h6>
+            </td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Name :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.StdName)</b></td>
+            <td align="center" colspan="5" cellpadding="6" rowspan="8">
+                <img src="@ViewBag.ImPict" alt="Photo" width="180" max-width="200">
+                <figure>
+                    <figcaption>Student's Photo<br></figcaption>
+                </figure>
+            </td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Mother's Name :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.ParentsNamesM)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Mother's Occupation :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.OccupationM)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Father's Name :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.ParentsNamesF)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Father's Occupation :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.OccupationF)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Date of Birth :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.Dob)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Gender :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.Sex)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Fee Category :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.StdCategory)</b></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Category/Community :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.StdGenCategory)</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Color/House :
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.Color_House)</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Aadhar:
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.Aadhar)</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Phone:
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.Hphone)</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="10px">
+            <td align="left" colspan="3">
+                &#160;&#160;&#160;Address:
+            </td>
+            <td align="left" colspan="4"><b>@Html.DisplayFor(model => model.Address) ,@Html.DisplayFor(model => model.Address1),@Html.DisplayFor(model => model.City)</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <table class="table">
+        <tbody class="labels">
+            <tr>
+                <td colspan="3">
+                    <label for="Activity">Activity</label>
+                    <input type="checkbox" name="Activity" id="Activity" data-toggle="toggle">
+                </td>
+            </tr>
+        </tbody>
+        <tbody class="hide">
+            <tr>
+                <td>
+                    Activity
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Remarks
+                </td>
+            </tr>
+
+            @foreach (var item in Model.StdActLst)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActRemarks)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody class="labels">
+            <tr>
+                <td colspan="3">
+                    <label for="Attendance">Attendance</label>
+                    <input type="checkbox" name="Attendance" id="Attendance" data-toggle="toggle">
+                </td>
+            </tr>
+        </tbody>
+        <tbody class="hide">
+            <tr>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Reason
+                </td>
+                <td>
+                    Remarks
+                </td>
+            </tr>
+            @foreach (var item in Model.StdAttLst)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AttDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AttReason)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AttRemarks)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody class="labels">
+            <tr>
+                <td colspan="3">
+                    <label for="Receipts">Receipts</label>
+                    <input type="checkbox" name="Receipts" id="Receipts" data-toggle="toggle">
+                </td>
+            </tr>
+        </tbody>
+        <tbody class="hide">
+            <tr>
+                <td>
+                    Pay Date
+                </td>
+                <td>
+                    Fee Name
+                </td>
+                <td>
+                    For Month
+                </td>
+                <td>
+                    Amount
+                </td>
+                <td>
+                    Paid
+                </td>
+                <td>
+                    Remarks
+                </td>
+            </tr>
+            @foreach (var item in Model.StdRecLst)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForMonth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.StdId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="toggle"]').change(function () {
+            $(this).parents().next('.hide').toggle();
+        });
+    });
+</script>

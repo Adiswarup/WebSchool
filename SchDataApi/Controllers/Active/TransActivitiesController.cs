@@ -10,6 +10,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using static SchDataApi.GenFunc.GloFunc;
+using static SchDataApi.GenFunc.ActiveFunc;
 
 namespace SchDataApi.Controllers
 {
@@ -38,6 +39,14 @@ namespace SchDataApi.Controllers
             }
             using (var command = conn.CreateCommand())
             {
+                MySql = "SELECT ActGroupID FROM ActivityGroup ";
+                MySql = MySql + " WHERE ActGroupName ='" + actgrps + "'";
+                MySql = MySql + " AND Dormant =0 ";
+                MySql = MySql + " AND DBID =  " + mDbId;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = MySql;
+                int tActGroupID = (int)command.ExecuteScalar();
+
                 MySql = "SELECT  RegNumber,PresentRollNo, FirstName, MiddleName, LastName, StdStatus, Unireg ";
                 MySql = MySql + " FROM Students WITH (NOLOCK) ";
                 MySql = MySql + " WHERE PresentClass='" + repSplChr(clss) + "'";
@@ -64,20 +73,20 @@ namespace SchDataApi.Controllers
                         {
                             acts.StdName = kMyReader.GetString(2); // " " + kMyReader.GetString(3) + " " + kMyReader.GetString(4);
                         }
-                        acts.TransActName = "None";
+                        acts.Activity = "None";
                         if (!kMyReader.IsDBNull(6))
                         {
                             acts.UniReg = kMyReader.GetInt32(6);
                         }
+                        acts.ActGroupID = tActGroupID;
                         stdActList.Add(acts);
                     }
                 }
                 kMyReader.Close();
-
-
                 MySql = "SELECT  TransActName, RegNumber, ActivityID, TransActID ";
                 MySql = MySql + " FROM TransActivity WITH (NOLOCK) ";
                 MySql = MySql + " WHERE RegNumber IN (" + strReg.Trim(',') + ")";
+                MySql = MySql + " AND ActivityID IN (SELECT ActivityID FROM Activity WHERE(ActGroupID = "  + tActGroupID  + "))";
                 MySql = MySql + " AND Dormant =0 ";
                 MySql = MySql + " AND TransActDate = " + actDate;
                 MySql = MySql + " AND DBID =  " + mDbId;
@@ -94,16 +103,16 @@ namespace SchDataApi.Controllers
                             {
                                 if (stdActList[i].RegNumber == kMyReader.GetInt32(1))
                                 {
-                                    if (stdActList[i].TransActName == "None")
+                                    if (stdActList[i].Activity == "None")
                                     {
-                                        stdActList[i].TransActName = kMyReader.GetString(0);
+                                        stdActList[i].Activity = kMyReader.GetString(0);
                                         stdActList[i].TransActId = kMyReader.GetInt32(3);
                                         break;
                                     }
                                     else
                                     {
                                         sActs = stdActList[i];
-                                        sActs.TransActName = kMyReader.GetString(0);
+                                        sActs.Activity = kMyReader.GetString(0);
                                         stdActList[i].TransActId = kMyReader.GetInt32(3);
                                         stdActList.Insert(i, sActs);
                                         break;
@@ -147,6 +156,7 @@ namespace SchDataApi.Controllers
             }
             try
             {
+                transActivity.ActivityId = GetActivityID(_context, transActivity.Activity, transActivity.ActGroupID, transActivity.DBid);
                 var conn = _context.Database.GetDbConnection();
                 if (conn.State == ConnectionState.Closed)
                 {
@@ -154,7 +164,7 @@ namespace SchDataApi.Controllers
                 }
                 using (var command = conn.CreateCommand())
                 {
-                    if (transActivity.TransActName == "None")
+                    if (transActivity.Activity == "None")
                     {
                         if (transActivity.TransActId != 0)
                         {
@@ -172,7 +182,7 @@ namespace SchDataApi.Controllers
                         MySql = " INSERT INTO TransActivity (TransActID, TransActName, ActivityID, RegNumber, TransActValue, "
                             + "TransActDate, TransActObserver, TeachID, TransActRemarks, UniReg, Score, ";
                         MySql = MySql + " Dormant, LoginName, ModTime, cTerminal, dBID) Values (0, '";
-                        MySql = MySql + transActivity.TransActName + "',0," + transActivity.RegNumber + ","
+                        MySql = MySql + transActivity.Activity + "'," + transActivity.ActivityId + "," + transActivity.RegNumber + ","
                             + transActivity.TransActValue + "," + GloFunc.ToOADate(transActivity.TransActDate) + ",'"
                             + transActivity.TransActObserver + "',0,'" + transActivity.TransActRemarks + "'," + transActivity.UniReg + ",0,";
                         MySql = MySql + "0,'" + transActivity.LoginName + "'," + GenFunc.GloFunc.ToOADate(DateTime.Now);

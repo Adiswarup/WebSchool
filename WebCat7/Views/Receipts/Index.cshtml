@@ -30,49 +30,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RegNo)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ForPeriod)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AmountPayable)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AmountPaid)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDuesClearance)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PaymentMode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BankName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ChqDated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ChqNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Remarks)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PaidAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FeeHeading)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DelRemarks)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AcaSession)
-                </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -96,54 +53,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RegNo)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ForPeriod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountPayable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDuesClearance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentMode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChqDated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChqNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaidAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FeeHeading)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DelRemarks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AcaSession)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AutoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AutoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AutoId">Delete</a>
-            </td>
-        </tr>
 }
     </tbody>
 </table>

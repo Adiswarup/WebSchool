@@ -27,19 +27,23 @@
     </div>
 </div>
 <div>
-    <ejs-grid id="ActGrid" cellSelecting="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
+    @{
+        var editActivityGroup = new { @params = new { dataSource = ViewBag.dropdownGradeType, fields = new { value = "ActivityGroup" } } };
+    }
+
+    <ejs-grid id="ActGrid" cellSelecting="true"  toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
         <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
 
         <e-grid-columns>
-            <e-grid-column field="ActivityId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+            <e-grid-column field="ActivityId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right"  width="100"></e-grid-column>
             <e-grid-column field="ActivityName" headerText="Activity Name" type="string" width="120"></e-grid-column>
-            <e-grid-column field="ActivityGroup" headerText="Group"  visible="false" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.ActGrp, fields= new {text= "text", value= "value"}}})"></e-grid-column>
+            <e-grid-column field="ActivityGroup" headerText="Group" visible="false" width="150" editType="dropdownedit" edit="editActivityGroup"></e-grid-column>
             <e-grid-column field="ActGroupId" headerText="actGroupId" visible="false" width="150"></e-grid-column>
             <e-grid-column field="ActivityRemarks" headerText="Remarks" type="string" width="120"></e-grid-column>
-            <e-grid-column field="ActivityDate" headerText="Date" editType="datepickeredit" format="yMd" width="120"></e-grid-column>
+            <e-grid-column field="ActivityDate" headerText="Date" editType="datepickeredit"  visible="false" format="dMy" width="120"></e-grid-column>
             <e-grid-column field="ActivityValue" headerText="Value" visible="false" width="150"></e-grid-column>
             <e-grid-column field="SendSms" headerText="Send SMS" editType="booleanedit" displayAsCheckBox="true" type="boolean" textAlign="Center" width="120"></e-grid-column>
-            <e-grid-column field="SendEmail" headerText="Send E-Mail" editType="booleanedit" displayAsCheckBox="true" textAlign="Center" type="boolean"  width="120"></e-grid-column>
+            <e-grid-column field="SendEmail" headerText="Send E-Mail" editType="booleanedit" displayAsCheckBox="true" textAlign="Center" type="boolean" width="120"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
 </div>

@@ -1,0 +1,85 @@
+﻿@using Syncfusion.EJ2.Grids;
+@using Syncfusion.Data;
+@model SchMod.Models.Active.EnmTransActivity
+
+@{
+    ViewData["Title"] = "Activity Transaction";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/TransAct.js"></script>
+<br />
+<h4>Activities Log</h4>
+@using (Html.BeginForm("Index", "EnmTransAcitivities", FormMethod.Post, new { id = "ActIndex", name = "ActIndex" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="form-group col-md-1">
+            <label class="e-name">
+                Class
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            @Html.DropDownListFor(model => model.StdClss, (SelectList)ViewBag.Schclsses, "Select Class", new { @id = "Schclsses", @class = "form-control", @onchange = "changeClsses()" })
+        </div>
+        <div class="form-group col-md-2">
+            <label class="e-name">
+                Activity Group
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            @Html.DropDownListFor(model => model.TransActGroup, (SelectList)ViewBag.ActGrps, "Select Activity Group", new { @class = "form -control", @onchange = "changeActGrps()", @id = "TransActGroup" })
+        </div>
+        <div class="form-group col-md-1"></div>
+        <div class="form-group col-md-2">
+            <label class="e-name">
+                Activity Date
+            </label>
+        </div>
+        <div class="form-group col-md-2">
+            <input asp-for="TransActDate" type="date" class="form-control" onchange="changeActDate()" id="TransActDate" />
+            @*<ejs-datetimepicker id="TransActDate" name="TransActDate" ejs-for="TransActDate"
+                format="dd-MM-yyyy" placeholder="Choose a Date" width="250px" change="changeActDate"></ejs-datetimepicker>*@
+        </div>
+    </div>
+    <div>
+        <ejs-grid id="TransActGrid" cellSelecting="true" rowHeight="55" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
+            <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+            <e-grid-columns>
+                <e-grid-column field="TransActId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column headerText="Image" template="#template" allowEditing="false" textAlign="Center" width="150"></e-grid-column>
+                <e-grid-column field="TransActName" headerText="Activity" visible="false" type="string" width="120"></e-grid-column>
+                <e-grid-column field="RollNumber" headerText="Roll" allowEditing="false" width="150"></e-grid-column>
+                <e-grid-column field="RegNumber" headerText="Reg" allowEditing="false" width="150"></e-grid-column>
+                <e-grid-column field="StdName" headerText="Name" allowEditing="false" width="150"></e-grid-column>
+                <e-grid-column field="Activity" headerText="Activity" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownActivity, fields= new {value= "Activity"}}})"></e-grid-column>
+                <e-grid-column field="ActGroupID" headerText="ActGroupID" visible="false" width="150"></e-grid-column>
+                <e-grid-column field="TransActRemarks" headerText="Remarks" width="150"></e-grid-column>
+                @*<e-grid-column field="Commit" headerText="Save" editType="booleanedit" displayAsCheckBox="true" type="boolean" width="150"></e-grid-column>*@
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+}
+<script id="template" type="text/x-template">
+    <div class="image">
+        <img src="${ImgDataURL}" alt="${RegNumber}" />
+    </div>
+</script>
+
+<script>
+    $(function () {
+        $("#TransActDate")
+            .datepicker();
+    });
+    function changeActGrps() {
+        $("#ActIndex").submit();
+    }
+</script>
+<style>
+    .image img {
+        height: 55px;
+        width: 55px;
+        border-radius: 50px;
+        box-shadow: inset 0 0 1px #e0e0e0, inset 0 0 14px rgba(0, 0, 0, 0.2);
+    }
+</style>

@@ -19,7 +19,7 @@ namespace WebCat7.Controllers.StdFee
         }
 
         // GET: FeeForms/Details/5
-        //[HttpGet]
+        [HttpGet]
         //[ValidateAntiForgeryToken]
         public ActionResult Fee_Std(int RegNo)
         {

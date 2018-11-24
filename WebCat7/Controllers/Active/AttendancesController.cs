@@ -45,7 +45,8 @@ namespace WebCat7.Controllers.Active
             GetSchClss(_context);
             ViewBag.clsses = StrClsLst;
             ViewBag.dropdownAtType = ls;
-            ViewBag.AtDate = DateTime.Now.Date;
+            ViewBag.AtType = "Class";
+            ViewBag.AtDate = DateTime.Now;
             return View();
             //return View(await _context.Attendance.ToListAsync());
         }

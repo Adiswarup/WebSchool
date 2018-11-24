@@ -108,7 +108,7 @@ namespace SchDataApi.Controllers
                 dynFee.Caption = item;
                 dynFee.ClsFeeId = 0;
                 dynFee.FeeNo = 0;
-                dynFee.ForMonth = dynaFeeList[0].ForMonth;
+                //dynFee.ForMonth = item.ForMonth;
                 dynFee.Amount = 0;
                 dynFee.ForClass = clss;
                 dynFee.StdCategory = stdFeeCat;

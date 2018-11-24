@@ -30,7 +30,7 @@ namespace SchMod.Models.Basics
         public int TutWeek { get; set; }
         public int LabWeek { get; set; }
         [DisplayName("Subject Teacher")]
-        public string classTeacher { get; set; }
+        public string ClassTeacher { get; set; }
         public int TeachId { get; set; }
         public string StandByTeacher { get; set; }
         public string RoomLab { get; set; }

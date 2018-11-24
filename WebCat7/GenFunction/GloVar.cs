@@ -21,8 +21,9 @@ namespace WebCat7.GenFunction
         public static String dActGrp = "";
         public static String dExm = "";
         public static int dSub = 0;
-      //public static String iBaseURI = "http://schdataapi.acceltech.co.in";
-         public static String iBaseURI = "http://localhost:55469";
+        public static int ConvCharge = 30;
+        //public static String iBaseURI = "http://schdataapi.acceltech.co.in";
+        public static String iBaseURI = "http://localhost:55469";
         //public static List<string> SchSessLst { get; set; }
 
     }

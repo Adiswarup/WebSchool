@@ -17,6 +17,7 @@ namespace SchDataApi.GenFunc
         public static String dClss = "";
         public static String dExm = "";
         public static int dSub = 0;
+        public static int ConvCharge = 30;
 
     }
 }

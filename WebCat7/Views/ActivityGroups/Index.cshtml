@@ -4,41 +4,34 @@
 @using SchMod.Models.Active;
 @model IEnumerable<SchMod.Models.Active.ActivityGroup>
 
-    @{
+@{
     ViewData["Title"] = "Activity Group";
+}
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/ActGroup.js"></script>
+<hr />
+<p>
+    <a asp-action="Create">Create New Activity Group</a>
+</p>
+<hr />
+<div>
+    @{
+        var editGradeType = new { @params = new { dataSource = ViewBag.dropdownGradeType, fields = new { value = "GradeType" } } };
+        var editClss = new { @params = new { dataSource = ViewBag.dropdownClss, fields = new { value = "Clss" } } };
     }
-    <script src="~/js/jquery-3.1.1.min.js"></script>
-    <script src="~/js/ActGroup.js"></script>
-    <hr />
-    <p>
-        <a asp-action="Create">Create New Activity Group</a>
-    </p>
-    <hr />
-    @*<div class="row">
-        <div class="form-group col-md-3">
-            <label class="e-name">
-                Session
-            </label>
-        </div>
-        <div class="form-group col-md-4">
-            <ejs-dropdownlist id="selectSession" width="150px" height="30px" select="changeSession" datasource="(IEnumerable<string>)ViewBag.dropdownSession">
-            </ejs-dropdownlist>
-        </div>
-    </div>*@
 
-    <div>
-        <ejs-grid id="ActGrpGrid" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
+        <ejs-grid id="ActGrpGrid" allowPaging="true"  toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
             <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
             <e-grid-columns>
-                <e-grid-column field="ActGroupId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
-                <e-grid-column field="ActGroupName" headerText="Activity GroupName" type="string" width="120"></e-grid-column>
-                <e-grid-column field="IsReflectedInReportCard" headerText="ReportCard" editType="booleanedit" displayAsCheckBox="true" type="boolean" width="150"></e-grid-column>
-                <e-grid-column field="ActGroupMotive" headerText="Motive" visible="false" width="150"></e-grid-column>
+                <e-grid-column field="ActGroupId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right" width="100"></e-grid-column>
+                <e-grid-column field="ActGroupName" headerText="Activity GroupName" validationRules="@(new { required=true, minLength=3})" type="string" width="120"></e-grid-column>
+                <e-grid-column field="IsReflectedInReportCard" headerText="ReportCard" visible="false"  editType="booleanedit" displayAsCheckBox="true" type="boolean" width="150"></e-grid-column>
+                <e-grid-column field="GradeType" headerText="Grade Type" width="150" editType="dropdownedit" edit="editGradeType"></e-grid-column>
+                <e-grid-column field="ActGroupMotive" headerText="Motive" width="150"></e-grid-column>
                 <e-grid-column field="ActCode" headerText="Code" visible="false" width="150"></e-grid-column>
-                <e-grid-column field="GradeType" headerText="Grade Type" width="150" editType="dropdownedit" edit="@(new {@params = new{dataSource = ViewBag.dropdownGradeType, fields= new {text= "Text", value="Value" }}})"></e-grid-column>
-                <e-grid-column field="Clss" headerText="Class" type="string" width="120"></e-grid-column>
-                <e-grid-column field="ActClss" headerText="Activity Class" type="string" width="120"></e-grid-column>
-                <e-grid-column field="ActSn" headerText="Serial No." type="string" width="120"></e-grid-column>
+                <e-grid-column field="Clss" headerText="Class" type="string" width="120"  visible="false"  editType="dropdownedit" edit="editClss"></e-grid-column>
+                <e-grid-column field="ActClss" headerText="Activity Class"  type="string" width="120"></e-grid-column>
+                <e-grid-column field="ActSn" headerText="Serial No." type="string"  visible="false"  width="120"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>

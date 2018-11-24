@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SchMod.Models.Active;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -33,9 +32,9 @@ namespace WebCat7.Controllers.Active
         public async Task<IActionResult> Index()
         {
             GetSchClss(_context);
-            ViewBag.clsses = StrClsLst;
-            GetActGrpLst(_context);
-            ViewBag.ActGrps = StrActGrpLst;
+            ViewBag.clsses = new SelectList(SchClsLst, "Value", "Text", null);
+            GetActivityGroup(_context);
+            ViewBag.ActGrps = new SelectList(SchActivityGroup, "Value", "Text", null);
             GetActivity(_context, "Thinking Skills", true);
             ViewBag.dropdownActivity = drpActLst;
             ViewBag.ActDate = DateTime.Now;
@@ -203,9 +202,10 @@ namespace WebCat7.Controllers.Active
             return Json(TransActVal.Value);
         }
 
-        public ActionResult DataSource(string clss, string actGrps, DateTime actDate, [FromBody] DataManagerRequest dm)
+        public ActionResult DataSource(string clss, string actGrps, string actDate, [FromBody] DataManagerRequest dm)
         {
-            double fActDate = GloFunc.ToOADate(actDate);
+
+            double fActDate=0; //= GloFunc.ToOADate(actDate);
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(GloVar.iBaseURI);
@@ -228,6 +228,10 @@ namespace WebCat7.Controllers.Active
         private bool TransActivityExists(int id)
         {
             return _context.TransActivity.Any(e => e.AutoId == id);
+            //value="https://paynetzuat.atomtech.in/paynetz/epi/fts?login=[MerchantLogin]pass=[MerchantPass]ttype=[TransactionType]" +
+            //    "prodid=[ProductID]amt=[TransactionAmount]txncurr=[TransactionCurrency]txnscamt=[TransactionServiceCharge]" +
+            //    "clientcode=[ClientCode]txnid=[TransactionID]date=[TransactionDateTime]custacc=[CustomerAccountNo]" +
+            //    "mdd=[MerchantDiscretionaryData]bankid=[BankID]ru=[ru]signature=[signature]" 
         }
     }
 }

@@ -40,7 +40,7 @@ namespace SchDataApi.Controllers
             }
             using (var command = conn.CreateCommand())
             {
-                MySql = " SELECT  RegNumber, FirstName, MiddleName, LastName, PresentRollNo FROM Students  WITH (NOLOCK) ";
+                MySql = " SELECT  RegNumber, FirstName, MiddleName, LastName, PresentRollNo, Photo FROM Students  WITH (NOLOCK) ";
                 MySql = MySql + " WHERE  Dormant = 0";
                 MySql = MySql + " AND dBID = " + mdBId;
                 MySql = MySql + " AND PresentClass = '" + clss + "'";
@@ -62,6 +62,9 @@ namespace SchDataApi.Controllers
                         if (!kMyReader.IsDBNull(3)) { lName = kMyReader.GetString(3); }
                         atts.StdName = fName + " " + mName + " " + lName;
                         if (!kMyReader.IsDBNull(4)) { atts.clsRoll = kMyReader.GetInt32(4); }
+                        if (!kMyReader.IsDBNull(5)) {
+                            atts.ImgDataURL = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String((byte[])(kMyReader.GetValue(5))));
+                        }
                         stdAttList.Add(atts);
                     }
                 }
@@ -137,22 +140,22 @@ namespace SchDataApi.Controllers
                 }
                 using (var command = conn.CreateCommand())
                 {
-                    if (attendance.AttId != 0)
-                    {
+                    //if (attendance.AttId != 0)
+                    //{
                         MySql = " UPDATE Attendance SET "
                                 + " Dormant = 1 "
                                 + " WHERE Dormant = 0  "
-                                + " AND AttDate = " + GenFunc.GloFunc.ToOADate(attendance.AttDate)
+                                + " AND AttDate = " +  attendance.AttDate.ToOADate().ToString() 
                                 + " AND RegNum = " + attendance.RegNum
-                                + " AND AcaSession = " + attendance.AcaSession;
+                                + " AND AcaSession = '" + attendance.AcaSession + "'";
                         command.CommandType = CommandType.Text;
                         command.CommandText = MySql;
                         command.ExecuteNonQuery();
-                    }
+                    //}
                     MySql = " INSERT INTO Attendance ( RegNum, Clss, Month, Year, AttDate, AtType, isAbsent, AcaSession, Cause, Remark,"
                             + " Dormant, LoginName, ModTime, cTerminal, dBID) Values ("
                             + attendance.RegNum + ",'" + attendance.Clss + "'," + (attendance.AttDate).Month + "," + (attendance.AttDate).Year + ","
-                            + GenFunc.GloFunc.ToOADate(attendance.AttDate) + ",'" + attendance.AtType + "'," + CBI(attendance.isAbsent) + ",'" + attendance.AcaSession + "','" + attendance.Cause + "','" + attendance.Remark
+                            +  attendance.AttDate.ToOADate().ToString()  + ",'" + attendance.AtType + "'," + CBI(attendance.isAbsent) + ",'" + attendance.AcaSession + "','" + attendance.Cause + "','" + attendance.Remark
                             + "', 0,'" + attendance.LoginName + "'," +  DateTime.Now.Date.ToOADate()
                             + ",'" + attendance.CTerminal + "'," + attendance.DBid + ")";
 
@@ -204,18 +207,18 @@ namespace SchDataApi.Controllers
                 }
                 using (var command = conn.CreateCommand())
                 {
-                    if (attendance.AttId != 0)
-                    {
+                    //if (attendance.AttId != 0)
+                    //{
                         MySql = " UPDATE Attendance SET "
                                 + " Dormant = 1 "
                                 + " WHERE Dormant = 0  "
                                 + " AND AttDate = " + GenFunc.GloFunc.ToOADate(attendance.AttDate)
                                 + " AND RegNum = " + attendance.RegNum
-                                + " AND AcaSession = " + attendance.AcaSession;
+                                + " AND AcaSession = '" + attendance.AcaSession  + "'";
                         command.CommandType = CommandType.Text;
                         command.CommandText = MySql;
                         command.ExecuteNonQuery();
-                    }
+                    //}
                     MySql = " INSERT INTO Attendance ( RegNum, Clss, Month, Year, AttDate, AcaSession, Cause, Remark,"
                             + " Dormant, LoginName, ModTime, cTerminal, dBID) Values ("
                             + attendance.RegNum + ",'" + attendance.Clss + "'," + (attendance.AttDate).Month + "," + (attendance.AttDate).Year + ","

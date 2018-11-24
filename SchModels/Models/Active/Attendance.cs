@@ -13,6 +13,7 @@ namespace SchMod.Models.Active
         public int RegNum { get; set; }
         public string Clss { get; set; }
         public string StdName { get; set; }
+        public string ImgDataURL { get; set; }
         public bool isAbsent { get; set; }
         public int clsRoll { get; set; }
         public int Month { get; set; }

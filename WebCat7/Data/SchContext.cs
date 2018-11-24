@@ -6,6 +6,7 @@ using SchMod.Models.Studs;
 using SchMod.Models.StdFees;
 using SchMod.Models.Active;
 using SchMod.Models.Convey;
+using SchMod.Models.General;
 
 namespace WebCat7.Data
 {
@@ -2602,5 +2603,8 @@ namespace WebCat7.Data
         public DbSet<SchMod.Models.Active.TransActivity> TransActivity { get; set; }
         public DbSet<SchMod.Models.StdFees.Fcaption> Fcaption { get; set; }
         public DbSet<SchMod.Models.StdFees.DynaFee> DynaFee { get; set; }
+        public DbSet<SchMod.Models.Active.EnmTransActivity> EnmTransActivity { get; set; }
+        public DbSet<SchMod.Models.Active.EnmAttendance> EnmAttendance { get; set; }
+        public DbSet<SchMod.Models.General.DashMod> DashMod { get; set; }
     }
 }

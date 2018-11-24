@@ -1,7 +1,5 @@
 ﻿@using Syncfusion.Data;
 @using Syncfusion.EJ2;
-
-@*@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet*@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -9,36 +7,48 @@
     <title>@ViewData["Title"] - WebCat7</title>
 
     <environment names="Development">
+        <link href="~/css/material.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/ej.widgets.core.material.min.css" />
-        @*<link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/bootstrap-theme/ej.web.all.min.css" />*@
-        @*<link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/responsive-css/ej.responsive.css" />*@
-
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+        <link href="~/lib/tether/dist/css/tether.css" rel="stylesheet" />
+        <link href="~/lib/tether/dist/css/tether-theme-arrows.css" rel="stylesheet" />
+        <link href="~/lib/tether/dist/css/tether-theme-arrows-dark.css" rel="stylesheet" />
+        <link href="~/lib/tether/dist/css/tether-theme-basic.css" rel="stylesheet" />
     </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/bootstrap-theme/ej.web.all.min.css" />
-        <link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/responsive-css/ej.responsive.css" />
-    </environment>
+    @*<environment names="Staging,Production">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+            <link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/bootstrap-theme/ej.web.all.min.css" />
+            <link rel="stylesheet" href="~/lib/syncfusion-javascript/Content/ej/web/responsive-css/ej.responsive.css" />
+        </environment>*@
     @*@Html.Raw(JavaScriptSnippet.FullScript)*@
+
+    @* Syncfusion Essential JS 2 Styles *@
+
+    @*<link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />*@
+
+    @* Syncfusion Essential JS 2 Scripts *@
+
+    @*<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>*@
+
 </head>
 <header>
+
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebCat7<span class="sr-only">(current)</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        @*<div class="collapse navbar-collapse" id="navbarCollapse">*@
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebCat7<span class="sr-only">(current)</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <ul class="navbar-nav mr-auto">
                 @*<li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>*@
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>*@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dd_Std" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Students</a>
                     <div class="dropdown-menu" aria-labelledby="dd_Std">
@@ -80,9 +90,8 @@
                     <div class="dropdown-menu" aria-labelledby="dd_Activity">
                         <a class="dropdown-item" asp-controller="ActivityGroups" asp-action="Index">Activity Group</a>
                         <a class="dropdown-item" asp-controller="Activities" asp-action="Index">Activity</a>
-                        <a class="dropdown-item" asp-controller="TransActivities" asp-action="Index">TransAct</a>
-                        <a class="dropdown-item" asp-controller="ActiLogs" asp-action="Index">Activity Log</a>
-                        <a class="dropdown-item" asp-controller="Attendances" asp-action="Index">Attendance</a>
+                        <a class="dropdown-item" asp-controller="EnmTransAcitivities" asp-action="Index">TransAct</a>
+                        <a class="dropdown-item" asp-controller="EnmAttendances" asp-action="Index">Attendance</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -102,80 +111,16 @@
                     </div>
                 </li>
             </ul>>
-            <form class="form-inline mt-2 mt-md-0">
+            @*<form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
+            </form>*@
+        @*</div>*@
         <div> @await Html.PartialAsync("_LoginPartial")</div>
     </nav>
-    <ejs-sidebar id="dockSidebar" width="220px" dockSize="72px" enableDock="true">
-        <e-content-template>
-            <div class="dock">
-                <div class="control_wrapper accordion-control-section">
-                    <ejs-accordion id="defaultAccordion">
-                        <e-accordion-accordionitems>
-                            <e-accordion-accordionitem expanded="true" header="WebCat" content="#sbmenu"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem expanded="true" header="Students" content="#Stds"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem header="Exam" content="#Exam"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem header="Basics" content="#Basics"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem header="Fee Setup" content="#FeeSetup"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem header="Activity" content="#Activity"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem header="Conveyance" content="#Conveyance"></e-accordion-accordionitem>
-                            <e-accordion-accordionitem header="Admin" content="#Admin"></e-accordion-accordionitem>
-                        </e-accordion-accordionitems>
-                    </ejs-accordion>
-                </div>
-                <ul id="sbmenu">
-                    <li class="sidebar-item" id="toggle">
-                        <span class="e-icons expand"></span>
-                        <span class="e-text" title="menu">Menu</span>
-                    </li>
-                </ul>
-
-                <ul id="Stds" style="display:contents">
-                    <li><a class="dropdown-item" asp-controller="SearchStd" asp-action="Index">Search</a></li>
-                    <li><a class="dropdown-item" asp-controller="FeeForms" asp-action="Fee_Std" asp-route-RegNo="0">Fee</a></li>
-                </ul>
-                <ul id="Exam" style="display:none">
-                    <li><a class="dropdown-item" asp-controller="SelectMarks//choose" asp-action="Index">Marks Entry</a></li>
-                </ul>
-                <ul id="Basics" style="display:none">
-                    <li><a class="dropdown-item" asp-controller="Teachers" asp-action="Index">Teachers</a></li>
-                    <li><a class="dropdown-item" asp-controller="Clsses" asp-action="Index">Class</a></li>
-                    <li><a class="dropdown-item" asp-controller="Subjects" asp-action="Index">Subjects</a></li>
-                    <li><a class="dropdown-item" asp-controller="AcaSessions" asp-action="Index">Sessions</a></li>
-                    <li><a class="dropdown-item" asp-controller="StdHouses" asp-action="Index">House</a></li>
-                    <li><a class="dropdown-item" asp-controller="StdCats" asp-action="Index">Category</a></li>
-                </ul>
-                <ul id="FeeSetup" style="display:none">
-                    <li><a class="dropdown-item" asp-controller="StdFeeCats" asp-action="Index">Fee Category</a></li>
-                    <li><a class="dropdown-item" asp-controller="Fcaptions" asp-action="Index">Fee Heads</a></li>
-                    <li><a class="dropdown-item" asp-controller="DynaFees" asp-action="Index">Fee Schedule</a></li>
-                    <li><a class="dropdown-item" asp-controller="ConfigLateFine" asp-action="Index">Late Fine</a></li>
-                    <li><a class="dropdown-item" asp-controller="StdWaivers" asp-action="Index">Waivers & Charges </a></li>
-                </ul>
-                <ul id="Activity" style="display:none">
-                    <li><a class="dropdown-item" asp-controller="ActivityGroups" asp-action="Index">Activity Group</a></li>
-                    <li><a class="dropdown-item" asp-controller="Activities" asp-action="Index">Activity</a></li>
-                    <li><a class="dropdown-item" asp-controller="TransActivities" asp-action="Index">TransAct</a></li>
-                    <li><a class="dropdown-item" asp-controller="ActiLogs" asp-action="Index">Activity Log</a></li>
-                    <li><a class="dropdown-item" asp-controller="Attendances" asp-action="Index">Attendance</a></li>
-                </ul>
-                <ul id="Conveyance" style="display:none">
-                    <li><a class="dropdown-item" asp-controller="VehicleTypes" asp-action="Index">Vehicle Category</a></li>
-                    <li><a class="dropdown-item" asp-controller="VehicleDescriptions" asp-action="Index">Vehicle Descriptions</a></li>
-                    <li><a class="dropdown-item" asp-controller="Stops" asp-action="Index">Stops</a></li>
-                    <li><a class="dropdown-item" asp-controller="Conveyances" asp-action="Index">Conveyance</a></li>
-                </ul>
-            </div>
-        </e-content-template>
-    </ejs-sidebar>
 </header>
 <html>
 <body>
-
-    @*@await Html.PartialAsync("_LoginPartial")*@
 
     <div class="container body-content">
         @RenderBody()
@@ -185,29 +130,35 @@
         </footer>
     </div>
 
-    @*<div class="container body-content">
-            @RenderBody()
-            <hr />
-        </div>*@
-    <script src="~/js/ej2/ej2.min.js"></script>
-
     <environment names="Development">
+        <script src="~/js/ej2.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery/dist/core.js"></script>
+        <script src="~/lib/jquery-validate/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validate/dist/additional-methods.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/jsrender/jsrender.js"></script>
+        <script src="~/lib/popper.js/popper.js"></script>
+        <script src="~/lib/tether/dist/js/tether.js"></script>
+        @*<script src="~/js/_jQ/jquery.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/lib/popper.js/dist/popper.js"></script>
+        <script src="~/lib/popper.js/popper.js"></script>
+        <script src="~/lib/tether/dist/js/tether.js"></script>
         <script src="~/lib/jsrender/jsrender.min.js"></script>
         <script src="~/js/ej2/ej2.min.js"></script>
-        <script src="~/js/jquery-3.1.1.min.js"></script>
+        <script src="~/lib/syncfusion-javascript/Scripts/ej/web/ej.web.all.min.js"></script>*@
     </environment>
-    <environment names="Staging,Production">
+    @*<environment names="Staging,Production">
+
+        <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jsrender/jsrender.min.js"></script>
-        <script src="~/js/ej2/ej2.min.js"></script>
-    </environment>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+                <script src="~/js/site.min.js" asp-append-version="true"></script>
+                <script src="~/lib/jsrender/jsrender.min.js"></script>
+                <script src="~/js/ej2/ej2.min.js"></script>
+            </environment>*@
 
     <ejs-scripts></ejs-scripts>
     @RenderSection("Scripts", required: false)

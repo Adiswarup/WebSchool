@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -29,19 +30,30 @@ namespace SchMod.ViewModels.StdFees
         [Key]
         public int Sn { get; set; }
         public int UniReg { get; set; }
+        [DisplayName("Registration No.")]
         public int RegNo { get; set; }
+        [DisplayName("Roll No. ")]
         public int RollNo { get; set; }
+        [DisplayName("Students Name")]
         public string StdName { get; set; }
+        [DisplayName("Gender")]
         public string Gender { get; set; }
-        public string Clss { get; set; }
+         [DisplayName("Class")]
+       public string Clss { get; set; }
+         [DisplayName("Father's Name")]
         public string FNames { get; set; }
+         [DisplayName("Mother's Name")]
         public string MNames { get; set; }
+         [DisplayName("Contact Phone")]
         public string ConPhone { get; set; }
+         [DisplayName("E-Mail")]
         public string EmailAddress { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+         [DisplayName("Date of Birth")]
         public DateTime DOB { get; set; }
+         [DisplayName("Fee Category")]
          public string StdCat { get; set; }
-       //public List<FeeSumm> FeeSumList { get; set; }
+        public List<FeeSumm> FeeSumList { get; set; }
 
     }
 

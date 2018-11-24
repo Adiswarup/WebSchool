@@ -1,6 +1,5 @@
 ﻿$(function() {
     $(document).ready(function() {
-         alert("Ready");
          UpdateGrid();
     });
  });

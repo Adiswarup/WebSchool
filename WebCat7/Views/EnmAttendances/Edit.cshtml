@@ -1,0 +1,56 @@
+﻿@model SchMod.Models.Active.EnmAttendance
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>EnmAttendance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AutoId" />
+            <div class="form-group">
+                <label asp-for="TransActId" class="control-label"></label>
+                <input asp-for="TransActId" class="form-control" />
+                <span asp-validation-for="TransActId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StdClss" class="control-label"></label>
+                <input asp-for="StdClss" class="form-control" />
+                <span asp-validation-for="StdClss" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AttDate" class="control-label"></label>
+                <input asp-for="AttDate" class="form-control" />
+                <span asp-validation-for="AttDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransActDateStr" class="control-label"></label>
+                <input asp-for="TransActDateStr" class="form-control" />
+                <span asp-validation-for="TransActDateStr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AttType" class="control-label"></label>
+                <input asp-for="AttType" class="form-control" />
+                <span asp-validation-for="AttType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UniReg" class="control-label"></label>
+                <input asp-for="UniReg" class="form-control" />
+                <span asp-validation-for="UniReg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

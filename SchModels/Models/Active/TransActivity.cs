@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,15 +9,17 @@ namespace SchMod.Models.Active
         public TransActivity()
             {
             TransActId = 0;
-            TransActName = "None";
+            Activity = "None";
             Dormant = 0;
+            TransActDate = DateTime.Now;
             }
         [Key]
         public int AutoId { get; set; }
         public int TransActId { get; set; }
         [DisplayName("Activity")]
-        public string TransActName { get; set; }
+        public string Activity { get; set; }
         public int ActivityId { get; set; }
+        public int ActGroupID { get; set; }
         [DisplayName("Reg #")]
         public int RegNumber { get; set; }
         [DisplayName("Roll #")]
@@ -31,6 +32,8 @@ namespace SchMod.Models.Active
         public string TransActObserver { get; set; }
         [DisplayName("Name")]
         public string StdName { get; set; }
+        public string ImgDataURL { get; set; }
+
         [DisplayName("Class")]
         public string StdClss { get; set; }
         public int TeachId { get; set; }

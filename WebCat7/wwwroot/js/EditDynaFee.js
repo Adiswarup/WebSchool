@@ -21,3 +21,5 @@ function click(args) {
         this.startEdit(args.row);  //trigger to edit the row 
     }
 } 
+
+

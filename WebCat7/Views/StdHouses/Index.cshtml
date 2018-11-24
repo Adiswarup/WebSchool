@@ -2,23 +2,23 @@
 @model IEnumerable<SchMod.Models.Basics.StdHouse>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Color/House";
 }
 <script src="~/js/jquery-3.1.1.min.js"></script>
 <script src="~/js/StdHouses.js"></script>
 
-<h2>Index</h2>
+<h2>Color/House</h2>
 
 <p>
-    <a asp-action="Create">Create New House</a>
+    <a asp-action="Create">Create New Color/House</a>
 </p>
 
 <div>
-    <ejs-grid id="FlatGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
+    <ejs-grid id="FlatGrid" cellSelecting="true" allowPaging="true"  toolbar="@(new List<string>() {"Edit","Update","Cancel","Search" })" enableAltRow="true">
         <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
         <e-grid-columns>
-            <e-grid-column field="stdHouseId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
-            <e-grid-column field="stHouse" headerText="House" type="string" width="120"></e-grid-column>
+            <e-grid-column field="StdHouseId" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+            <e-grid-column field="StHouse" headerText="House" type="string" width="120"></e-grid-column>
         </e-grid-columns>
     </ejs-grid>
 </div>

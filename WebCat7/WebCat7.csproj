@@ -17,10 +17,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <UserSecretsId>aspnet-WebCat7-64664f39-fd76-48c8-85ab-e93f2d81e6a3</UserSecretsId>
     <ApplicationIcon />
     <OutputTypeEx>exe</OutputTypeEx>
@@ -62,7 +58,6 @@
     <Compile Remove="Views\StdFeeCats\**" />
     <Compile Remove="Views\StdHouses\**" />
     <Compile Remove="Views\Stops\**" />
-    <Compile Remove="Views\Students\**" />
     <Compile Remove="Views\Subjects\**" />
     <Compile Remove="Views\Teachers\**" />
     <Compile Remove="Views\TransActivities\**" />
@@ -93,7 +88,6 @@
     <Content Remove="Views\StdFeeCats\**" />
     <Content Remove="Views\StdHouses\**" />
     <Content Remove="Views\Stops\**" />
-    <Content Remove="Views\Students\**" />
     <Content Remove="Views\Subjects\**" />
     <Content Remove="Views\Teachers\**" />
     <Content Remove="Views\TransActivities\**" />
@@ -124,7 +118,6 @@
     <EmbeddedResource Remove="Views\StdFeeCats\**" />
     <EmbeddedResource Remove="Views\StdHouses\**" />
     <EmbeddedResource Remove="Views\Stops\**" />
-    <EmbeddedResource Remove="Views\Students\**" />
     <EmbeddedResource Remove="Views\Subjects\**" />
     <EmbeddedResource Remove="Views\Teachers\**" />
     <EmbeddedResource Remove="Views\TransActivities\**" />
@@ -155,7 +148,6 @@
     <None Remove="Views\StdFeeCats\**" />
     <None Remove="Views\StdHouses\**" />
     <None Remove="Views\Stops\**" />
-    <None Remove="Views\Students\**" />
     <None Remove="Views\Subjects\**" />
     <None Remove="Views\Teachers\**" />
     <None Remove="Views\TransActivities\**" />
@@ -166,6 +158,7 @@
 
   <ItemGroup>
     <Compile Remove="Auth\DbInitializer.cs" />
+    <Compile Remove="Controllers\Active\ActiLogsController.cs" />
     <Compile Remove="Controllers\ApplicationRoleController.cs" />
     <Compile Remove="Controllers\AppRolesControllerX.cs" />
     <Compile Remove="GenFunction\Generate.cs" />
@@ -173,10 +166,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="bower.json" />
     <Content Remove="Views\AcaSessions\GridAcaSession.cshtml" />
+    <Content Remove="Views\EnmAttendances\Create.cshtml" />
+    <Content Remove="Views\EnmAttendances\Delete.cshtml" />
+    <Content Remove="Views\EnmAttendances\Details.cshtml" />
+    <Content Remove="Views\EnmAttendances\Edit.cshtml" />
+    <Content Remove="Views\EnmTransAcitivities\Edit.cshtml" />
+    <Content Remove="Views\EnmTransAcitivities\View.cshtml" />
     <Content Remove="wwwroot\js\jquery-1.11.3.min.js" />
     <Content Remove="wwwroot\js\jquery-2.1.4.min.js" />
+    <Content Remove="wwwroot\js\jquery-3.1.1.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -224,33 +223,30 @@
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
-    <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Syncfusion.EJ2" Version="16.2.0.50" />
-    <PackageReference Include="Syncfusion.Licensing" Version="16.2.0.50" />
-    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="popper.js" Version="1.14.3" />
+    <PackageReference Include="Syncfusion.EJ2" Version="16.3.0.29" />
+    <PackageReference Include="Syncfusion.Licensing" Version="16.3.0.29" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0-msbuild3-final" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0-msbuild3-final" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
-  </ItemGroup>
+</ItemGroup>
   <ItemGroup>
-    <None Include="Views\ActiLogs\Index.cshtml" />
     <None Include="Views\Activities\Create.cshtml" />
     <None Include="Views\Activities\Index.cshtml" />
     <None Include="Views\ActivityGroups\Create.cshtml" />
     <None Include="Views\ActivityGroups\Index.cshtml" />
-    <None Include="Views\Attendances\Create.cshtml" />
     <None Include="Views\Attendances\Index.cshtml" />
     <None Include="Views\Clsses\Index.cshtml" />
     <None Include="Views\Conveyances\Create.cshtml" />
     <None Include="Views\Conveyances\Index.cshtml" />
     <None Include="Views\DynaFees\EditDynaFee.cshtml" />
     <None Include="Views\DynaFees\Index.cshtml" />
+    <None Include="Views\DynaFees\NewDynaFee.cshtml" />
     <None Include="Views\Fcaptions\Index.cshtml" />
     <None Include="Views\FeeForms\Fee_Std.cshtml" />
     <None Include="Views\FeeForms\Index.cshtml" />
@@ -258,7 +254,9 @@
     <None Include="Views\FeeSumm\Index.cshtml" />
     <None Include="Views\Marks\MarksEntry.cshtml" />
     <None Include="Views\Marks\SelectMarks\Choose.cshtml" />
+    <None Include="Views\Receipts\Edit.cshtml" />
     <None Include="Views\SearchStd\Index.cshtml" />
+    <None Include="Views\SelectMarks\Choose.cshtml" />
     <None Include="Views\StdCats\Create.cshtml" />
     <None Include="Views\StdCats\Edit.cshtml" />
     <None Include="Views\StdCats\Index.cshtml" />
@@ -267,23 +265,35 @@
     <None Include="Views\StdHouses\Index.cshtml" />
     <None Include="Views\Stops\Create.cshtml" />
     <None Include="Views\Stops\Index.cshtml" />
+    <None Include="Views\Students\Create.cshtml" />
+    <None Include="Views\Students\Edit.cshtml" />
+    <None Include="Views\Students\EditAddress.cshtml" />
+    <None Include="Views\Students\EditFamily.cshtml" />
+    <None Include="Views\Students\EditHealth.cshtml" />
     <None Include="Views\Subjects\Index.cshtml" />
     <None Include="Views\Teachers\Create.cshtml" />
     <None Include="Views\Teachers\Edit.cshtml" />
     <None Include="Views\Teachers\Index.cshtml" />
-    <None Include="Views\TransActivities\Index.cshtml" />
     <None Include="Views\VehicleDescriptions\Create.cshtml" />
     <None Include="Views\VehicleDescriptions\Index.cshtml" />
     <None Include="Views\VehicleTypes\Create.cshtml" />
     <None Include="Views\VehicleTypes\Index.cshtml" />
+    <None Include="wwwroot\lib\popper.js\popper-utils.js" />
+    <None Include="wwwroot\lib\popper.js\popper-utils.js.map" />
+    <None Include="wwwroot\lib\popper.js\popper-utils.min.js" />
+    <None Include="wwwroot\lib\popper.js\popper-utils.min.js.map" />
+    <None Include="wwwroot\lib\popper.js\popper.js" />
+    <None Include="wwwroot\lib\popper.js\popper.js.map" />
+    <None Include="wwwroot\lib\popper.js\popper.min.js" />
+    <None Include="wwwroot\lib\popper.js\popper.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SchModels\SchMod.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />
-  </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Store\" />
+    <Folder Include="wwwroot\lib\jquery-validation\src\" />
+    <Folder Include="wwwroot\UserData\Images\Students\" />
   </ItemGroup>
 </Project>

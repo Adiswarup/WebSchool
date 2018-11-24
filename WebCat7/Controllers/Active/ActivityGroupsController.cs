@@ -4,8 +4,6 @@ using Newtonsoft.Json;
 using SchMod.Models.Active;
 using SchMod.Models.Basics;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -33,15 +31,12 @@ namespace WebCat7.Controllers.Active
         // GET: ActivityGroups
         public async Task<IActionResult> Index()
         {
-            // List<dropDown> lsGradeType = new List<dropDown>
-            //{
-            //    new dropDown("5 Point Scale", "5 Point Scale"),
-            //    new dropDown("3 Point Scale", "3 Point Scale"),
-            //};
             AcaFunctions.GetActivityGradeType(_context, false);
             AcaFunctions.GetSchSession(_context);
-            ViewBag.dropdownSession = strSessLst;
-            ViewBag.dropdownGradeType = drpActGrdLst; // lsGradeType;
+             AcaFunctions.GetSchClss(_context);
+           ViewBag.dropdownSession = strSessLst;
+            ViewBag.dropdownGradeType = drpActGrdLst; 
+            ViewBag.dropdownClss = drpClsLst; 
             return View();
         }
 

@@ -4,28 +4,31 @@
 
 @model IEnumerable<SchMod.Models.StdFees.Fcaption>
 
-    @{
-    ViewData["Title"] = "Index";
-    }
+@{
+    ViewData["Title"] = "Fee Captions/Names";
+}
 
-    <h2>Index</h2>
-    <script src="~/js/jquery-3.1.1.min.js"></script>
-    <script src="~/js/fcaps.js"></script>
+<h2>Fee Captions/Names/Heads</h2>
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/fcaps.js"></script>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <div>
-        <ejs-grid id="fCapGrid" cellSelecting="true" enablePersistence="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {" Edit","Update","Cancel","Search" })" enableAltRow="true">
-            <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+<p>
+    <a asp-action="Create">New Fee Captions/Names</a>
+</p>
+<div>
+    <ejs-grid id="fCapGrid" cellSelecting="true" toolbar="@(new List<string>() {" Edit","Update","Cancel" })" enableAltRow="true">
+        <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
 
-            <e-grid-columns>
-                <e-grid-column field="feeNameId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right" width="100"></e-grid-column>
-                <e-grid-column field="feeCaption" headerText="Caption/Label" type="string" width="120"></e-grid-column>
-                <e-grid-column field="feeOrder" headerText="Fee Order" width="150"></e-grid-column>
-                <e-grid-column field="showIt" headerText="ShowIt" width="150" editType="checkbox"></e-grid-column>
-            </e-grid-columns>
-        </ejs-grid>
+        <e-grid-columns>
+            <e-grid-column field="FeeNameId" headerText="ID" isPrimaryKey="true" visible="false" textAlign="Right" width="100"></e-grid-column>
+            <e-grid-column field="FeeCaption" headerText="Caption/Label" type="string" width="120"></e-grid-column>
+            <e-grid-column field="FeeOrder" headerText="Fee Order" width="150"></e-grid-column>
+            <e-grid-column field="ShowIt" headerText="ShowIt" width="150" displayAsCheckBox="true" textAlign="Center" editType="booleanedit"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
 
-    </div>
+</div>
+<p>
+    To Edit Double Click the relevant row
+</p>
 

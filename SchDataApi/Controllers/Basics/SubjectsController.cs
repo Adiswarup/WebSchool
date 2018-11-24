@@ -56,7 +56,7 @@ namespace SchDataApi.Controllers
                         if (!kMyReader.IsDBNull(0)) { subjs.SubId = kMyReader.GetInt32(0); }
                         if (!kMyReader.IsDBNull(1)) { subjs.SubName = kMyReader.GetString(1); }
                         if (!kMyReader.IsDBNull(2)) { subjs.SubCode = kMyReader.GetString(2); }
-                        if (!kMyReader.IsDBNull(3)) { subjs.classTeacher = kMyReader.GetString(3); }
+                        if (!kMyReader.IsDBNull(3)) { subjs.ClassTeacher = kMyReader.GetString(3); }
                         if (!kMyReader.IsDBNull(4)) { subjs.SubjectExamName = kMyReader.GetString(4); }
                         if (!kMyReader.IsDBNull(5)) { subjs.SubType = kMyReader.GetInt32(5); }
                         if (!kMyReader.IsDBNull(6)) { subjs.FeatureInReport = CIB(kMyReader.GetInt32(6)); }
@@ -124,7 +124,7 @@ namespace SchDataApi.Controllers
                     MySql = MySql + " IsPract = " + CBI(subjects.IsPract) + ",";
                     MySql = MySql + " IsAssign = " + CBI(subjects.IsAssign) + ",";
                     MySql = MySql + " GradeType = '" + subjects.GradeType + "',";
-                    MySql = MySql + " Pref_Teacher = '" + subjects.classTeacher + "'";
+                    MySql = MySql + " Pref_Teacher = '" + subjects.ClassTeacher + "'";
                     MySql = MySql + " WHERE SubID = " + subjects.SubId;
                     MySql = MySql + " AND Dormant = 0";
                     MySql = MySql + " AND dBID = " + subjects.DBid;
@@ -170,7 +170,7 @@ namespace SchDataApi.Controllers
                     MySql = MySql + " AcaSession, SubjectExamName, SubType, FeatureInReport, AutoGrades, GradeType, GradeOrMarks, IsElective, ";
                     MySql = MySql + " IsTheory, IsPract, IsAssign, ";
                     MySql = MySql + " Dormant, LoginName, ModTime, cTerminal, dBID) Values (0, '";
-                    MySql = MySql + subjects.SubName + "','" + subjects.SubCode + "','" + subjects.Clss + "','" + subjects.classTeacher;
+                    MySql = MySql + subjects.SubName + "','" + subjects.SubCode + "','" + subjects.Clss + "','" + subjects.ClassTeacher;
                     MySql = MySql + "','" + subjects.AcaSession + "','" + subjects.SubjectExamName + "'," + subjects.SubType + "," + CBI(subjects.FeatureInReport);
                     MySql = MySql + "," + CBI(subjects.AutoGrades) + ",'" + subjects.GradeType + "'," + CBI(subjects.GradeOrMarks) + "," + CBI(subjects.IsElective);
                     MySql = MySql + "," + CBI(subjects.IsTheory) + "," + CBI(subjects.IsPract) + "," + CBI(subjects.IsAssign);

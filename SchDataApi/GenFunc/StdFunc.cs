@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SchDataApi.Controllers.StdFees;
 using SchDataApi.DataLayer;
+using SchMod.Models.Active;
 using SchMod.Models.Studs;
-using SchMod.Models.StdFees;
 using SchMod.ViewModels.StdFees;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.IO;
 using System.Threading.Tasks;
 using static SchDataApi.GenFunc.GloFunc;
-
 
 namespace SchDataApi.GenFunc
 {
@@ -31,7 +32,7 @@ namespace SchDataApi.GenFunc
                 MySql = MySql + " StdGenCategory, ConPhone, UniReg, EmailAddress, ";
                 MySql = MySql + " Religion, ParentsNamesM, StdCategory, Color_House,";
                 MySql = MySql + " PermIdentification,   MPhone,    Nationality,";
-                MySql = MySql + " BoardRollCode, AAdhar";
+                MySql = MySql + " BoardRollCode, AAdhar,Photo";
                 MySql = MySql + " FROM  Students";
                 MySql = MySql + " WHERE dBID = " + mdBId;
                 MySql = MySql + " AND  StdStatus = 0";
@@ -93,6 +94,10 @@ namespace SchDataApi.GenFunc
                         //BoardRollCode, AAdhar
                         if (!kMyReader.IsDBNull(19)) { students.BoardRollCode = kMyReader.GetString(19); }
                         if (!kMyReader.IsDBNull(20)) { students.Aadhar = kMyReader.GetString(20); }
+                        if (!kMyReader.IsDBNull(21))
+                        {
+                            students.ImgDataURL = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String((byte[])(kMyReader.GetValue(21))));
+                        }
                         schStdLst.Add(students);
                     }
                 }
@@ -168,7 +173,9 @@ namespace SchDataApi.GenFunc
             string fName = "";
             string mName = "";
             string lName = "";
-
+            List<Profile_Attendance> schAttLst = new List<Profile_Attendance>();
+            List<Profile_Activity> schActLst = new List<Profile_Activity>();
+            List<Profile_Receipt> schRecLst = new List<Profile_Receipt>();
             Students stdGenEdit = new Students
             {
                 RegNumber = regNum,
@@ -219,8 +226,155 @@ namespace SchDataApi.GenFunc
                     if (!kMyReader.IsDBNull(11)) { stdGenEdit.EmailAddress = kMyReader.GetString(11); }
                     if (!kMyReader.IsDBNull(12)) { stdGenEdit.StdCategory = kMyReader.GetString(12); }
                 }
+                kMyReader.Close();
+            }
+            var pathPict = Path.Combine(
+               Directory.GetCurrentDirectory(),
+               "wwwroot" + "/userImages/", regNum + "Pict.jpg");
+            using (var command = conn.CreateCommand())
+            {
+                MySql = " SELECT Photo FROM Students"
+                            + " WHERE RegNumber = " + regNum
+                             + " AND StdStatus = 0"
+                             + " AND dBID = " + mdBId
+                                + " AND Dormant = 0";
+                command.CommandText = MySql;
+                DbDataReader MyReaderPict = command.ExecuteReader();
+                if (MyReaderPict.HasRows)
+                {
+                    MyReaderPict.Read();
+                    stdGenEdit.ImajePict = (byte[])(MyReaderPict.GetValue(0));
+                    System.IO.File.WriteAllBytes(pathPict, stdGenEdit.ImajePict);
+                }
+                MyReaderPict.Close();
+            }
+            //Profile Attendance
+            using (var command = conn.CreateCommand())
+            {
+                MySql = " SELECT  TransActID, TransActName,  TransActDate, TransActObserver, TeachID, TransActRemarks FROM TransActivity"
+                            + " WHERE RegNumber = " + regNum
+                              + " AND Dormant = 0"
+                                + " AND dBID = " + mdBId
+                                    + " Order BY TransActDate DESC";
+                command.CommandText = MySql;
+                DbDataReader MyReaderAtt = command.ExecuteReader();
+                if (MyReaderAtt.HasRows)
+                {
+                    while (MyReaderAtt.Read())
+                    {
+                        Profile_Activity schAct = new Profile_Activity();
+                        if (!MyReaderAtt.IsDBNull(0)) { schAct.AutoId = MyReaderAtt.GetInt32(0); }
+                        if (!MyReaderAtt.IsDBNull(1)) { schAct.Activity = MyReaderAtt.GetString(1); }
+                        if (!MyReaderAtt.IsDBNull(2)) { schAct.ActDate = DateTime.FromOADate(MyReaderAtt.GetDouble(2)); }
+                        if (!MyReaderAtt.IsDBNull(3)) { schAct.LoggedBy = MyReaderAtt.GetString(3); }
+                        if (!MyReaderAtt.IsDBNull(5)) { schAct.ActRemarks = MyReaderAtt.GetString(5); }
+                        schActLst.Add(schAct);
+                    }
+                }
+                MyReaderAtt.Close();
+                stdGenEdit.StdActLst = schActLst;
+            }
+            using (var command = conn.CreateCommand())
+            {
+                MySql = " SELECT AttID, AtType, AttDate, Cause, Remark FROM Attendance"
+                            + " WHERE RegNum = " + regNum
+                                + " AND Dormant = 0"
+                                   + " AND dBID = " + mdBId
+                                    + " Order BY AttDate DESC";
+                command.CommandText = MySql;
+                DbDataReader MyReaderAtt = command.ExecuteReader();
+                if (MyReaderAtt.HasRows)
+                {
+                    while (MyReaderAtt.Read())
+                    {
+                        Profile_Attendance schAtt = new Profile_Attendance();
+                        if (!MyReaderAtt.IsDBNull(0)) { schAtt.AutoId = MyReaderAtt.GetInt32(0); }
+                        if (!MyReaderAtt.IsDBNull(1)) { schAtt.AtType = MyReaderAtt.GetString(1); }
+                        if (!MyReaderAtt.IsDBNull(2)) { schAtt.AttDate = DateTime.FromOADate(MyReaderAtt.GetDouble(2)); }
+                        if (!MyReaderAtt.IsDBNull(3)) { schAtt.AttReason = MyReaderAtt.GetString(3); }
+                        if (!MyReaderAtt.IsDBNull(4)) { schAtt.AttRemarks = MyReaderAtt.GetString(4); }
+                        schAttLst.Add(schAtt);
+                    }
+                }
+                MyReaderAtt.Close();
+                stdGenEdit.StdAttLst = schAttLst;
+            }
+            //Receipt 
+            using (var command = conn.CreateCommand())
+            {
+                MySql = " SELECT DISTINCT FeeCaption, ForMonth FROM DynaFee"
+                            + " WHERE Dormant = 0"
+                                  + " AND ForClass   = '" + stdGenEdit.PresentClass + "'"
+                                  + " AND StdCategory    = '" + stdGenEdit.StdCategory + "'"
+                                  + " AND SessionName  = '" + dSess + "'"
+                                  + " AND dBID = " + mdBId
+                                   + " Order BY ForMonth";
+                command.CommandText = MySql;
+                DbDataReader MyReaderRec = command.ExecuteReader();
+                if (MyReaderRec.HasRows)
+                {
+                    while (MyReaderRec.Read())
+                    {
+                        Profile_Receipt schRec = new Profile_Receipt();
+                        if (!MyReaderRec.IsDBNull(0)) { schRec.FeeName = MyReaderRec.GetString(0); }
+                        if (!MyReaderRec.IsDBNull(1))
+                        {
+                            schRec.ForMonthX = MyReaderRec.GetInt32(1);
+                            schRec.ForMonth = DateTime.FromOADate(MyReaderRec.GetInt32(1)).ToLongDateString();
+                        }
+                        schRecLst.Add(schRec);
+                    }
+                }
+                MyReaderRec.Close();
+
+                stdGenEdit.StdRecLst = schRecLst;
+            }
+            using (var command = conn.CreateCommand())
+            {
+                DbDataReader MyReaderRec;
+                foreach (var item in schRecLst)
+                {
+                    MySql = " SELECT Sum(Amount) FROM DynaFee"
+                                  + " WHERE Dormant = 0"
+                                        + " AND ForClass   = '" + stdGenEdit.PresentClass + "'"
+                                        + " AND StdCategory    = '" + stdGenEdit.StdCategory + "'"
+                                        + " AND SessionName  = '" + dSess + "'"
+                                        + " AND dBID = " + mdBId
+                                        + " AND ForMonth = " + item.ForMonthX;
+                    command.CommandText = MySql;
+                    MyReaderRec = command.ExecuteReader();
+                    if (MyReaderRec.HasRows)
+                    {
+                        MyReaderRec.Read();
+                        if (!MyReaderRec.IsDBNull(0))
+                        {
+                            item.Amount = MyReaderRec.GetDouble(0).ToString();
+                        }
+                    }
+                    MyReaderRec.Close();
+                }
+
+                foreach (var item in schRecLst)
+                {
+                    MySql = " SELECT ReceiptDate, AmountPaid FROM Receipt"
+                                  + " WHERE Dormant = 0"
+                                        + " AND RegNo   = " + stdGenEdit.RegNumber  
+                                        + " AND AcaSession  = '" + dSess + "'"
+                                        + " AND dBID = " + mdBId
+                                        + " AND ForPeriod = " + item.ForMonthX;
+                    command.CommandText = MySql;
+                    MyReaderRec = command.ExecuteReader();
+                    if (MyReaderRec.HasRows)
+                    {
+                        MyReaderRec.Read();
+                        if (!MyReaderRec.IsDBNull(0)) { item.RecDate = DateTime.FromOADate(MyReaderRec.GetDouble(0)).ToLongDateString(); }
+                        if (!MyReaderRec.IsDBNull(1)) { item.Paid = MyReaderRec.GetDouble(1).ToString(); }
+                    }
+                    MyReaderRec.Close();
+                }
             }
             conn.Close();
+
             return stdGenEdit;
         }
 
@@ -655,8 +809,9 @@ namespace SchDataApi.GenFunc
                         kMyReader.Read();
                         stdFeeList[i].IsPaid = "<a onclick = \"clkPaid(this)\" href = #>Paid</a>";
                         if (!kMyReader.IsDBNull(0)) { stdFeeList[i].Remarks = "Amnt:" + kMyReader.GetDouble(0).ToString(); }
-                        if (!kMyReader.IsDBNull(1)) {
-                            stdFeeList[i].ReceiptNo=kMyReader.GetInt32(1).ToString();
+                        if (!kMyReader.IsDBNull(1))
+                        {
+                            stdFeeList[i].ReceiptNo = kMyReader.GetInt32(1).ToString();
                             stdFeeList[i].Remarks = stdFeeList[i].Remarks + ", Rec #:" + kMyReader.GetInt32(1).ToString();
                         }
                         if (!kMyReader.IsDBNull(2)) { stdFeeList[i].Remarks = stdFeeList[i].Remarks + ", Rec Date:" + GloFunc.FromOADate(kMyReader.GetDouble(2)).ToShortDateString(); }
@@ -700,12 +855,13 @@ namespace SchDataApi.GenFunc
                 //return !kMyReader.HasRows
                 if (kMyReader.HasRows)
                 {
-                    retBool= false;
-                }else
+                    retBool = false;
+                }
+                else
                 {
                     retBool = true;
                 }
-            kMyReader.Close();
+                kMyReader.Close();
             }
             return retBool;
         }
@@ -713,12 +869,12 @@ namespace SchDataApi.GenFunc
         public static async Task<Receipt> getFeeDetail(SchContext _context, Receipt recX, string dSess, int mdBId)
         {
             string MySql = "";
+            int jSl = 0;
             try
             {
                 var conn = _context.Database.GetDbConnection();
                 await conn.OpenAsync();
                 using (var command = conn.CreateCommand())
-
                 {
                     MySql = "Select Caption, Amount, ForMonth From DynaFee WITH (NOLOCK)  ";
                     MySql = MySql + " WHERE ForMonth = " + (int)(recX.ForPeriod);
@@ -735,10 +891,13 @@ namespace SchDataApi.GenFunc
                         while (kMyReader.Read())
                         {
                             ReceiptDetails receiptDetails = new ReceiptDetails();
+                            receiptDetails.SlNo = jSl + 1;
+                            receiptDetails.RecId = jSl + 1;
                             if (!kMyReader.IsDBNull(0)) { receiptDetails.FeenWahead = kMyReader.GetString(0); }
                             if (!kMyReader.IsDBNull(1)) { receiptDetails.AmountPaid = kMyReader.GetDouble(1); }
-                            if (!kMyReader.IsDBNull(2)) { receiptDetails.ForPeriod = GloFunc.FromOADate((Double)kMyReader.GetInt32(2)); }
+                            if (!kMyReader.IsDBNull(2)) { receiptDetails.ForPeriod = GloFunc.FromOADate(kMyReader.GetInt32(2)); }
                             recX.RecDetails.Add(receiptDetails);
+                            jSl = jSl + 1;
                         }
                     }
                     kMyReader.Close();
@@ -756,10 +915,13 @@ namespace SchDataApi.GenFunc
                         while (kMyReader.Read())
                         {
                             ReceiptDetails receiptDetails = new ReceiptDetails();
+                            receiptDetails.SlNo = jSl + 1;
+                            receiptDetails.RecId = jSl + 1;
                             if (!kMyReader.IsDBNull(0)) { receiptDetails.FeenWahead = kMyReader.GetString(0); }
                             if (!kMyReader.IsDBNull(1)) { receiptDetails.AmountPaid = kMyReader.GetDouble(1); }
                             if (!kMyReader.IsDBNull(2)) { receiptDetails.ForPeriod = GloFunc.FromOADate(kMyReader.GetDouble(2)); }
                             recX.RecDetails.Add(receiptDetails);
+                            jSl = jSl + 1;
                         }
                     }
                 }
@@ -770,15 +932,16 @@ namespace SchDataApi.GenFunc
 
                 throw;
             }
-            ReceiptDetails receiptDet = new ReceiptDetails();
-            receiptDet.FeenWahead = "Service Charge";
-            receiptDet.AmountPaid = 30;
-            receiptDet.ForPeriod = GloFunc.FromOADate(recX.ForPeriod);
-            recX.RecDetails.Add(receiptDet);
-            for (int  jI = 0;  jI < recX.RecDetails.Count - 1;  jI++)
+            //ReceiptDetails receiptDet = new ReceiptDetails();
+            //receiptDet.FeenWahead = "Convenience Charge";
+            //receiptDet.AmountPaid = 30;
+            //receiptDet.ForPeriod = GloFunc.FromOADate(recX.ForPeriod);
+            //recX.RecDetails.Add(receiptDet);
+            for (int jI = 0; jI < recX.RecDetails.Count; jI++)
             {
                 recX.AmountPaid += recX.RecDetails[jI].AmountPaid;
             }
+            recX.AmountPaid = recX.AmountPaid;
             recX.AmountPayable = recX.AmountPaid;
             return recX;
         }

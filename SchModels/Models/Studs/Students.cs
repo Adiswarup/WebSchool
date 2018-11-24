@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SchDataApi.Controllers.StdFees;
+using SchMod.Models.Active;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace SchMod.Models.Studs
 {
@@ -79,6 +82,10 @@ namespace SchMod.Models.Studs
             RouteMode = "";
             Aadhar = "";
             EmailAddress = "";
+            StdActLst = Enumerable.Empty<Profile_Activity>();
+            StdAttLst = Enumerable.Empty<Profile_Attendance>();
+            StdRecLst = Enumerable.Empty<Profile_Receipt>();
+            //   //  
         }
 
         public static explicit operator Students(Task<IActionResult> v)
@@ -243,6 +250,17 @@ namespace SchMod.Models.Studs
         public string BoardRollCode { get; set; }
         [Display(Name = "Aadhar Number")]
         public string Aadhar { get; set; }
+        [Display(Name = "Photo")]
+        //[MaxLength(150000, ErrorMessage = "Image Size Must be less than 100 kb")]
+        //[MinLength(10000, ErrorMessage = "Image Size Must be larger than 10 kb")]
+        public byte[] ImajePict { get; set; }
+        public string ImgDataURL { get; set; }
+
+        public IEnumerable<Profile_Activity> StdActLst { get; set; }
+        public IEnumerable<Profile_Attendance> StdAttLst { get; set; }
+        public IEnumerable<Profile_Receipt> StdRecLst { get; set; }
+
+
     }
     public partial class StudentsEdit
     {

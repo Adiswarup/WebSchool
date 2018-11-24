@@ -21,6 +21,7 @@ namespace SchMod.Models.StdFees
         }
 
         public int AutoId { get; set; }
+        [Key]
         public int StdFeeCatId { get; set; }
         [DisplayName("Student Fee Category")]
         public string StdFeeCategory { get; set; }
