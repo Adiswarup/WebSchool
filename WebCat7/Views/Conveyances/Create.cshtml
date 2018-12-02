@@ -1,13 +1,16 @@
 ﻿@model SchMod.Models.Convey.Conveyance
-
 @{
     ViewData["Title"] = "Create";
 }
-
 <h2>Create</h2>
-
 <h4>Conveyance</h4>
 <hr />
+<div class="row">
+    <div class="form-group col-md-9">
+        @ViewBag.Remark;
+        <br />
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -88,8 +91,6 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

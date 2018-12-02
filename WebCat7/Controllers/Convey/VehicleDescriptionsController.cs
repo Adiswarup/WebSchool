@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SchMod.Models.Convey;
+using Syncfusion.EJ2.Base;
+using Syncfusion.EJ2.Linq;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using WebCat7.Data;
 using static WebCat7.GenFunction.AcaFunctions;
-using System.Net.Http;
 using static WebCat7.GenFunction.GloVar;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
-using Syncfusion.EJ2.Linq;
-using System.Collections;
 
 namespace WebCat7.Controllers.Convey
 {
@@ -72,22 +70,51 @@ namespace WebCat7.Controllers.Convey
         {
             if (ModelState.IsValid)
             {
-                using (HttpClient client = new HttpClient())
+                if (!VehicleDescriptionExists(vehicleDescription.VehicleName))
                 {
-                    vehicleDescription.DBid = mdBId;
-                    vehicleDescription.LoginName = strLoginName;
-                    vehicleDescription.ModTime = DateTime.Now ;
-                    client.BaseAddress = new Uri(iBaseURI);
-                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                    client.DefaultRequestHeaders.Accept.Add(contentType);
-                    string stringData = JsonConvert.SerializeObject(vehicleDescription);
-                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync("/api/vehicleDescriptions", contentData).Result;
-                    ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                    //return View(vehicleDescription);
+                    using (HttpClient client = new HttpClient())
+                    {
+                        vehicleDescription.DBid = mdBId;
+                        vehicleDescription.LoginName = strLoginName;
+                        vehicleDescription.ModTime = DateTime.Now;
+                        client.BaseAddress = new Uri(iBaseURI);
+                        MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                        client.DefaultRequestHeaders.Accept.Add(contentType);
+                        string stringData = JsonConvert.SerializeObject(vehicleDescription);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = client.PostAsync("/api/vehicleDescriptions", contentData).Result;
+                        ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Vehicle '" + vehicleDescription.VehicleName + "' Successful";
+                            GetVehTypLst(_context);
+                            ViewBag.dropdownVehType = new SelectList(SchVehTypLst, "Value", "Text", null); ;
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Vehicle '" + vehicleDescription.VehicleName + "' Failed!. Please Try Again";
+                            GetVehTypLst(_context);
+                            ViewBag.dropdownVehType = new SelectList(SchVehTypLst, "Value", "Text", null); ;
+                            return View(vehicleDescription);
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.Remark = "Failed Vehicle '" + vehicleDescription.VehicleName + "' Already Exists.";
+                    GetVehTypLst(_context);
+                    ViewBag.dropdownVehType = new SelectList(SchVehTypLst, "Value", "Text", null); ;
+                    return View(vehicleDescription);
                 }
             }
-            return View(vehicleDescription);
+            else
+            {
+                ViewBag.Remark = "Failed! Vehicle '" + vehicleDescription.VehicleName + "' Unable To create. PleaseTry Again.";
+                GetVehTypLst(_context);
+                ViewBag.dropdownVehType = new SelectList(SchVehTypLst, "Value", "Text", null); ;
+                return View(vehicleDescription);
+            }
         }
 
         // GET: VehicleDescriptions/Edit/5
@@ -177,7 +204,7 @@ namespace WebCat7.Controllers.Convey
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    vehDesVal.Value.DBid  = mdBId;
+                    vehDesVal.Value.DBid = mdBId;
                     client.BaseAddress = new Uri(iBaseURI);
                     MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
                     client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -221,9 +248,15 @@ namespace WebCat7.Controllers.Convey
                 IEnumerable data = subjects;
                 var count = data.AsQueryable().Count();
                 if (dm.Skip > 0)
+                {
                     data = operation.PerformSkip(data, dm.Skip);
+                }
+
                 if (dm.Take > 0)
+                {
                     data = operation.PerformTake(data, dm.Take);
+                }
+
                 return Json(new { result = data, count = count });
             }
         }

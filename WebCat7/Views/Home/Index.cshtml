@@ -4,104 +4,181 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <img class="card-img-top" src="..." alt="Students Activities">
-                <div class="card-body">
-                    <h5 class="card-title">Activities</h5>
-                    <table  max-height="40"  class="table">
-                        <tbody>
-                            @foreach (var item in Model.DashActivities)
-                            {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Activity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Clss)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Roll)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Remark)
-                                </td>
-                            </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <a class="card-link" asp-action="Index" asp-controller="Activities">Log</a>
-                    <a class="card-link" asp-action="Index" asp-controller="TransActivities">Add Activity</a>
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<ejs-grid id="Grid" allowPaging="true" allowSorting="true" allowFiltering="true" height="273" toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Cancel", "Update" })">
+    <e-data-manager url="/Home/GridDatasource" insertUrl="/Home/Insert" updateUrl="/Home/Update" removeUrl="/Home/Delete" adaptor="UrlAdaptor"></e-data-manager>
+    <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Normal" showConfirmDialog="true" showDeleteConfirmDialog="true"></e-grid-editSettings>
+    <e-grid-pagesettings pageSize="7"></e-grid-pagesettings>
+    <e-grid-columns>
+        <e-grid-column field="OrderID" headerText="Order ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
+        <e-grid-column field="CustomerID" headerText="Customer ID" type="string" width="120"></e-grid-column>
+        <e-grid-column field="Freight" headerText="Freight" textAlign="Right" format="C2" editType="numericedit" width="120"></e-grid-column>
+        <e-grid-column field="ShipCountry" headerText="Ship Country" width="150"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+
+<div class="jumbotron jumbotron-fluid " style="width:100%;">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="flip-card col-lg-6" style="height:450px;">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card" style="height:400px;">
+                            <img class="card-img-top" src="..." alt="Students Activities">
+                            <div class="card-body">
+                                <h5 class="card-title">Activities</h5>
+                                <table max-height="40" class="table">
+                                    <tbody>
+                                        @foreach (var item in Model.DashActivities)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Activity)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Clss)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Roll)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Remark)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <a class="card-link" asp-action="Index" asp-controller="Activities">Log</a>
+                                <a class="card-link" asp-action="Index" asp-controller="TransActivities">Add Activity</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>John Doe</h1>
+                        <p>Architect & Engineer</p>
+                        <p>We love that guy</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <img class="card-img-top img-fluid" src="~/images/attendance_hands.jpg" alt="Attendance">
-                <div class="card-body">
-                    <h5 class="card-title">Attendance</h5>
-                    <table class="table">
-                        <tbody>
-                            @foreach (var item in Model.DashAttendances)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Clss)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Roll)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
 
-                        <a asp-action="Index" asp-controller="Attendances" class="btn btn-primary">Class Attendance</a>
+            <div class="flip-card col-lg-3" style="height:450px;">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card" style="height:400px;">
+                            <img class="card-img-top img-fluid" src="~/images/attendance_hands.jpg" alt="Attendance">
+                            <div class="card-body">
+                                <h5 class="card-title">Attendance</h5>
+                                <table class="table">
+                                    <tbody>
+                                        @foreach (var item in Model.DashAttendances)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Clss)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Roll)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                <a asp-action="Index" asp-controller="Attendances" class="btn btn-primary">Class Attendance</a>
+                            </div>
+                        </div>
                     </div>
+                    <div class="flip-card-back">
+                        <div class="card" style="height:400px;">
+                            <img class="card-img-top img-fluid" src="~/images/attendance_hands.jpg" alt="Attendance">
+                            <div class="card-body">
+                                <h5 class="card-title">Class Attendance</h5>
+                                <table style="width:100%">
+                                    <tbody>
+                                        @foreach (var item in Model.DashAttClss)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <font color="red">@Html.DisplayFor(modelItem => item.Cclss)</font>
+                                                </td>
+                                                <td>
+                                                    <font color="red">@Html.DisplayFor(modelItem => item.Ccount)</font>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                <a asp-action="Index" asp-controller="Attendances" class="btn btn-primary">Class Attendance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <img src="..." alt="Total Fee Collection">
-                <div class="card-body">
-                    <h5 class="card-title">Fees</h5>
-                    <p class="card-text">Total Fee Collection ₹@Html.DisplayFor(model => model.TodaysFeeCollection)</p>
-                    <table class="table">
-                        <tbody>
-                            @foreach (var item in Model.DashFeess)
-                            {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RegNum)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Clss)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FeeName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Amount)
-                                </td>
-                            </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <a asp-action="Fee_Std" asp-controller="FeeForms" class="btn btn-primary">Fees</a>
+
+            <div class="flip-card col-lg-3" style="height:450px;">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card" style="height:400px;">
+                            <img src="..." alt="Total Fee Collection">
+                            <div class="card-body">
+                                <h5 class="card-title">Fees</h5>
+                                <p class="card-text">Total Fee Collection ₹@Html.DisplayFor(model => model.TodaysFeeCollection)</p>
+                                <table class="table">
+                                    <tbody>
+                                        @foreach (var item in Model.DashFeess)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.RegNum)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Clss)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FeeName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Amount)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <a asp-action="Fee_Std" asp-controller="FeeForms" class="btn btn-primary">Fees</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>John Doe</h1>
+                        <p>Architect & Engineer</p>
+                        <p>We love that guy</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@*<style>
+        tbody {
+            height: 300px;
+            display: block;
+            overflow: scroll
+        }
+    </style>*@

@@ -3,21 +3,27 @@
 @{
     ViewData["Title"] = "Create Student Category";
 }
-<hr />
 
 <h2>Create Student Category</h2>
+<hr />
+<div class="row">
+    <div class="form-group col-md-9">
+        @ViewBag.Remark;
+        <br />
+    </div>
+</div>
 
 <form asp-action="Create">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         @*<div class="form-group">
-            <label asp-for="AutoId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="AutoId" class="form-control" />
-                <span asp-validation-for="AutoId" class="text-danger"></span>
-            </div>
-        </div>*@
+                <label asp-for="AutoId" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="AutoId" class="form-control" />
+                    <span asp-validation-for="AutoId" class="text-danger"></span>
+                </div>
+            </div>*@
         <div class="row">
             <div class="form-group col-md-3">
                 <label asp-for="StdCategory" class="control-label"></label>
@@ -28,14 +34,14 @@
             </div>
         </div>
         @*<div class="row">
-            <div class="form-group col-md-3">
-                <label asp-for="LoginName" class="control-label"></label>
-            </div>
-            <div class="form-group col-md-4">
-                <input asp-for="LoginName" class="form-control" />
-                <span asp-validation-for="LoginName" class="text-danger"></span>
-            </div>
-        </div>*@
+                <div class="form-group col-md-3">
+                    <label asp-for="LoginName" class="control-label"></label>
+                </div>
+                <div class="form-group col-md-4">
+                    <input asp-for="LoginName" class="form-control" />
+                    <span asp-validation-for="LoginName" class="text-danger"></span>
+                </div>
+            </div>*@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-3 ">

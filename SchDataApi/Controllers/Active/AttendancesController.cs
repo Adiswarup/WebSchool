@@ -103,24 +103,107 @@ namespace SchDataApi.Controllers
             return stdAttList;
         }
 
-        // GET: api/Attendances/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetAttendance([FromRoute] int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        //GET: api/Attendances/5
+        [HttpGet]
+        [Route("api/Attendances/Clss")]
+        public async Task<IActionResult> GetAttendance(string clss, string atType, float atDate, string dSess, int mdBId)
+        {
+            int noStd = 68;
+            DateTime dateTime = DateTime.Now;
+            int noDays = DateTime.DaysInMonth(dateTime.Year, dateTime.Month) + 4;
+            string[,] attRegs = new string[noStd, noDays]; ;
+            string regNums = "";
+            attRegs[0, 0] = "class";
+            attRegs[0, 1] = "RegNum";
+            attRegs[0, 2] = "Name";
+            attRegs[0, 3] = "Roll";
+                 DateTime tDate =  new DateTime(dateTime.Year, dateTime.Month, 1);
+           for (int j = 4; j < noDays +5 ; j++)
+            {
+                attRegs[0, j] = tDate.DayOfWeek .ToString();
+                tDate = tDate.AddDays(1);
+                for (int i = 1; i <= noStd+1; i++)
+                {
+                    attRegs[i, j] = i.ToString() + " - " + j.ToString();
+                }
+            }
+            var conn = _context.Database.GetDbConnection();
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            using (var command = conn.CreateCommand())
+            {
+                MySql = " SELECT  RegNumber, FirstName, PresentRollNo FROM Students  WITH (NOLOCK) ";
+                MySql = MySql + " WHERE  Dormant = 0";
+                MySql = MySql + " AND dBID = " + mdBId;
+                MySql = MySql + " AND PresentClass = '" + clss + "'";
+                MySql = MySql + " AND StdSession = '" + dSess + "'";
+                MySql = MySql + " AND StdStatus <= 0";
+                MySql = MySql + " ORDER BY PresentRollNo";
+                command.CommandType = CommandType.Text;
+                command.CommandText = MySql;
+                DbDataReader kMyReader = command.ExecuteReader();
+                int iStd = 1;
+                if (kMyReader.HasRows)
+                {
+                    while (kMyReader.Read())
+                    {
+                        if (!kMyReader.IsDBNull(0)) {
+                            attRegs[iStd,1] = kMyReader.GetInt32(0).ToString();
+                            regNums= regNums + kMyReader.GetInt32(0).ToString() + ",";
+                        }
+                        if (!kMyReader.IsDBNull(1)) { attRegs[iStd, 2] = kMyReader.GetString(1); }
+                        if (!kMyReader.IsDBNull(2)) { attRegs[iStd, 3] = kMyReader.GetInt32(2).ToString(); }
+                        iStd = iStd + 1;
+                    }
+                }
+                regNums = regNums.TrimEnd(',');
+                kMyReader.Close();
+                MySql = " SELECT  isAbsent, Cause, Remark FROM Attendance WITH (NOLOCK)";
+                MySql = MySql + " WHERE  Dormant = 0";
+                MySql = MySql + " AND dBID = " + mdBId;
+                MySql = MySql + " AND AttDate = " + (int)atDate;
+                MySql = MySql + " AND AtType = '" + atType + "'";
+                MySql = MySql + " AND AcaSession = '" + dSess + "'";
+                MySql = MySql + " AND RegNumber IN (" + regNums + ")";
+                command.CommandType = CommandType.Text;
+                command.CommandText = MySql;
+                kMyReader = command.ExecuteReader();
+                if (kMyReader.HasRows)
+                {
+                    while (kMyReader.Read())
+                    {
+                        if (!kMyReader.IsDBNull(0))
+                        {
+                            for (int jRegs = 1; jRegs < noStd; jRegs++)
+                            {
+                                if (attRegs[jRegs, 1] == kMyReader.GetInt32(0).ToString()) {
+                                    attRegs[jRegs, 1] = "Ab";
+                                }
+                            }
+                                                    }
 
-        //    var attendance = await _context.Attendance.SingleOrDefaultAsync(m => m.AutoId == id);
+                    }
+                }
+                kMyReader.Close();
+            }
 
-        //    if (attendance == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return Ok(attendance);
-        //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var attendance = await _context.Attendance.SingleOrDefaultAsync();
+
+            if (attendance == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(attendance);
+        }
 
         // PUT: api/Attendances/5
         [HttpPut("{id}")]

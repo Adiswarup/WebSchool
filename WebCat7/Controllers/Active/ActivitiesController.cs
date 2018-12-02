@@ -82,7 +82,20 @@ namespace WebCat7.Controllers.Active
                     var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                     HttpResponseMessage response = client.PostAsync("/api/Activities", contentData).Result;
                     ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                    return RedirectToAction(nameof(Create));
+                    if (response.IsSuccessStatusCode)
+                    {
+                        GetActivityGroup(_context);
+                        ViewBag.ActGrp = new SelectList(SchActivityGroup, "Value", "Text", null);
+                        ViewBag.Remark = "Creation of Activity '" + activity.ActivityName + "' Successful";
+                        return View();
+                    }
+                    else
+                    {
+                        GetActivityGroup(_context);
+                        ViewBag.ActGrp = new SelectList(SchActivityGroup, "Value", "Text", null);
+                        ViewBag.Remark = "Creation of Session '" + activity.ActivityName + "' Failed!. Please Try Again";
+                        return View(activity);
+                    }
                 }
             }
             else

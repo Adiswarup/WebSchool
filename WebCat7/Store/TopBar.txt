@@ -1,0 +1,89 @@
+﻿    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">WebCat</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav mr-auto">
+                    @*<li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>*@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_Std" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Students</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Std">
+                            <a class="dropdown-item" asp-controller="SearchStd" asp-action="Index">Search</a>
+                            <a class="dropdown-item" asp-controller="FeeForms" asp-action="Fee_Std" asp-route-RegNo="0">Fee</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_Exam" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Exam">
+                            <a class="dropdown-item" asp-controller="SelectMarks//choose" asp-action="Index">Marks Entry</a>
+                            <a class="dropdown-item" asp-controller="Clsses" asp-action="Index" asp-route-RegNo="0">Class</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_Basics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Basics</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Basics">
+                            <a class="dropdown-item" asp-controller="Teachers" asp-action="Index">Teachers</a>
+                            <a class="dropdown-item" asp-controller="Clsses" asp-action="Index">Class</a>
+                            <a class="dropdown-item" asp-controller="Subjects" asp-action="Index">Subjects</a>
+                            <a class="dropdown-item" asp-controller="AcaSessions" asp-action="Index">Sessions</a>
+                            <a class="dropdown-item" asp-controller="StdHouses" asp-action="Index">House</a>
+                            <a class="dropdown-item" asp-controller="StdCats" asp-action="Index">Category</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_FeeSetup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fee Setup</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Basics">
+                            <a class="dropdown-item" asp-controller="StdFeeCats" asp-action="Index">Fee Category</a>
+                            <a class="dropdown-item" asp-controller="Fcaptions" asp-action="Index">Fee Heads</a>
+                            <a class="dropdown-item" asp-controller="DynaFees" asp-action="Index">Fee Schedule</a>
+                            <a class="dropdown-item" asp-controller="ConfigLateFine" asp-action="Index">Late Fine</a>
+                            <a class="dropdown-item" asp-controller="StdWaivers" asp-action="Index">Waivers & Charges </a>
+                            @*<a class="dropdown-item" asp-controller="SmsDates" asp-action="Index">Sms Dates</a>*@
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_Activity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Activity</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Activity">
+                            <a class="dropdown-item" asp-controller="ActivityGroups" asp-action="Index">Activity Group</a>
+                            <a class="dropdown-item" asp-controller="Activities" asp-action="Index">Activity</a>
+                            <a class="dropdown-item" asp-controller="EnmTransAcitivities" asp-action="Index">TransAct</a>
+                            <a class="dropdown-item" asp-controller="EnmAttendances" asp-action="Index">Attendance</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_Conveyance" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Conveyance</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Conveyance">
+                            <a class="dropdown-item" asp-controller="VehicleTypes" asp-action="Index">Vehicle Category</a>
+                            <a class="dropdown-item" asp-controller="VehicleDescriptions" asp-action="Index">Vehicle Descriptions</a>
+                            <a class="dropdown-item" asp-controller="Stops" asp-action="Index">Stops</a>
+                            <a class="dropdown-item" asp-controller="Conveyances" asp-action="Index">Conveyance</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dd_Admin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                        <div class="dropdown-menu" aria-labelledby="dd_Admin">
+                            <a class="dropdown-item" asp-controller="AppRoles" asp-action="Index">Assign Roles</a>
+                            <a class="dropdown-item" asp-controller="User" asp-action="Index">User</a>
+                        </div>
+                    </li>
+                </ul>>
+                @*<form class="form-inline mt-2 mt-md-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>*@
+                <div> @await Html.PartialAsync("_LoginPartial")</div>
+            </div>
+        </div>
+    </nav>

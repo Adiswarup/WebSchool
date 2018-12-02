@@ -7,7 +7,6 @@
 <div class="control">
     <ejs-list-view id="TimeP" />
 </div>
-<script src="~/js/jquery-3.1.1.min.js"></script>
 <script src="~/js/SearchStd.js"></script>
 <p>
     @Html.ActionLink("New Student", "Create", "Students")
@@ -29,37 +28,37 @@
                     @*@Html.DropDownListFor(model => model.SClass, (SelectList)ViewBag.stdList, new { @class = "form-control col-md-3", id = "iSclass", onchange = "changeClsses()" })*@
                 </div>
                 @*<div class="col-md-2">
-                    <input type=submit value="GO" name="GO" class="form-group btn btn-outline-dark" formmethod="post" />
-                </div>*@
+                        <input type=submit value="GO" name="GO" class="form-group btn btn-outline-dark" formmethod="post" />
+                    </div>*@
             </div>
             @*<div class="row">
-                <div class="col-md-2">
-                    @Html.LabelFor(model => model.SeaStr, htmlAttributes: new { @class = "control-label col-md-2" })
-                </div>
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.SeaStr, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeSearchEvent()" })
-                </div>
-                <div class="col-md-2">
-                    <ej-button id="btnRefresh" click="btnClick" text="Search" />
-                </div>
-            </div>*@
-            <br/>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.SeaStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.SeaStr, new { htmlAttributes = new { @class = "form-control" }, @onchange = "OnChangeSearchEvent()" })
+                    </div>
+                    <div class="col-md-2">
+                        <ej-button id="btnRefresh" click="btnClick" text="Search" />
+                    </div>
+                </div>*@
+            <br />
             @{
                 List<object> commands = new List<object>();
                 commands.Add(new { type = "Edit", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "e-flat" } });
                 commands.Add(new { type = "Update", buttonOption = new { iconCss = "e-icons e-Update", cssClass = "e-flat" } });
             }
             <div class="control-section">
-                <ejs-grid id="Stdnts" rowHeight="56" enableAltRow="true" frozenColumns="4" allowPaging="true"  toolbar="@(new List<string>(){" Edit","Update","Cancel"  })">
-                    <e-grid-editSettings  allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
+                <ejs-grid id="Stdnts" rowHeight="56" enableAltRow="true" frozenColumns="4" allowPaging="true" toolbar="@(new List<string>(){" Edit","Update","Cancel"  })">
+                    <e-grid-editSettings allowEditing="true" mode="Normal" allowEditOnDblClick="true"></e-grid-editSettings>
                     <e-grid-columns>
                         <e-grid-column field="RegNumber" headerText="Profile" allowEditing="false" template="#stdTemplate" width="170"></e-grid-column>
                         <e-grid-column headerText="Image" template="#imgTemplate" allowEditing="false" textAlign="Center" width="150"></e-grid-column>
                         @*<e-grid-column field="UniReg" headerText="Id" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>*@
-                        <e-grid-column field="RegNumber" headerText="Admin No." allowEditing="false"  type="string" width="120"></e-grid-column>
-                        <e-grid-column field="StdName" headerText="Name"  allowEditing="false" width="150"></e-grid-column>
+                        <e-grid-column field="RegNumber" headerText="Admin No." allowEditing="false" type="string" width="120"></e-grid-column>
+                        <e-grid-column field="StdName" headerText="Name" allowEditing="false" width="150"></e-grid-column>
                         <e-grid-column field="PresentRollNo" headerText="Roll" width="150"></e-grid-column>
-                        <e-grid-column field="Sex" headerText="Gender" editType="dropdownedit" width="150"></e-grid-column>
+                        <e-grid-column field="Sex" headerText="Gender" editType="dropdownedit"  width="150"></e-grid-column>
                         <e-grid-column field="ParentsNamesF" headerText="Father's Name" width="150"></e-grid-column>
                         <e-grid-column field="ParentsNamesM" headerText="Mother's Name" width="150"></e-grid-column>
                         <e-grid-column field="StdGenCategory" headerText="Category" editType="dropdownedit" width="150"></e-grid-column>

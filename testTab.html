@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="D:\School\WebSchool\WebCat7\wwwroot\js\BootStrap\bootstrap.js"></script>
+
+    <script src="D:\School\WebSchool\WebCat7\wwwroot\js\jquery-3.3.1.js"></script>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        var subsec1_value = '';
+        var hdomain = 'indiatimes.com';
+        if (document.domain != hdomain) {
+            if ((document.domain.indexOf(hdomain)) != -1) { document.domain = hdomain }
+        }
+
+        // Creating Elements for IE : HTML 5
+        var elem = ["article", "aside", "figure", "footer", "figcaption", "header", "hgroup", "nav", "section", "time"];
+        for (var i = 0; i <= elem.length - 1; i++) {
+            document.createElement(elem[i]);
+        }
+        var gcmflag = 1;
+
+        function getQueryParams(qs) {
+            qs = qs.split('+').join(' ');
+            var params = {},
+                tokens,
+                re = /[?&]?([^=]+)=([^&]*)/g;
+            while (tokens = re.exec(qs)) {
+                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+            }
+            return params;
+        }
+        var query = getQueryParams(document.location.search);</script>
+</head>
+<body>
+    <div class="tabsView">
+        <div class="tabsBtn mostPopular tabs-btn">
+            <ul>
+                <li class="active"><a href="#">Most Read</a></li>
+                <li><a class="active" href="#" data-track="MSTAB">Most Shared</a></li>
+                <li><a class="active" href="#" data-track="MCTAB">Most Commented</a></li>
+            </ul>
+            <div class="clr">
+            </div>
+        </div>
+        <div class="tabsContent">
+            <ul>
+                <li class="active">
+                    <ul class="list1">
+                        <li>
+                            <a title="Rajiv Bajaj is ready to shake up the auto sector with his 'anti-car'">Rajiv Bajaj is ready to shake up the auto sector with his 'anti-car'</a>
+                        </li>
+                        <li>
+                            <a title="Investors">Investors</a>
+                        </li>
+                        <li>
+                            <a title="Surprised">Surprised</a>
+                        </li>
+                        <li>
+                            <a title="In need of cash">In need of cash</a>
+                        </li>
+                        <li>
+                            <a title="Twists and turns make Paytm data theft case murkier">Twists and turns make Paytm data theft case murkier</a>
+                        </li>
+                        <li>
+                            <a title="Moin Qureshi">Moin Qureshi</a>
+                        </li>
+                        <li>
+                            <a title="Investing">Investing</a>
+                        </li>
+                    </ul>
+                    <p class="more"><a href="https://economictimes.indiatimes.com/news/latest-news/most-read" data-track="MRMOR">More </a>»</p>
+                </li>
+                <li></li>
+                <li></li>
+            </ul><div class="clr"></div>
+        </div>
+    </div>
+</body>
+</html>

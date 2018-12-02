@@ -72,7 +72,9 @@ namespace WebCat7.Controllers.Convey
         {
             if (ModelState.IsValid)
             {
-                using (HttpClient client = new HttpClient())
+                if (!StopsExists(stops.stops1))
+                {
+                    using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(iBaseURI);
                     MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
@@ -81,14 +83,33 @@ namespace WebCat7.Controllers.Convey
                     var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                     HttpResponseMessage response = client.PostAsync("/api/stops", contentData).Result;
                     ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-            //return View(stops);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        ViewBag.Remark = "Creation of stops '" + stops.stops1 + "' Successful";
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Remark = "Creation of stops '" + stops.stops1 + "' Failed!. Please Try Again";
+                        return View(stops);
+                    }
                 }
             }
-            return View(stops);
+            else
+            {
+                ViewBag.Remark = "Failed stops '" + stops.stops1  + "' Already Exists.";
+                return View(stops);
+            }
         }
+            else
+            {
+                ViewBag.Remark = "Failed! stops '" + stops.stops1 + "' Unable To create. PleaseTry Again.";
+                return View(stops);
+    }
+}
 
-        // GET: Stops/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+// GET: Stops/Edit/5
+public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -229,6 +250,10 @@ namespace WebCat7.Controllers.Convey
         private bool StopsExists(int id)
         {
             return _context.Stops.Any(e => e.stopId == id);
+        }
+        private bool StopsExists(string stoop)
+        {
+            return _context.Stops.Any(e => e.stops1 == stoop);
         }
     }
 }

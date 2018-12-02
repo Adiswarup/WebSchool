@@ -56,13 +56,11 @@ namespace WebSchool.Controllers
                 //HttpRequestMessage httpRequestMessage;
                 //httpRequestMessage.RequestUri = TransURL;
                 Redirect(TransURL);
+
                 client.BaseAddress = new Uri(GloVar.iBaseURI);
-                MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                client.DefaultRequestHeaders.Accept.Add(contentType);
                 string stringData = JsonConvert.SerializeObject(receipt);
                 var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.GetAsync(TransURL).Result;
-                ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                HttpResponseMessage response = client.PostAsync("api/receipts", contentData).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = await response.Content.ReadAsStringAsync();
@@ -91,13 +89,6 @@ namespace WebSchool.Controllers
            receipt.AmountPaid = receipt.AmountPaid+30;
             receipt.AmountPayable = receipt.AmountPayable+30;
            return View(receipt);
-        }
-
-
-        [HttpGet]
-        public async void PayReceipt()
-        {
-
         }
 
 

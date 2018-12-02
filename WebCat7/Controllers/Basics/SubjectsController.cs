@@ -89,19 +89,56 @@ namespace WebCat7.Controllers.Basics
         {
             if (ModelState.IsValid)
             {
-                using (HttpClient client = new HttpClient())
+                if (!SubjectsExistsName(subjects.SubName))
                 {
-                    client.BaseAddress = new Uri(GloVar.iBaseURI);
-                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                    client.DefaultRequestHeaders.Accept.Add(contentType);
-                    string stringData = JsonConvert.SerializeObject(subjects);
-                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync("/api/Subjects", contentData).Result;
-                    ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                    using (HttpClient client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(GloVar.iBaseURI);
+                        MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                        client.DefaultRequestHeaders.Accept.Add(contentType);
+                        string stringData = JsonConvert.SerializeObject(subjects);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = client.PostAsync("/api/Subjects", contentData).Result;
+                        ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Subject '" + subjects.SubName + "' Successful";
+                            GetSchTeachers(_context, true);
+                            ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);  //drpTeachLst;
+                            GetSchClss(_context);
+                            ViewBag.dropdownClass = new SelectList(SchClsLst, "Value", "Text", null);  //drpClsLst;
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Subject '" + subjects.SubName + "' Failed!. Please Try Again";
+                            GetSchTeachers(_context, true);
+                            ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);  //drpTeachLst;
+                            GetSchClss(_context);
+                            ViewBag.dropdownClass = new SelectList(SchClsLst, "Value", "Text", null);  //drpClsLst;
+                            return View(subjects);
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.Remark = "Failed Subject '" + subjects.SubName + "' Already Exists.";
+                    GetSchTeachers(_context, true);
+                    ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);  //drpTeachLst;
+                    GetSchClss(_context);
+                    ViewBag.dropdownClass = new SelectList(SchClsLst, "Value", "Text", null);  //drpClsLst;
                     return View(subjects);
                 }
             }
-            return View(subjects);
+            else
+            {
+                ViewBag.Remark = "Failed! Subject '" + subjects.SubName + "' Unable To create. PleaseTry Again.";
+                GetSchTeachers(_context, true);
+                ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);  //drpTeachLst;
+                GetSchClss(_context);
+                ViewBag.dropdownClass = new SelectList(SchClsLst, "Value", "Text", null);  //drpClsLst;
+                return View(subjects);
+            }
         }
 
         // GET: Subjects/Edit/5
@@ -253,6 +290,11 @@ namespace WebCat7.Controllers.Basics
         private bool SubjectsExists(int id)
         {
             return _context.Subjects.Any(e => e.SubAutoId == id);
+        }
+
+        private bool SubjectsExistsName(string subName)
+        {
+            return _context.Subjects.Any(e => e.SubName == subName);
         }
     }
 }

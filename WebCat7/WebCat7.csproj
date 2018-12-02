@@ -43,7 +43,6 @@
     <Compile Remove="Views\ActivityGroups\**" />
     <Compile Remove="Views\AppicationRole\**" />
     <Compile Remove="Views\AppRoles\XXX\**" />
-    <Compile Remove="Views\Attendances\**" />
     <Compile Remove="Views\Clsses\**" />
     <Compile Remove="Views\Conveyances\**" />
     <Compile Remove="Views\DynaFees\**" />
@@ -73,7 +72,6 @@
     <Content Remove="Views\ActivityGroups\**" />
     <Content Remove="Views\AppicationRole\**" />
     <Content Remove="Views\AppRoles\XXX\**" />
-    <Content Remove="Views\Attendances\**" />
     <Content Remove="Views\Clsses\**" />
     <Content Remove="Views\Conveyances\**" />
     <Content Remove="Views\DynaFees\**" />
@@ -103,7 +101,6 @@
     <EmbeddedResource Remove="Views\ActivityGroups\**" />
     <EmbeddedResource Remove="Views\AppicationRole\**" />
     <EmbeddedResource Remove="Views\AppRoles\XXX\**" />
-    <EmbeddedResource Remove="Views\Attendances\**" />
     <EmbeddedResource Remove="Views\Clsses\**" />
     <EmbeddedResource Remove="Views\Conveyances\**" />
     <EmbeddedResource Remove="Views\DynaFees\**" />
@@ -133,7 +130,6 @@
     <None Remove="Views\ActivityGroups\**" />
     <None Remove="Views\AppicationRole\**" />
     <None Remove="Views\AppRoles\XXX\**" />
-    <None Remove="Views\Attendances\**" />
     <None Remove="Views\Clsses\**" />
     <None Remove="Views\Conveyances\**" />
     <None Remove="Views\DynaFees\**" />
@@ -159,6 +155,8 @@
   <ItemGroup>
     <Compile Remove="Auth\DbInitializer.cs" />
     <Compile Remove="Controllers\Active\ActiLogsController.cs" />
+    <Compile Remove="Controllers\Active\AttendancesController.cs" />
+    <Compile Remove="Controllers\Active\TransActivitiesController.cs" />
     <Compile Remove="Controllers\ApplicationRoleController.cs" />
     <Compile Remove="Controllers\AppRolesControllerX.cs" />
     <Compile Remove="GenFunction\Generate.cs" />
@@ -166,6 +164,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="libman.json" />
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
     <Content Remove="Views\AcaSessions\GridAcaSession.cshtml" />
     <Content Remove="Views\EnmAttendances\Create.cshtml" />
     <Content Remove="Views\EnmAttendances\Delete.cshtml" />
@@ -223,16 +224,6 @@
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="popper.js" Version="1.14.3" />
-    <PackageReference Include="Syncfusion.EJ2" Version="16.3.0.29" />
-    <PackageReference Include="Syncfusion.Licensing" Version="16.3.0.29" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-  </ItemGroup>
-  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
 </ItemGroup>
   <ItemGroup>
@@ -240,13 +231,14 @@
     <None Include="Views\Activities\Index.cshtml" />
     <None Include="Views\ActivityGroups\Create.cshtml" />
     <None Include="Views\ActivityGroups\Index.cshtml" />
-    <None Include="Views\Attendances\Index.cshtml" />
+    <None Include="Views\Clsses\Create.cshtml" />
     <None Include="Views\Clsses\Index.cshtml" />
     <None Include="Views\Conveyances\Create.cshtml" />
     <None Include="Views\Conveyances\Index.cshtml" />
     <None Include="Views\DynaFees\EditDynaFee.cshtml" />
     <None Include="Views\DynaFees\Index.cshtml" />
     <None Include="Views\DynaFees\NewDynaFee.cshtml" />
+    <None Include="Views\Fcaptions\Create.cshtml" />
     <None Include="Views\Fcaptions\Index.cshtml" />
     <None Include="Views\FeeForms\Fee_Std.cshtml" />
     <None Include="Views\FeeForms\Index.cshtml" />
@@ -260,6 +252,7 @@
     <None Include="Views\StdCats\Create.cshtml" />
     <None Include="Views\StdCats\Edit.cshtml" />
     <None Include="Views\StdCats\Index.cshtml" />
+    <None Include="Views\StdFeeCats\Create.cshtml" />
     <None Include="Views\StdFeeCats\Index.cshtml" />
     <None Include="Views\StdHouses\Create.cshtml" />
     <None Include="Views\StdHouses\Index.cshtml" />
@@ -270,6 +263,7 @@
     <None Include="Views\Students\EditAddress.cshtml" />
     <None Include="Views\Students\EditFamily.cshtml" />
     <None Include="Views\Students\EditHealth.cshtml" />
+    <None Include="Views\Subjects\Create.cshtml" />
     <None Include="Views\Subjects\Index.cshtml" />
     <None Include="Views\Teachers\Create.cshtml" />
     <None Include="Views\Teachers\Edit.cshtml" />
@@ -295,5 +289,13 @@
     <Folder Include="Store\" />
     <Folder Include="wwwroot\lib\jquery-validation\src\" />
     <Folder Include="wwwroot\UserData\Images\Students\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="16.3.0.36" />
+    <PackageReference Include="Syncfusion.Licensing" Version="16.3.0.36" />
   </ItemGroup>
 </Project>

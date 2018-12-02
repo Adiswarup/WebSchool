@@ -83,11 +83,37 @@ namespace WebCat7.Controllers.Basics
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/Clsses", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return View(clss);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Class '" + clss.ClsName + "' Successful";
+                            AcaFunctions.GetSchTeachers(_context, true);
+                            ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Class '" + clss.ClsName + "' Failed!. Please Try Again";
+                            AcaFunctions.GetSchTeachers(_context, true);
+                            ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);
+                            return View(clss);
+                        }
                     }
                 }
+                else
+                {
+                    ViewBag.Remark = "Failed Class '" + clss.ClsName + "' Already Exists.";
+                    AcaFunctions.GetSchTeachers(_context, true);
+                    ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);
+                    return View(clss);
+                }
             }
-            return View(clss);
+            else
+            {
+                ViewBag.Remark = "Failed! Class '" + clss.ClsName + "' Unable To create. PleaseTry Again.";
+                AcaFunctions.GetSchTeachers(_context, true);
+                ViewBag.dropdownTeacher = new SelectList(SchTeachLst, "Value", "Text", null);
+                return View(clss);
+            }
         }
 
         // GET: Clsses/Edit/5

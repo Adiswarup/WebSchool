@@ -80,11 +80,29 @@ namespace WebCat7.Controllers.Basics
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/StdHouses", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return View(stdHouse);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Color/House '" + stdHouse.StHouse + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Color/House '" + stdHouse.StHouse + "' Failed!. Please Try Again";
+                            return View(stdHouse);
+                        }
                     }
                 }
+                else
+                {
+                    ViewBag.Remark = "Failed Color/House '" + stdHouse.StHouse + "' Already Exists.";
+                    return View(stdHouse);
+                }
             }
-            return View(stdHouse);
+            else
+            {
+                ViewBag.Remark = "Failed! Color/House '" + stdHouse.StHouse + "' Unable To create. PleaseTry Again.";
+                return View(stdHouse);
+            }
         }
 
         // GET: StdHouses/Edit/5

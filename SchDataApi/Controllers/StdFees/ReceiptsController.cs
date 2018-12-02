@@ -78,7 +78,7 @@ namespace SchDataApi.Controllers
             //    return BadRequest(ModelState);
             //}
             FeeForm feeForm = await getStdDetails(_context, fRegNo, dSess, mdBId);
-            List<ReceiptDetails> RecDets = new List<ReceiptDetails>();
+            List<ReceiptDetails> recDets = new List<ReceiptDetails>();
 
             Receipt receipt = new Receipt
             {
@@ -92,10 +92,10 @@ namespace SchDataApi.Controllers
                 ForPeriod = feeNo,
                 AcaSession = dSess,
                 DBid = mdBId,
-                RecDetails = RecDets
+                RecDetails = recDets
             };
-            Receipt receiptX = new Receipt();
-            receiptX = await getFeeDetail(_context, receipt, dSess, mdBId);
+            //Receipt receiptX = new Receipt();
+            receipt = await getFeeDetail(_context, receipt, dSess, mdBId);
 
             //var receipt = await _context.Receipt.SingleOrDefaultAsync(m => m.AutoId == feeNo );
 
@@ -104,38 +104,20 @@ namespace SchDataApi.Controllers
                 return NotFound();
             }
 
-            return Ok(receiptX);
+            return Ok(receipt);
         }
 
-        // POST: api/Receipts
-        //[HttpPost]
-        //public async Task<IActionResult> PostReceipt([FromBody] Receipt receipt)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    string TransURL = TransferFund();
-
-        //    HttpContext.Response.Redirect(TransURL, false);
-
-        //    using (HttpClient client = new HttpClient())
-        //    {
-        //        HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get,TransURL) ;
-        //        client.BaseAddress = new Uri("https://paynetzuat.atomtech.in");
-        //        MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
-        //        client.DefaultRequestHeaders.Accept.Add(contentType);
-        //        HttpContext.Response.Redirect(TransURL);
-        //        //HttpResponseMessage response = client.SendAsync(request: httpRequest).Result;
-        //        //ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-        //    }
-        //    //InititiatePayment(receipt);
-
-        //    //_context.Receipt.Add(receipt);
-        //    //await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetReceipt", new { id = receipt.AutoId }, receipt);
-        //}
+        //POST: api/Receipts
+       [HttpPost]
+        public async Task<IActionResult> PostReceipt([FromBody] Receipt receipt)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            receipt = await GenFunc.FeeFunc.SaveReceipt(_context, receipt);
+            return CreatedAtAction("GetReceipt", new { id = receipt.AutoId }, receipt);
+        }
 
         // DELETE: api/Receipts/5
         [HttpDelete("{id}")]

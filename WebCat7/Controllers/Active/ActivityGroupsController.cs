@@ -84,9 +84,23 @@ namespace WebCat7.Controllers.Active
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/ActivityGroups", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return View(activityGroup);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Activity Group '" + activityGroup.ActGroupName + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Session Group '" + activityGroup.ActGroupName + "' Failed!. Please Try Again";
+                            return View(activityGroup);
+                        }
                     }
                 }
+                else
+                {
+                    return View(activityGroup);
+                }
+
             }
 
             //if (ModelState.IsValid)

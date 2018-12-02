@@ -73,8 +73,6 @@ namespace WebCat7.Controllers.Basics
         // GET: Teachers/Create
         public IActionResult Create()
         {
-            GetSchClss(_context);
-            ViewBag.dropdownClass = drpClsLst;
                 return View();
         }
 
@@ -99,11 +97,29 @@ namespace WebCat7.Controllers.Basics
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/Teachers", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return RedirectToAction("Index");
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Teacher '" + teachers.tName + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Teacher '" + teachers.tName + "' Failed!. Please Try Again";
+                            return View(teachers);
+                        }
                     }
                 }
+                else
+                {
+                    ViewBag.Remark = "Failed Teacher '" + teachers.tName + "' Already Exists.";
+                    return View(teachers);
+                }
             }
-            return View(teachers);
+            else
+            {
+                ViewBag.Remark = "Failed! Teacher '" + teachers.tName + "' Unable To create. PleaseTry Again.";
+                return View(teachers);
+            }
         }
 
         // GET: Teachers/Edit/5

@@ -22,12 +22,16 @@
 
   <ItemGroup>
     <Compile Remove="DataApi\**" />
+    <Compile Remove="ModelsXXX\**" />
     <Compile Remove="Models\**" />
     <Content Remove="DataApi\**" />
+    <Content Remove="ModelsXXX\**" />
     <Content Remove="Models\**" />
     <EmbeddedResource Remove="DataApi\**" />
+    <EmbeddedResource Remove="ModelsXXX\**" />
     <EmbeddedResource Remove="Models\**" />
     <None Remove="DataApi\**" />
+    <None Remove="ModelsXXX\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
@@ -47,17 +51,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Models\TokenOptions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\userImages\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />

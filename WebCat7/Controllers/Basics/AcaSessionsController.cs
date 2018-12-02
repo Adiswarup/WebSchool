@@ -97,12 +97,13 @@ namespace WebCat7.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("AutoId,Ssdid,SessionName,SessionStartDate,SessionEndDate,Dormant,LoginName,ModTime,CTerminal,DBid")] AcaSession acaSession)
+        public IActionResult Create([Bind("Ssdid,SessionName,SessionStartDate,SessionEndDate")] AcaSession acaSession)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 using (HttpClient client = new HttpClient())
                 {
+                    acaSession.DBid = mdBId;
                     client.BaseAddress = new Uri(GloVar.iBaseURI);
                     MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
                     client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -110,13 +111,22 @@ namespace WebCat7.Controllers
                     var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                     HttpResponseMessage response = client.PostAsync("/api/AcaSessions", contentData).Result;
                     ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                    return View(acaSession);
+                    if (response.IsSuccessStatusCode)
+                    {
+                    ViewBag.Remark = "Creation of Session '" + acaSession.SessionName + "' Successful";
+                        return View();
+                    }
+                    else
+                    {
+                    ViewBag.Remark = "Creation of Session '" + acaSession.SessionName + "' Failed!. Please Try Again";
+                        return View(acaSession);
+                    }
                 }
 
                 //_context.Add(acaSession);
                 //await _context.SaveChangesAsync();
                 //return RedirectToAction("Index");
-            }
+            //}
             return View(acaSession);
         }
 

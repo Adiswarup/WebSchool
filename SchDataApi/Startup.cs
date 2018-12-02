@@ -9,7 +9,7 @@ using SchDataApi.DataLayer;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Text;
-using TokenOptions = SchDataApi.Models.TokenOptions;
+//using TokenOptions = SchDataApi.Models.TokenOptions;
 
 namespace SchDataApi
 {
@@ -90,7 +90,7 @@ namespace SchDataApi
 
             services.AddOptions();
 
-            services.Configure<TokenOptions>(Configuration.GetSection("TokenOptions"));
+            //services.Configure<TokenOptions>(Configuration.GetSection("TokenOptions"));
 
         }
 

@@ -17,6 +17,7 @@ using WebCat7.Extensions;
 using WebCat7.Models;
 using WebCat7.Services;
 using TokenOptions = WebCat7.Models.TokenOptions;
+using Syncfusion.Licensing;
 
 namespace WebCat7
 {
@@ -112,7 +113,11 @@ namespace WebCat7
 
             services.Configure<IdentityOptions>(options =>
             {
-                Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("OTM5N0AzMTM2MmUzMjJlMzBjM01MTDVrVzd1TTRqeFdNa3gveEpPSXFSWHp2ZU1mNFlPQ1Mwb2xCbzJRPQ==");
+                Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@31362e332e30CBt5vXGMRIPX9j/P3+QVtzrgOtk1IZOdnCsHASqsfhQ=");
+                //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("OTM5N0AzMTM2MmUzMjJlMzBjM01MTDVrVzd1TTRqeFdNa3gveEpPSXFSWHp2ZU1mNFlPQ1Mwb2xCbzJRPQ==");
+                //@31362e332e30CBt5vXGMRIPX9j/P3+QVtzrgOtk1IZOdnCsHASqsfhQ=
+
+
                 // Password settings
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
@@ -226,23 +231,23 @@ namespace WebCat7
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 });
-            if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")))
-            {
-                if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"js", @"ej2")))
-                {
-                    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"js", @"ej2"));
-                    File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"syncfusion", @"ej2", @"dist", @"ej2.min.js"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"js", @"ej2", @"ej2.min.js"));
-                }
+            //if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")))
+            //{
+            //    if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"js", @"ej2")))
+            //    {
+            //        Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"js", @"ej2"));
+            //        File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2-js-es5", @"scripts", @"ej2.min.js"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"js", @"ej2", @"ej2.min.js"));
+            //    }
 
-                if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2")))
-                {
-                    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2"));
-                    File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2", @"bootstrap.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"bootstrap.css"));
-                    File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2", @"material.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"material.css"));
-                    File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2", @"highcontrast.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"highcontrast.css"));
-                    File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2", @"fabric.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"fabric.css"));
-                }
-            }
+            //    if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2")))
+            //    {
+            //        Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2"));
+            //        File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2-js-es5", @"styles", @"bootstrap.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"bootstrap.css"));
+            //        File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2-js-es5", @"styles", @"material.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"material.css"));
+            //        File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2-js-es5", @"styles", @"highcontrast.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"highcontrast.css"));
+            //        File.Copy(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion", @"ej2-js-es5", @"styles", @"fabric.css"), Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", @"css", @"ej2", @"fabric.css"));
+            //    }
+            //}
         }
 
     }

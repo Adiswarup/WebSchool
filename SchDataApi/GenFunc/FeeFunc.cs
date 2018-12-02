@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SchDataApi.DataLayer;
+using SchMod.ViewModels.StdFees;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +10,13 @@ namespace SchDataApi.GenFunc
 {
     public static class FeeFunc
     {
+        public static async Task<Receipt> SaveReceipt(SchContext _context, Receipt receipt)
+        {
+
+
+            return receipt;
+        }
+
         //        public boolean tCalculateDues(int tUniReg  ,  double tForPeriod   , string  tCategory  , string  tClass   , double  tFeeStartDate   )
         //        {
         //          string MySql ="";

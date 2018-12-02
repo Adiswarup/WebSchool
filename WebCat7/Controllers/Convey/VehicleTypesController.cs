@@ -67,8 +67,8 @@ namespace WebCat7.Controllers.Convey
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VehType")] VehicleType vehicleType)
         {
-            //if (!(VehicleTypeExists(vehicleType.VehType)) && (ModelState.IsValid))
-            //{
+            if (!VehicleTypeExists(vehicleType.VehType))  
+            {
                 if (ModelState.IsValid)
                 {
                     using (HttpClient client = new HttpClient())
@@ -82,16 +82,35 @@ namespace WebCat7.Controllers.Convey
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/vehicleTypes", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return RedirectToAction("Index");
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Vehicle Type '" + vehicleType.VehType + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Vehicle Type '" + vehicleType.VehType + "' Failed!. Please Try Again";
+                            return View(vehicleType);
+                        }
                     }
-                //}
+                }
+                else
+                {
+                    ViewBag.Remark = "Failed Vehicle Type '" + vehicleType.VehType + "' Already Exists.";
+                    return View(vehicleType);
+                }
             }
-        return View(vehicleType);
+            else
+            {
+                ViewBag.Remark = "Failed! Vehicle Type '" + vehicleType.VehType + "' Unable To create. PleaseTry Again.";
+                return View(vehicleType);
+            }
         }
-            
 
-        // GET: VehicleTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+
+    // GET: VehicleTypes/Edit/5
+    public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {

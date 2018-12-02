@@ -24,6 +24,7 @@ namespace SchMod.Models.General
         public IEnumerable<DashActivity> DashActivities { get; set; }
         public IEnumerable<DashAttendance> DashAttendances { get; set; }
         public IEnumerable<DashFees> DashFeess { get; set; }
+        public IEnumerable<DashAttClss> DashAttClss { get; set; }
     }
 
     public class DashActivity
@@ -83,4 +84,17 @@ namespace SchMod.Models.General
         public DateTime FeeDate { get; set; }
         public int DBid { get; set; }
     }
+
+    public class DashAttClss
+    {
+        [Key]
+        public int AutoId { get; set; }
+        public int AttCId { get; set; }
+
+        public string Cclss { get; set; }
+        public int Ccount { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime AttDate { get; set; }
+    }
+
 }

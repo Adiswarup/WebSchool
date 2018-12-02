@@ -8,11 +8,17 @@
 
 <h4>Stops</h4>
 <hr />
+<div class="row">
+    <div class="form-group col-md-9">
+        @ViewBag.Remark;
+        <br />
+    </div>
+</div>
 <        <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="AutoId" />
 
-     <div class="row">
+     @*<div class="row">
         <div class="form-group col-md-3">
             <label asp-for="ConveyanceMode" class="control-label"></label>
         </div>
@@ -20,41 +26,41 @@
             <input asp-for="ConveyanceMode" class="form-control" />
             <span asp-validation-for="ConveyanceMode" class="text-danger"></span>
         </div>
-    </div>
+    </div>*@
     <div class="row">
         <div class="form-group col-md-3">
-            <label asp-for="Stops1" class="control-label"></label>
+            <label asp-for="stops1" class="control-label"></label>
         </div>
         <div class="form-group col-md-4">
-            <input asp-for="Stops1" class="form-control" />
-            <span asp-validation-for="Stops1" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-3">
-            <label asp-for="Circuit" class="control-label"></label>
-        </div>
-        <div class="form-group col-md-4">
-            <input asp-for="Circuit" class="form-control" />
-            <span asp-validation-for="Circuit" class="text-danger"></span>
+            <input asp-for="stops1" class="form-control" />
+            <span asp-validation-for="stops1" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-3">
-            <label asp-for="MonthlyFare" class="control-label"></label>
+            <label asp-for="circuit" class="control-label"></label>
         </div>
         <div class="form-group col-md-4">
-            <input asp-for="MonthlyFare" class="form-control" />
-            <span asp-validation-for="MonthlyFare" class="text-danger"></span>
+            <input asp-for="circuit" class="form-control" />
+            <span asp-validation-for="circuit" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-3">
-            <label asp-for="FareFromMonth" class="control-label"></label>
+            <label asp-for="monthlyFare" class="control-label"></label>
         </div>
         <div class="form-group col-md-4">
-            <input asp-for="FareFromMonth" class="form-control" />
-            <span asp-validation-for="FareFromMonth" class="text-danger"></span>
+            <input asp-for="monthlyFare" class="form-control" />
+            <span asp-validation-for="monthlyFare" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="fareFromMonth" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="fareFromMonth" class="form-control" />
+            <span asp-validation-for="fareFromMonth" class="text-danger"></span>
         </div>
     </div>
     <div class="row">

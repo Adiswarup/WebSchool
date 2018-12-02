@@ -4,8 +4,6 @@ using Newtonsoft.Json;
 using SchMod.Models.Basics;
 using SchMod.Models.StdFees;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -30,12 +28,12 @@ namespace WebCat7.Controllers.StdFee
         }
 
         // GET: Fcaptions
-        public async  Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             List<DropDown> periodList = new List<DropDown>();
             periodList.Add(new DropDown("Monthly", "Monthly"));
-            periodList.Add(new DropDown("Quaterly" , "Quaterly"));
-            periodList.Add(new DropDown("Half Yearly" , "Half Yearly"));
+            periodList.Add(new DropDown("Quaterly", "Quaterly"));
+            periodList.Add(new DropDown("Half Yearly", "Half Yearly"));
             periodList.Add(new DropDown("Annually", "Annually"));
             ViewBag.dropdownDuration = periodList;
             return View();
@@ -74,18 +72,40 @@ namespace WebCat7.Controllers.StdFee
         {
             if (ModelState.IsValid)
             {
-                using (HttpClient client = new HttpClient())
+                if (!FcaptionExists(fcaption.FeeCaption))
                 {
-                    client.BaseAddress = new Uri(GloVar.iBaseURI);
-                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                    client.DefaultRequestHeaders.Accept.Add(contentType);
-                    string stringData = JsonConvert.SerializeObject(fcaption);
-                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync("/api/fcaptions?mDbid=" + mdBId, contentData).Result;
-                    ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                    using (HttpClient client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(GloVar.iBaseURI);
+                        MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                        client.DefaultRequestHeaders.Accept.Add(contentType);
+                        string stringData = JsonConvert.SerializeObject(fcaption);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = client.PostAsync("/api/fcaptions?mDbid=" + mdBId, contentData).Result;
+                        ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Class '" + fcaption.FeeCaption + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Class '" + fcaption.FeeCaption + "' Failed!. Please Try Again";
+                            return View(fcaption);
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.Remark = "Failed Class '" + fcaption.FeeCaption + "' Already Exists.";
+                    return View(fcaption);
                 }
             }
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                ViewBag.Remark = "Failed! Class '" + fcaption.FeeCaption + "' Unable To create. PleaseTry Again.";
+                return View(fcaption);
+            }
         }
 
         // GET: Fcaptions/Edit/5
@@ -205,7 +225,7 @@ namespace WebCat7.Controllers.StdFee
         }
 
 
-        public ActionResult DataSource( [FromBody] DataManagerRequest dm)
+        public ActionResult DataSource([FromBody] DataManagerRequest dm)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -219,9 +239,15 @@ namespace WebCat7.Controllers.StdFee
                 IEnumerable data = fcap;
                 var count = data.AsQueryable().Count();
                 if (dm.Skip > 0)
+                {
                     data = operation.PerformSkip(data, dm.Skip);
+                }
+
                 if (dm.Take > 0)
+                {
                     data = operation.PerformTake(data, dm.Take);
+                }
+
                 return Json(new { result = data, count = count });
             }
         }
@@ -229,6 +255,10 @@ namespace WebCat7.Controllers.StdFee
         private bool FcaptionExists(int id)
         {
             return _context.Fcaption.Any(e => e.FeeNameId == id);
+        }
+        private bool FcaptionExists(string FeeCap)
+        {
+            return _context.Fcaption.Any(e => e.FeeCaption == FeeCap);
         }
     }
 }

@@ -32,6 +32,7 @@ namespace SchDataApi.Controllers.General
             List<DashActivity> dashActList = new List<DashActivity>();
             List<DashAttendance> dashAttList = new List<DashAttendance>();
             List<DashFees> dashFeeList = new List<DashFees>();
+            List<DashAttClss> dashAttClssList = new List<DashAttClss>();
             dashMod.DBid = mDbId;
             var conn = _context.Database.GetDbConnection();
             if (conn.State == ConnectionState.Closed)
@@ -149,7 +150,28 @@ namespace SchDataApi.Controllers.General
                 }
                 kMyReader.Close();
                 dashMod.DashFeess = dashFeeList;
-
+                DashAttClss attCs;
+                MySql = "SELECT Count(RegNum), Clss  ";
+                MySql = MySql + " FROM Attendance";
+                MySql = MySql + " WHERE isAbsent = 0";
+                MySql = MySql + " AND DBID =  " + mDbId;
+                MySql = MySql + " AND Dormant = 0 ";
+                MySql = MySql + " GROUP BY Clss";
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = MySql;
+                kMyReader = command.ExecuteReader();
+                if (kMyReader.HasRows)
+                {
+                    while (kMyReader.Read())
+                    {
+                        attCs = new DashAttClss();
+                        if (!kMyReader.IsDBNull(0)) { attCs.Ccount = kMyReader.GetInt32(0); }
+                        if (!kMyReader.IsDBNull(1)) { attCs.Cclss =  kMyReader.GetString(1); }
+                        dashAttClssList.Add(attCs);
+                    }
+                }
+                kMyReader.Close();
+                dashMod.DashAttClss = dashAttClssList;
                 return dashMod;
             }
         }
@@ -169,7 +191,6 @@ namespace SchDataApi.Controllers.General
             {
                 return NotFound();
             }
-
             return Ok(dashMod);
         }
 
@@ -204,7 +225,6 @@ namespace SchDataApi.Controllers.General
                     throw;
                 }
             }
-
             return NoContent();
         }
 

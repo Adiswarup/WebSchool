@@ -8,83 +8,90 @@
 
 <h4>Activity</h4>
 <hr />
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<div class="form-group col-md-3">
-                    <label asp-for="ActivityId" class="control-label"></label>
-                    <input asp-for="ActivityId" class="form-control" />
-                    <span asp-validation-for="ActivityId" class="text-danger"></span>
-                </div>*@
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="ActivityName" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input asp-for="ActivityName" class="form-control" />
-                        <span asp-validation-for="ActivityName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="ActivityValue" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input asp-for="ActivityValue" class="form-control" />
-                        <span asp-validation-for="ActivityValue" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="ActivityGroup" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.DropDownListFor(model => model.ActivityGroup, (SelectList)ViewBag.ActGrp, "Select Activity Group", new { @class = "form -control", style = "width: 350px;" })
-                        <span asp-validation-for="ActivityGroup" class="text-danger"></span>
-                    </div>
-                </div>
-                @*<div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="ActGroupId" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">*@
-                        <input asp-for="ActGroupId" hidden="hidden" class="form-control" />
-                        @*<span asp-validation-for="ActGroupId" class="text-danger"></span>
-                    </div>
-                </div>*@
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="ActivityRemarks" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input asp-for="ActivityRemarks" class="form-control" />
-                        <span asp-validation-for="ActivityRemarks" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="SendSms" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input asp-for="SendSms" class="form-control" />
-                        <span asp-validation-for="SendSms" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label asp-for="SendEmail" class="control-label"></label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input asp-for="SendEmail" class="form-control" />
-                        <span asp-validation-for="SendEmail" class="text-danger"></span>
-                    </div>
-                </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="form-group col-md-3 ">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+<div class="row">
+    <div class="form-group col-md-9">
+        @ViewBag.Remark;
+        <br />
+    </div>
+</div>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @*<div class="form-group col-md-3">
+            <label asp-for="ActivityId" class="control-label"></label>
+            <input asp-for="ActivityId" class="form-control" />
+            <span asp-validation-for="ActivityId" class="text-danger"></span>
+        </div>*@
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActivityName" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActivityName" class="form-control" />
+            <span asp-validation-for="ActivityName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActivityValue" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActivityValue" class="form-control" />
+            <span asp-validation-for="ActivityValue" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActivityGroup" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            @Html.DropDownListFor(model => model.ActivityGroup, (SelectList)ViewBag.ActGrp, "Select Activity Group", new { @class = "form -control", style = "width: 350px;" })
+            <span asp-validation-for="ActivityGroup" class="text-danger"></span>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActGroupId" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">*@
+    <input asp-for="ActGroupId" hidden="hidden" class="form-control" />
+    @*<span asp-validation-for="ActGroupId" class="text-danger"></span>
             </div>
-        </form>
+        </div>*@
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="ActivityRemarks" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ActivityRemarks" class="form-control" />
+            <span asp-validation-for="ActivityRemarks" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="SendSms" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="SendSms" class="form-control" />
+            <span asp-validation-for="SendSms" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="SendEmail" class="control-label"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="SendEmail" class="form-control" />
+            <span asp-validation-for="SendEmail" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="form-group col-md-3 ">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>

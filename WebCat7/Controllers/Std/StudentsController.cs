@@ -13,6 +13,7 @@ using static WebCat7.GenFunction.GloVar;
 using Newtonsoft.Json;
 using static WebCat7.GenFunction.AcaFunctions;
 using System.IO;
+using WebCat7.GenFunction;
 
 namespace WebCat7.Controllers.Std
 {
@@ -146,6 +147,7 @@ namespace WebCat7.Controllers.Std
         {
             if (ModelState.IsValid)
             {
+                client.BaseAddress = new Uri(GloVar.iBaseURI);
                 string stringData = JsonConvert.SerializeObject(students);
                 //String content = new String(JsonConvert.SerializeObject(students));
                 var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");

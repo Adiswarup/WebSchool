@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SchMod.Models.StdFees;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -25,7 +23,7 @@ namespace WebCat7.Controllers.StdFee
 
         public StdFeeCatsController(SchContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: StdFeeCats
@@ -79,12 +77,29 @@ namespace WebCat7.Controllers.StdFee
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/StdFeeCats", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        //return View(stdFeeCat);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Fee Category '" + stdFeeCat.StdFeeCategory + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Fee Category '" + stdFeeCat.StdFeeCategory + "' Failed!. Please Try Again";
+                            return View(stdFeeCat);
+                        }
                     }
                 }
+                else
+                {
+                    ViewBag.Remark = "Failed Fee Category '" + stdFeeCat.StdFeeCategory + "' Already Exists.";
+                    return View(stdFeeCat);
+                }
             }
-            return RedirectToAction("Index");
-            //return View(StdFeeCat);
+            else
+            {
+                ViewBag.Remark = "Failed! Fee Category '" + stdFeeCat.StdFeeCategory + "' Unable To create. PleaseTry Again.";
+                return View(stdFeeCat);
+            }
         }
 
         // GET: StdFeeCats/Edit/5
@@ -217,9 +232,15 @@ namespace WebCat7.Controllers.StdFee
                 IEnumerable data = StdFeeCat;
                 var count = data.AsQueryable().Count();
                 if (dm.Skip > 0)
+                {
                     data = operation.PerformSkip(data, dm.Skip);
+                }
+
                 if (dm.Take > 0)
+                {
                     data = operation.PerformTake(data, dm.Take);
+                }
+
                 return Json(new { result = data, count = count });
             }
         }

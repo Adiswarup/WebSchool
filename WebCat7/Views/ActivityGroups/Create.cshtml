@@ -4,6 +4,12 @@
 }
 <h2>Create Activity Group</h2>
 <hr />
+<div class="row">
+    <div class="form-group col-md-9">
+        @ViewBag.Remark;
+        <br />
+    </div>
+</div>
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ActGroupId" />
@@ -65,14 +71,14 @@
         </div>
     </div>
     @*<div class="row">
-        <div class="form-group col-md-3">
-            <label asp-for="Clss" class="control-label"></label>
-        </div>
-        <div class="form-group col-md-4">
-            <input asp-for="Clss" class="form-control" />
-            <span asp-validation-for="Clss" class="text-danger"></span>
-        </div>
-    </div>*@
+            <div class="form-group col-md-3">
+                <label asp-for="Clss" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="Clss" class="form-control" />
+                <span asp-validation-for="Clss" class="text-danger"></span>
+            </div>
+        </div>*@
     <div class="row">
         <div class="form-group col-md-3">
             <label asp-for="ActSn" class="control-label"></label>
@@ -92,14 +98,14 @@
         </div>
     </div>
     @*<div class="row">
-        <div class="form-group col-md-3">
-            <label asp-for="ActSession" class="control-label"></label>
-        </div>
-        <div class="form-group col-md-4">
-            <input asp-for="ActSession" class="form-control" />
-            <span asp-validation-for="ActSession" class="text-danger"></span>
-        </div>
-    </div>*@
+            <div class="form-group col-md-3">
+                <label asp-for="ActSession" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <input asp-for="ActSession" class="form-control" />
+                <span asp-validation-for="ActSession" class="text-danger"></span>
+            </div>
+        </div>*@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="form-group col-md-3 ">

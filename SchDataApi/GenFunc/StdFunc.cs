@@ -483,7 +483,6 @@ namespace SchDataApi.GenFunc
                 }
                 conn.Close();
                 return stdAddrEdit;
-
             }
         }
 

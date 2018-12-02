@@ -3,8 +3,14 @@
 @{
     ViewData["Title"] = "Create";
 }
-<hr />
 <h2>Create New Subjects</h2>
+<hr />
+<div class="row">
+    <div class="form-group col-md-9">
+        @ViewBag.Remark;
+        <br />
+    </div>
+</div>
 
 <form asp-action="Create">
     <div class="form-horizontal">
@@ -40,11 +46,11 @@
         </div>
         <div class="row">
             <div class="form-group col-md-3">
-                <label asp-for="PrefTeacher" class="control-label"></label>
+                <label asp-for="ClassTeacher" class="control-label"></label>
             </div>
             <div class="form-group col-md-4">
-                @Html.DropDownListFor(model => model.PrefTeacher, (SelectList)ViewBag.dropdownTeacher)
-                <span asp-validation-for="PrefTeacher" class="text-danger"></span>
+                @Html.DropDownListFor(model => model.ClassTeacher, (SelectList)ViewBag.dropdownTeacher)
+                <span asp-validation-for="ClassTeacher" class="text-danger"></span>
             </div>
         </div>
         <div class="row">

@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SchMod.Models.Basics;
 using Syncfusion.EJ2.Base;
-using Syncfusion.EJ2.Grids;
-using Syncfusion.EJ2.Inputs;
 using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections;
@@ -25,7 +23,7 @@ namespace WebCat7.Controllers.Basics
 
         public StdCatsController(SchContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: StdCats
@@ -67,8 +65,8 @@ namespace WebCat7.Controllers.Basics
         {
             if (ModelState.IsValid)
             {
-                //if (!StdCatExists(stdCat.StdCategory))
-                //{
+                if (!StdCatExists(stdCat.StdCategory))
+                {
                     using (HttpClient client = new HttpClient())
                     {
                         client.BaseAddress = new Uri(GloVar.iBaseURI);
@@ -78,11 +76,29 @@ namespace WebCat7.Controllers.Basics
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("/api/StdCats", contentData).Result;
                         ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                        return View(stdCat);
-                    //}
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.Remark = "Creation of Students Category '" + stdCat.StdCategory + "' Successful";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Remark = "Creation of Students Category '" + stdCat.StdCategory + "' Failed!. Please Try Again";
+                            return View(stdCat);
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.Remark = "Failed Students Category '" + stdCat.StdCategory + "' Already Exists.";
+                    return View(stdCat);
                 }
             }
-            return View(stdCat);
+            else
+            {
+                ViewBag.Remark = "Failed! Students Category '" + stdCat.StdCategory + "' Unable To create. PleaseTry Again.";
+                return View(stdCat);
+            }
         }
 
         // GET: StdCats/Edit/5
@@ -214,9 +230,15 @@ namespace WebCat7.Controllers.Basics
                 IEnumerable data = stdCat;
                 var count = data.AsQueryable().Count();
                 if (dm.Skip > 0)
+                {
                     data = operation.PerformSkip(data, dm.Skip);
+                }
+
                 if (dm.Take > 0)
+                {
                     data = operation.PerformTake(data, dm.Take);
+                }
+
                 return Json(new { result = data, count = count });
             }
         }
